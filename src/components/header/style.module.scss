@@ -1,0 +1,40 @@
+.root {
+	font-family: "Creepster", cursive;
+	padding: 15px 0px;
+}
+
+.top {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title {
+	font-size: 50px;
+	padding-bottom: 10px;
+}
+
+.logo {
+	font-size: 50px;
+	margin-right: 20px;
+	cursor: pointer;
+
+	svg {
+		color: #000;
+		transition: all 0.2s ease 0s;
+	}
+
+	@media (hover: hover) {
+		&:hover {
+			svg {
+				color: indigo;
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	font-family: "Creepster", cursive;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
+
+.title {
+	font-size: 50px;
+}
