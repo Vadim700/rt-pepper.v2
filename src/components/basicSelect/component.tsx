@@ -5,11 +5,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+import { useAppDispatch } from '../../hooks';
+import { setStateLimit } from '../../redux/slices/stateSlice';
+
 export const BasicSelect = () => {
-   const [age, setAge] = React.useState('');
+   const [count, setCount] = React.useState('');
+   const dispatch = useAppDispatch();
 
    const handleChange = (event: SelectChangeEvent) => {
-      setAge(event.target.value as string);
+      setCount(event.target.value as string);
+      dispatch(setStateLimit(Number(event.target.value)));
    };
 
    return (
@@ -24,12 +29,12 @@ export const BasicSelect = () => {
                   letterSpacing: '2px',
                }}
             >
-               Items on page
+               Items per page
             </InputLabel>
             <Select
                labelId="demo-simple-select-label"
                id="demo-simple-select"
-               value={age}
+               value={count}
                label="Age"
                onChange={handleChange}
                sx={{
@@ -42,7 +47,7 @@ export const BasicSelect = () => {
                <MenuItem value={20}>20</MenuItem>
                <MenuItem value={30}>30</MenuItem>
                <MenuItem value={50}>50</MenuItem>
-               <MenuItem value={100}>100</MenuItem>
+               <MenuItem value={0}>All</MenuItem>
             </Select>
          </FormControl>
       </Box>

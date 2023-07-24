@@ -3,10 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 type CounterState = {
    topic: string;
+   limit: number;
 };
 
 const initialState: CounterState = {
    topic: 'posts',
+   limit: 10,
 };
 
 const topicSlice = createSlice({
@@ -16,9 +18,12 @@ const topicSlice = createSlice({
       setState: (state, action: PayloadAction<string>) => {
          state.topic = action.payload;
       },
+      setStateLimit: (state, action: PayloadAction<number>) => {
+         state.limit = action.payload;
+      },
    },
 });
 
-export const { setState } = topicSlice.actions;
+export const { setState, setStateLimit } = topicSlice.actions;
 
 export default topicSlice.reducer;
