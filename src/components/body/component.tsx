@@ -4,6 +4,7 @@ import { useAppSelector } from '../../hooks';
 import { Posts } from '../posts/component';
 import { TodoList } from '../todos/component';
 import { Albums } from '../albums/component';
+import PaginationControlled from '../pagination/component';
 
 type BodyProps = {};
 
@@ -15,6 +16,9 @@ export const Body: FC<BodyProps> = (): JSX.Element => {
          {state === 'posts' && <Posts />}
          {state === 'albums' && <Albums />}
          {state === 'todos' && <TodoList />}
+         <div className={styles.pagination}>
+            <PaginationControlled />
+         </div>
       </main>
    );
 };

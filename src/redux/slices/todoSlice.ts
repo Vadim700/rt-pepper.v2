@@ -21,11 +21,14 @@ type TodoState = {
 // fetchTodos
 export const fetchTodos = createAsyncThunk<
    Todo[],
-   number,
+   any,
    { rejectValue: string }
->('todos/fetchTodos', async (limit, { rejectWithValue }) => {
+>('todos/fetchTodos', async (url, { rejectWithValue }) => {
+   const limit = url.itemsPerPage;
+   const page = url.pageNumber;
+
    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`,
+      `https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=${limit}`,
    );
 
    if (!response.ok) {

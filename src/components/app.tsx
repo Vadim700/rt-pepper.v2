@@ -11,11 +11,13 @@ import { fetchTodos } from '../redux/slices/todoSlice';
 export const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
    const itemsPerPage = useAppSelector((limit) => limit.topic.limit);
+   const pageNumber = useAppSelector((page) => page.topic.pageNumber);
+   const bodyState = useAppSelector((state) => state.topic.topic);
    const { loading, error } = useAppSelector((state) => state.todo);
 
    useEffect(() => {
-      dispatch(fetchTodos(itemsPerPage));
-   }, [dispatch, itemsPerPage]);
+      dispatch(fetchTodos({ itemsPerPage, pageNumber }));
+   }, [dispatch, itemsPerPage, pageNumber, bodyState]);
 
    return (
       <div className="App container">

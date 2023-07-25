@@ -1,6 +1,7 @@
 .root {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 
 	font-family: "Creepster", cursive;
 	letter-spacing: 5px;
@@ -9,4 +10,9 @@
 
 .title {
 	font-size: 50px;
+}
+
+.pagination {
+	margin: 0px auto;
+	padding: 10px 0;
 }
