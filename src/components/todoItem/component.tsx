@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 
-import { useAppDispatch } from '../../../hooks';
-import { deleteTodo } from '../../../redux/slices/todoSlice';
+import { useAppDispatch } from '../../hooks';
+import { deleteTodo } from '../../redux/slices/todoSlice';
 
 type TodoItemProps = {
    id: number;

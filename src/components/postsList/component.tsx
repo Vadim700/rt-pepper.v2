@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
-import { Post } from './post/component';
+import { Post } from '../postItem/component';
 
 type PostsProps = {};
 

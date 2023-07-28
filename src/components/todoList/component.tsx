@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style.module.scss';
-import { TodoItem } from './todo/component';
+import { TodoItem } from '../todoItem/component';
 
 import { useAppSelector } from '../../hooks';
 

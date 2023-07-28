@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { useAppSelector } from '../../hooks';
-import { Posts } from '../posts/component';
-import { TodoList } from '../todos/component';
-import { Albums } from '../albums/component';
+import { Posts } from '../postsList/component';
+import { TodoList } from '../todoList/component';
+import { Albums } from '../albumsList/component';
 import PaginationControlled from '../pagination/component';
 
 type BodyProps = {};

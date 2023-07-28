@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
-import { Album } from './album/component';
+import { Album } from '../albumItem/component';
 
 type AlbumsProps = {};
 
