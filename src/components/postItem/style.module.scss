@@ -1,0 +1,73 @@
+.root {
+	border: 1px solid;
+	padding: 10px 0px 10px 50px;
+	border-radius: 4px;
+	position: relative;
+
+	&:not(:last-child) {
+		margin-bottom: 20px;
+	}
+}
+
+.title {
+	margin: 0;
+	padding: 0;
+	padding-right: 100px;
+	margin-bottom: 20px;
+	text-transform: none;
+}
+
+.text {
+	font-family: "Fasthand", cursive;
+	text-transform: none;
+	margin-bottom: 10px;
+}
+
+.name {
+	font-size: 20px;
+}
+
+.checkbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.action {
+	position: absolute;
+	top: 0;
+	right: 10px;
+
+	display: flex;
+	align-items: center;
+}
+
+.edit {
+	font-size: 24px;
+	cursor: pointer;
+
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
+}
+
+.favorite {
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
+}
+
+.delete {
+	font-size: 28px;
+	cursor: pointer;
+
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
+}

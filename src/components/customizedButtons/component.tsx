@@ -1,62 +1,31 @@
 import * as React from 'react';
-import Button, { ButtonProps } from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import styles from './style.module.scss';
 
 import { BsPostcardHeart } from 'react-icons/bs';
 import { MdOutlinePhotoAlbum } from 'react-icons/md';
 import { FaListCheck } from 'react-icons/fa6';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setState } from '../../redux/slices/stateSlice';
+import { NavLink } from 'react-router-dom';
 
-const ColorButton = styled(Button)<ButtonProps>(() => ({
-   padding: '6px 30px',
-   backgroundColor: 'black',
-   fontSize: '20px',
-   fontFamily: 'Creepster, cursive',
-   letterSpacing: '2px',
-   outline: 'none',
-}));
-
-export const CustomizedButtons: React.FC = () => {
-   const state = useAppSelector((a: any) => a.topic.topic);
-   const dispatch = useAppDispatch();
+export const Buttons: React.FC = () => {
+   const setActive = ({ isActive }: any): any => {
+      return { backgroundColor: isActive ? '#1976d2' : 'black' };
+   };
 
    return (
-      <Stack spacing={2} direction="row">
-         <ColorButton
-            id="posts"
-            onClick={() => dispatch(setState('posts'))}
-            variant="contained"
-            style={state === 'posts' ? { backgroundColor: purple[700] } : {}}
-         >
-            <BsPostcardHeart
-               style={{ marginRight: '10px', fontSize: '24px' }}
-            />
+      <div className={styles.root}>
+         <NavLink className={styles.button} to="/" style={setActive}>
+            <BsPostcardHeart className={styles.icon} />
             Posts
-         </ColorButton>
-         <ColorButton
-            id="albums"
-            onClick={() => dispatch(setState('albums'))}
-            variant="contained"
-            style={state === 'albums' ? { backgroundColor: purple[700] } : {}}
-         >
-            <MdOutlinePhotoAlbum
-               style={{ marginRight: '10px', fontSize: '24px' }}
-            />
+         </NavLink>
+         <NavLink className={styles.button} to="/albums" style={setActive}>
+            <MdOutlinePhotoAlbum className={styles.icon} />
             Albums
-         </ColorButton>
-         <ColorButton
-            id="todos"
-            onClick={() => dispatch(setState('todos'))}
-            variant="contained"
-            style={state === 'todos' ? { backgroundColor: purple[700] } : {}}
-         >
-            <FaListCheck style={{ marginRight: '10px', fontSize: '24px' }} />
+         </NavLink>
+         <NavLink className={styles.button} to="/todos" style={setActive}>
+            <FaListCheck className={styles.icon} />
             Todos
-         </ColorButton>
-      </Stack>
+         </NavLink>
+      </div>
    );
 };

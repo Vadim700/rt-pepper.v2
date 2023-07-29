@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { SiGhostery } from 'react-icons/si';
-import { CustomizedButtons } from '../customizedButtons/component';
+import { Buttons } from '../customizedButtons/component';
 import { BasicSelect } from '../basicSelect/component';
 
 import styles from './style.module.scss';
@@ -17,7 +17,7 @@ export const Header: FC<HeaderProps> = (): JSX.Element => {
             <span className={styles.title}>Confident pepper</span>
          </div>
          <div className={styles.bottom}>
-            <CustomizedButtons />
+            <Buttons />
             <BasicSelect />
          </div>
       </header>

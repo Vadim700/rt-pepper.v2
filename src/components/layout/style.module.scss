@@ -1,0 +1,33 @@
+.root {
+	font-family: "Creepster", cursive;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	height: 100%;
+
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+
+	max-width: 1280px;
+	margin: 0px auto;
+	padding: 0 15px;
+}
+
+.title {
+	font-size: 50px;
+}
+
+.pagination {
+	height: 100%;
+	margin: 0px auto;
+	padding: 10px 0;
+}
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.main {
+	margin-top: 20px;
+}
