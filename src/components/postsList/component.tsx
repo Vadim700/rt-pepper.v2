@@ -1,18 +1,26 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
-import { Post } from '../postItem/component';
+import { PostItem } from '../postItem/component';
+// import { useAppSelector } from '../../hooks';
 
-type PostsProps = {};
+type PostsListProps = {};
 
-const arr = Array(5)
-   .fill(1)
-   .map((_, i) => i);
+export const PostsList: FC<PostsListProps> = (): JSX.Element => {
+   // const data = useAppSelector(list => list.);
+   const [data, setData] = React.useState([]);
 
-export const Posts: FC<PostsProps> = (): JSX.Element => {
+   React.useEffect(() => {
+      const getData = fetch(
+         'https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10',
+      )
+         .then((res) => res.json())
+         .then((json) => setData(json));
+   }, []);
+
    return (
       <div className={styles.root}>
-         {arr.map((_, i) => (
-            <Post data={arr} key={i} />
+         {data.map((item: { id: number; item: any }) => (
+            <PostItem key={item.id} {...item} />
          ))}
       </div>
    );

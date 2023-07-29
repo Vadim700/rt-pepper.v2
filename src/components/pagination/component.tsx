@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import styles from './style.module.scss';
 
 import { useAppDispatch } from '../../hooks';
 import { setPageNumber } from '../../redux/slices/stateSlice';
@@ -15,7 +16,7 @@ export default function PaginationControlled() {
    };
 
    return (
-      <Stack spacing={2}>
+      <Stack spacing={2} className={styles.pagination}>
          <Pagination count={10} page={page} onChange={handleChange} />
       </Stack>
    );

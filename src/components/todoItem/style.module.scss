@@ -1,5 +1,5 @@
 .root {
-	border: 1px solid #000;
+	border: 2px solid;
 	border-radius: 4px;
 	display: flex;
 	align-items: center;
@@ -12,4 +12,16 @@
 
 .delete {
 	cursor: pointer;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	font-size: 28px;
+	padding: 0;
+	margin: 0;
+
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
 }

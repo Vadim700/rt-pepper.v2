@@ -26,7 +26,6 @@ export const fetchTodos = createAsyncThunk<
 >('todos/fetchTodos', async (url, { rejectWithValue }) => {
    const limit = url.itemsPerPage;
    const page = url.pageNumber;
-   // todos, albums, posts - {query}
 
    const response = await fetch(
       `https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=${limit}`,
@@ -52,6 +51,7 @@ export const addNewTodo = createAsyncThunk<
       userId: 1,
       completed: false,
    };
+   console.log(text);
 
    const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
       method: 'POST',

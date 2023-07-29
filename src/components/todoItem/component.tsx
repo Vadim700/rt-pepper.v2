@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { deleteTodo } from '../../redux/slices/todoSlice';
+import { RxCross2 } from 'react-icons/rx';
 
 type TodoItemProps = {
    id: number;
@@ -18,13 +19,16 @@ export const TodoItem: FC<TodoItemProps> = ({
    const dispatch = useAppDispatch();
 
    return (
-      <li className={styles.root}>
+      <li
+         className={styles.root}
+         style={{ borderColor: completed ? 'green' : 'tomato' }}
+      >
          <div className={styles.title}>{title}</div>
          <button
             onClick={() => dispatch(deleteTodo(String(id)))}
             className={styles.delete}
          >
-            X
+            <RxCross2 />
          </button>
       </li>
    );
