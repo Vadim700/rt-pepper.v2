@@ -125,8 +125,6 @@ const todoSlice = createSlice({
    },
 });
 
-// export const { addTodo, toggleCompleted, removeTodo } = todoSlice.actions;
-
 export default todoSlice.reducer;
 
 const isError = (action: AnyAction) => {

@@ -1,12 +1,16 @@
 .root {
-	border: 1px solid;
-	padding: 10px 0px 10px 50px;
-	border-radius: 4px;
 	position: relative;
 
 	&:not(:last-child) {
 		margin-bottom: 20px;
 	}
+}
+
+.post {
+	border: 1px solid;
+	padding: 10px 0px 10px 50px;
+	border-radius: 4px;
+	margin-bottom: 10px;
 }
 
 .title {
@@ -69,5 +73,78 @@
 		&:hover {
 			color: #1976d2;
 		}
+	}
+}
+
+.comment {
+	font-size: 12px;
+	border: 2px solid #000;
+	border-radius: 4px;
+	outline: none;
+	padding: 10px;
+	background-color: transparent;
+	font-family: "Creepster", cursive;
+	font-size: 20px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: #1976d2;
+			color: white;
+			border-color: #1976d2;
+		}
+	}
+}
+
+.bottom {
+	display: inline-flex;
+	column-gap: 20px;
+	align-items: center;
+}
+
+.comments {
+	display: flex;
+	flex-direction: column;
+
+	padding: 10px 15px;
+	padding-right: 120px;
+	margin-left: 50px;
+
+	border-radius: 4px;
+	border: 1px solid #000;
+	font-family: "Fasthand", cursive;
+	font-size: 11px;
+	position: relative;
+
+	&:not(:last-child) {
+		margin-bottom: 10px;
+	}
+
+	> * {
+		margin-bottom: 5px;
+	}
+
+	&__name {
+		font-size: 18px;
+		font-family: "Creepster", cursive;
+	}
+
+	&__email {
+		font-family: "Creepster", cursive;
+	}
+
+	strong {
+		font-size: 16px;
+	}
+
+	&__id {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+
+		display: flex;
+		flex-direction: column;
+		row-gap: 5px;
 	}
 }

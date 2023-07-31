@@ -11,16 +11,17 @@ import { Layout } from './layout/component';
 import { Todos } from '../pages/todos/component';
 import { Albums } from '../pages/albums/components';
 import { Posts } from '../pages/posts/component';
+import { fetchPosts } from '../redux/slices/postsSlice';
 
 export const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
    const itemsPerPage = useAppSelector((limit) => limit.topic.limit);
    const pageNumber = useAppSelector((page) => page.topic.pageNumber);
-   const bodyState = useAppSelector((state) => state.topic.topic);
 
    useEffect(() => {
       dispatch(fetchTodos({ itemsPerPage, pageNumber }));
-   }, [dispatch, itemsPerPage, pageNumber, bodyState]);
+      dispatch(fetchPosts({ itemsPerPage, pageNumber }));
+   }, [dispatch, itemsPerPage, pageNumber]);
 
    return (
       <Routes>

@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { useAppDispatch } from '../../hooks';
-import { setStateLimit } from '../../redux/slices/stateSlice';
+import { setStateLimit } from '../../redux/slices/topicSlice';
 
 export const BasicSelect = () => {
    const [count, setCount] = React.useState('');

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import topicSlice from './slices/stateSlice';
+import topicSlice from './slices/topicSlice';
 import todoSlice from './slices/todoSlice';
+import postSlice from './slices/postsSlice';
 
 const store = configureStore({
    reducer: {
       topic: topicSlice,
       todo: todoSlice,
+      post: postSlice,
    },
 });
 

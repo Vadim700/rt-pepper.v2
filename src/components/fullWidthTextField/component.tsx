@@ -38,7 +38,7 @@ export default function FullWidthTextField() {
                onChange={handleChange}
             />
             <button type="submit" onClick={handleAction}>
-               submit
+               Add task
             </button>
          </Box>
       </>

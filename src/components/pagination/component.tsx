@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import styles from './style.module.scss';
 
 import { useAppDispatch } from '../../hooks';
-import { setPageNumber } from '../../redux/slices/stateSlice';
+import { setPageNumber } from '../../redux/slices/topicSlice';
 
 export default function PaginationControlled() {
    const dispatch = useAppDispatch();
