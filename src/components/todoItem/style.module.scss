@@ -5,9 +5,11 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 10px;
+	border-color: red;
 }
 
 .title {
+	margin-right: auto;
 }
 
 .delete {
@@ -23,5 +25,14 @@
 		&:hover {
 			color: #1976d2;
 		}
+	}
+}
+
+.id {
+	margin-right: 40px;
+	flex-shrink: 0;
+
+	b {
+		font-size: 20px;
 	}
 }

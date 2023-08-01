@@ -1,10 +1,9 @@
-import React from 'react';
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchTodos } from '../redux/slices/todoSlice';
 
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { NotfoundPage } from '../pages/notfoundPage/component';
 
 import { Layout } from './layout/component';

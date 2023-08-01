@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useId } from 'react';
+import React, { FC } from 'react';
 
 import { BiEditAlt } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
@@ -9,14 +9,24 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 
 import styles from './style.module.scss';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchComments } from '../../redux/slices/commentSlice';
+import { deletePost } from '../../redux/slices/postsSlice';
+
+type Comment = {
+   postId: number;
+   id: number;
+   name: string;
+   email: string;
+   body: string;
+};
 
 type PostItemProps = {
    title?: string;
    id?: number;
    userId?: number;
    body?: string;
-   name: any;
+   onlyName: string[];
 };
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -26,34 +36,31 @@ export const PostItem: FC<PostItemProps> = ({
    id,
    userId,
    body,
-   name,
+   onlyName,
 }): JSX.Element => {
    const [checked, setChecked] = React.useState<boolean>(true);
    const [openComment, setOpenComment] = React.useState<boolean>(false);
-   const [comments, setComments] = React.useState([]);
-   const limit = useAppSelector((limit) => limit.topic.limit);
+   const dispatch = useAppDispatch();
+   const comments = useAppSelector((comment) => comment.comment.list);
+
+   const userName = onlyName.filter((_, key) => key === userId);
 
    const onchange = () => {
       setChecked((checked) => !checked);
    };
 
-   const showComments = (event: any) => {
+   const showComments = () => {
       setOpenComment((close) => !close);
+      dispatch(fetchComments(id));
    };
 
-   React.useEffect(() => {
-      const getComments = async () => {
-         const response = await fetch(
-            `https://jsonplaceholder.typicode.com/comments`,
-         ).then((res) => res.json());
-         setComments(response);
-      };
-      getComments();
-   }, []);
-
-   const relevant = comments.filter((value: any) => value.postId === id);
-
-   console.log(relevant, 'relevant');
+   const style = {
+      comment: {
+         backgroundColor: openComment ? '#1976d2' : '',
+         color: openComment ? 'white' : '',
+         borderColor: openComment ? '#1976d2' : '',
+      },
+   };
 
    return (
       <article className={styles.root}>
@@ -64,11 +71,12 @@ export const PostItem: FC<PostItemProps> = ({
             <h3 className={styles.title}>{title}</h3>
             <div className={styles.text}>{body}</div>
             <div className={styles.bottom}>
-               <div className={styles.name}>Name</div>
+               <div className={styles.name}>{userName}</div>
                <button
                   onClick={showComments}
                   className={styles.comment}
                   value={userId}
+                  style={style.comment}
                >
                   comments
                </button>
@@ -85,29 +93,24 @@ export const PostItem: FC<PostItemProps> = ({
                   checkedIcon={<Favorite />}
                   className={styles.favorite}
                />
-               <RxCross2 className={styles.delete} />
+               <RxCross2
+                  className={styles.delete}
+                  onClick={() => dispatch(deletePost(String(id)))}
+               />
             </div>
          </div>
          {openComment &&
-            relevant.map(
-               (item: {
-                  name: string;
-                  email: string;
-                  body: string;
-                  id: number;
-                  postId: number;
-               }) => (
-                  <div className={styles.comments}>
-                     <div className={styles.comments__name}>{item.name}</div>
-                     <div className={styles.comments__email}>{item.email}</div>
-                     <div className={styles.comments__body}>{item.body}</div>
-                     <span className={styles.comments__id}>
-                        <strong>ID: {item.id}</strong>
-                        <strong>postID: {item.postId}</strong>
-                     </span>
-                  </div>
-               ),
-            )}
+            comments.map((item: Comment) => (
+               <div className={styles.comments} key={item.id}>
+                  <div className={styles.comments__name}>{item.name}</div>
+                  <div className={styles.comments__email}>{item.email}</div>
+                  <div className={styles.comments__body}>{item.body}</div>
+                  <span className={styles.comments__id}>
+                     <strong>ID: {item.id}</strong>
+                     <strong>postID: {item.postId}</strong>
+                  </span>
+               </div>
+            ))}
       </article>
    );
 };

@@ -21,9 +21,17 @@ export const TodoItem: FC<TodoItemProps> = ({
    return (
       <li
          className={styles.root}
-         style={{ borderColor: completed ? 'green' : 'tomato' }}
+         style={{ borderColor: completed ? 'green' : '' }}
       >
-         <div className={styles.title}>{title}</div>
+         <span className={styles.id}>
+            ID: <b>{id}</b>
+         </span>
+         <div
+            className={styles.title}
+            style={{ textDecoration: completed ? 'line-through' : '' }}
+         >
+            {title}
+         </div>
          <button
             onClick={() => dispatch(deleteTodo(String(id)))}
             className={styles.delete}

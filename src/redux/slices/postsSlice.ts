@@ -22,7 +22,7 @@ export const fetchPosts = createAsyncThunk<
    Post[],
    any,
    { rejectValue: string }
->('posts/fetchPosts', async (url, { rejectWithValue }) => {
+>('post/fetchPosts', async (url, { rejectWithValue }) => {
    const limit = url.itemsPerPage;
    const page = url.pageNumber;
 
@@ -36,7 +36,27 @@ export const fetchPosts = createAsyncThunk<
 
    const data = await response.json();
 
+   localStorage.posts = JSON.stringify(data);
+
    return data;
+});
+
+export const deletePost = createAsyncThunk<
+   string,
+   string,
+   { rejectValue: string }
+>('post/deletePost', async function (id, { rejectWithValue }) {
+   const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      {
+         method: 'DELETE',
+      },
+   );
+   if (!response.ok) {
+      return rejectWithValue("Can't delete this post ;)");
+   }
+
+   return id;
 });
 
 const initialState: PostState = {
@@ -58,6 +78,11 @@ const postSlice = createSlice({
          .addCase(fetchPosts.fulfilled, (state, action) => {
             state.list = action.payload;
             state.loading = false;
+         })
+         .addCase(deletePost.fulfilled, (state, action) => {
+            state.list = state.list.filter(
+               (post) => String(post.id) !== action.payload,
+            );
          })
          .addMatcher(isError, (state, action: PayloadAction<string>) => {
             state.error = action.payload;
