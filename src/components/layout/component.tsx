@@ -21,7 +21,7 @@ export const Layout: FC<LayoutProps> = (): JSX.Element => {
             ) : (
                <Outlet />
             )}
-            {error && <h2>Error!</h2>}
+            {error && <h2 className={styles.error}>Error!</h2>}
          </main>
 
          <PaginationControlled />

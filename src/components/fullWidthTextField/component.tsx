@@ -3,21 +3,35 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useAppDispatch } from '../../hooks';
 import { addNewTodo } from '../../redux/slices/todoSlice';
+import { FC } from 'react';
+import { AiOutlineFileAdd } from 'react-icons/ai';
+import styles from './style.module.scss';
 
-export default function FullWidthTextField() {
-   const [value, setVaue] = React.useState<string>('');
+type FullWidthTextFieldProps = {
+   label: string;
+   id: string;
+   postValue: any;
+};
+
+export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
+   label,
+   id,
+   postValue,
+}) => {
+   const [value, setValue] = React.useState<string>('');
    const dispatch = useAppDispatch();
 
    const handleChange = (event: {
       target: { value: React.SetStateAction<string> };
    }) => {
-      setVaue(event.target.value);
+      setValue(event.target.value);
    };
 
    const handleAction = () => {
       if (value.trim().length) {
          dispatch(addNewTodo(value));
-         setVaue('');
+         setValue('');
+         postValue();
       }
    };
 
@@ -28,19 +42,23 @@ export default function FullWidthTextField() {
                width: 500,
                maxWidth: '100%',
                margin: '0 auto 20px',
+               display: 'flex',
+               columnGap: '20px',
             }}
          >
             <TextField
                fullWidth
-               label="add task"
-               id="fullWidth"
+               label={label}
+               id={id}
                value={value}
                onChange={handleChange}
+               autoComplete="off"
+               type="text"
             />
-            <button type="submit" onClick={handleAction}>
-               Add task
+            <button type="submit" onClick={handleAction} className={styles.add}>
+               <AiOutlineFileAdd />
             </button>
          </Box>
       </>
    );
-}
+};

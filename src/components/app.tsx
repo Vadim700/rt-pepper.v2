@@ -16,7 +16,6 @@ export const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
    const itemsPerPage = useAppSelector((limit) => limit.topic.limit);
    const pageNumber = useAppSelector((page) => page.topic.pageNumber);
-   const page = useAppSelector((page) => page.topic.topic);
 
    useEffect(() => {
       dispatch(fetchTodos({ itemsPerPage, pageNumber }));
