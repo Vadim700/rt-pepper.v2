@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { PostItem } from '../postItem/component';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchPosts } from '../../redux/slices/postsSlice';
 
 type PostsListProps = {};
 

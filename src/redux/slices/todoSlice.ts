@@ -43,31 +43,68 @@ export const fetchTodos = createAsyncThunk<
 });
 
 // addNewTodo
-export const addNewTodo = createAsyncThunk<
+export const addNewTodo = createAsyncThunk<Todo, any, { rejectValue: string }>(
+   'todos/addNewTodo',
+   async (text, { rejectWithValue }) => {
+      const todo = {
+         title: text,
+         userId: 1,
+         completed: false,
+      };
+
+      const response = await fetch(
+         'https://jsonplaceholder.typicode.com/todos',
+         {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(todo),
+         },
+      );
+
+      if (!response.ok) {
+         return rejectWithValue("Can't add task");
+      }
+
+      return (await response.json()) as Todo;
+   },
+);
+
+//toggleCompleted
+export const toggleStatus = createAsyncThunk<
    Todo,
-   string,
-   { rejectValue: string }
->('todos/addNewTodo', async (text, { rejectWithValue }) => {
-   const todo = {
-      title: text,
-      userId: 1,
-      completed: false,
-   };
+   any,
+   { rejectValue: string; state: { todo: TodoState } }
+>(
+   'todos/toggleStatus',
+   async function (id, { rejectWithValue, dispatch, getState }) {
+      const todo = getState().todo.list.find((item) => item.id === id);
 
-   const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(todo),
-   });
+      if (todo) {
+         const response = await fetch(
+            `https://jsonplaceholder.typicode.com/todos/${id}`,
+            {
+               method: 'PATCH',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({
+                  completed: !todo.completed,
+               }),
+            },
+         );
 
-   if (!response.ok) {
-      return rejectWithValue("Can't add task");
-   }
+         if (response.ok) {
+            return rejectWithValue('Server error!');
+         }
 
-   return { await: response.json() } as unknown as Todo;
-});
+         return (await response.json()) as Todo;
+      }
+
+      return rejectWithValue('no such todo id');
+   },
+);
 
 // deleteTodo;
 export const deleteTodo = createAsyncThunk<
@@ -118,6 +155,14 @@ const todoSlice = createSlice({
             state.list = state.list.filter(
                (todo) => String(todo.id) !== action.payload,
             );
+         })
+         .addCase(toggleStatus.fulfilled, (state, action) => {
+            const toggledTodo = state.list.find(
+               (item) => item.id === action.payload.id,
+            );
+            if (toggledTodo) {
+               toggledTodo.completed = !toggledTodo.completed;
+            }
          })
          .addMatcher(isError, (state, action: PayloadAction<string>) => {
             state.error = action.payload;

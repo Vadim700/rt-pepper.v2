@@ -36,7 +36,7 @@ export const fetchPosts = createAsyncThunk<
 
    const data = await response.json();
 
-   localStorage.posts = JSON.stringify(data);
+   // localStorage.posts = JSON.stringify(data);
 
    return data;
 });
