@@ -4,6 +4,7 @@ import {
    createAsyncThunk,
    AnyAction,
 } from '@reduxjs/toolkit';
+import { useAppSelector } from '../../hooks';
 
 type Todo = {
    id: number;
@@ -36,6 +37,7 @@ export const fetchTodos = createAsyncThunk<
    }
 
    const data = await response.json();
+   // localStorage.todo = JSON.stringify(data);
 
    return data;
 });
@@ -51,7 +53,6 @@ export const addNewTodo = createAsyncThunk<
       userId: 1,
       completed: false,
    };
-   console.log(text);
 
    const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
       method: 'POST',

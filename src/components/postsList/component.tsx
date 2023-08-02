@@ -13,10 +13,9 @@ type Post = {
 };
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
-   // const data = useAppSelector((list) => list.post.list);
+   const data = useAppSelector((list) => list.post.list);
+   // const data = JSON.parse(localStorage.posts);
    const [users, setUsers] = React.useState([]);
-
-   const data = JSON.parse(localStorage.posts);
 
    React.useEffect(() => {
       const getName = async () => {
