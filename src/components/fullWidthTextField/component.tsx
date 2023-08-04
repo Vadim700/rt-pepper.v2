@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addNewTodo } from '../../redux/slices/todoSlice';
 import { FC } from 'react';
 import { AiOutlineFileAdd } from 'react-icons/ai';
@@ -20,6 +20,10 @@ export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
 }) => {
    const [value, setValue] = React.useState<string>('');
    const dispatch = useAppDispatch();
+   const current = useAppSelector((item) => item.todo.list).map(
+      (todo) => todo.id,
+   );
+   const maxId = Math.max(...current) + 1;
 
    const handleChange = (event: {
       target: { value: React.SetStateAction<string> };
@@ -29,7 +33,7 @@ export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
 
    const handleAction = () => {
       if (value.trim().length) {
-         dispatch(addNewTodo(value));
+         dispatch(addNewTodo({ value, maxId }));
          setValue('');
          postValue();
       }

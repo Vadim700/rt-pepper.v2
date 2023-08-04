@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { deleteTodo, toggleStatus } from '../../redux/slices/todoSlice';
 import { RxCross2 } from 'react-icons/rx';
@@ -20,13 +20,6 @@ export const TodoItem: FC<TodoItemProps> = ({
 }): JSX.Element => {
    const dispatch = useAppDispatch();
 
-   const [checked, setChecked] = React.useState(true);
-
-   const handleChange = (event: any) => {
-      setChecked(event.target.checked);
-      dispatch(toggleStatus(id));
-   };
-
    return (
       <li
          className={styles.root}
@@ -36,8 +29,8 @@ export const TodoItem: FC<TodoItemProps> = ({
             ID: <b>{id}</b>
          </span>
          <Switch
-            checked={checked}
-            onChange={handleChange}
+            checked={completed}
+            onChange={() => dispatch(toggleStatus(id))}
             inputProps={{ 'aria-label': 'controlled' }}
          />
          <div

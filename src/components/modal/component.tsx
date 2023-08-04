@@ -19,6 +19,7 @@ const style = {
    border: '2px solid #000',
    boxShadow: 24,
    p: 4,
+   borderRadius: '8px',
 };
 
 const styleOpenButton = {
@@ -38,9 +39,7 @@ export default function BasicModal() {
       handleClose();
    };
 
-   const postValue = (e: any) => {
-      console.log(e);
-   };
+   const postValue = (e: any) => {};
 
    return (
       <div className={styles.root}>

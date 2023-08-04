@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { PostItem } from '../postItem/component';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchPosts } from '../../redux/slices/postsSlice';
 
 type PostsListProps = {};
 
@@ -15,7 +14,6 @@ type Post = {
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
    const data = useAppSelector((list) => list.post.list);
-   // const data = JSON.parse(localStorage.posts);
    const [users, setUsers] = React.useState([]);
 
    React.useEffect(() => {

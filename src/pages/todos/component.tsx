@@ -6,7 +6,10 @@ import BasicModal from '../../components/modal/component';
 export const Todos: React.FC = (): JSX.Element => {
    return (
       <div className={styles.root}>
-         <BasicModal />
+         <div className={styles.top}>
+            <button>sort</button>
+            <BasicModal />
+         </div>
          <TodoList />
       </div>
    );
