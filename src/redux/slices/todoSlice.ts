@@ -45,17 +45,23 @@ export const fetchTodos = createAsyncThunk<
 // addNewTodo
 export const addNewTodo = createAsyncThunk<Todo, any, { rejectValue: string }>(
    'todos/addNewTodo',
-   async (text, { rejectWithValue }) => {
+   async (obj, { rejectWithValue }) => {
+      const text = obj.value;
+      const id = obj.maxId;
+
+      console.log(obj, '>>> input');
+
       const todo = {
          title: text,
          userId: 1,
          completed: false,
+         id: id,
       };
 
       const response = await fetch(
-         'https://jsonplaceholder.typicode.com/todos',
+         `https://jsonplaceholder.typicode.com/todos/${id}`,
          {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
             },
@@ -67,42 +73,9 @@ export const addNewTodo = createAsyncThunk<Todo, any, { rejectValue: string }>(
          return rejectWithValue("Can't add task");
       }
 
+      // console.log(await response.json(), '>>> output');
+
       return (await response.json()) as Todo;
-   },
-);
-
-//toggleCompleted
-export const toggleStatus = createAsyncThunk<
-   Todo,
-   any,
-   { rejectValue: string; state: { todo: TodoState } }
->(
-   'todos/toggleStatus',
-   async function (id, { rejectWithValue, dispatch, getState }) {
-      const todo = getState().todo.list.find((item) => item.id === id);
-
-      if (todo) {
-         const response = await fetch(
-            `https://jsonplaceholder.typicode.com/todos/${id}`,
-            {
-               method: 'PATCH',
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({
-                  completed: !todo.completed,
-               }),
-            },
-         );
-
-         if (response.ok) {
-            return rejectWithValue('Server error!');
-         }
-
-         return (await response.json()) as Todo;
-      }
-
-      return rejectWithValue('no such todo id');
    },
 );
 
@@ -123,6 +96,35 @@ export const deleteTodo = createAsyncThunk<
    }
 
    return id;
+});
+
+//toggleCompleted
+export const toggleStatus = createAsyncThunk<
+   Todo,
+   any,
+   { rejectValue: string; state: { todo: TodoState } }
+>('todos/toggleStatus', async function (id, { rejectWithValue, getState }) {
+   const todo = getState().todo.list.find((item) => item.id === id);
+
+   if (todo) {
+      const response = await fetch(
+         `https://jsonplaceholder.typicode.com/todos/${id}`,
+         {
+            method: 'PATCH',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+               completed: !todo.completed,
+            }),
+         },
+      );
+      if (!response.ok) {
+         return rejectWithValue('Server error!');
+      }
+      return (await response.json()) as Todo;
+   }
+   return rejectWithValue('no such todo id');
 });
 
 const initialState: TodoState = {
