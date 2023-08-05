@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { deleteTodo, toggleStatus } from '../../redux/slices/todoSlice';
 import { RxCross2 } from 'react-icons/rx';
 import { Switch } from '@mui/material';
+import { BiEditAlt } from 'react-icons/bi';
 
 type TodoItemProps = {
    id: number;
@@ -19,6 +20,8 @@ export const TodoItem: FC<TodoItemProps> = ({
    completed,
 }): JSX.Element => {
    const dispatch = useAppDispatch();
+
+   const handleClick = (e: any) => {};
 
    return (
       <li
@@ -39,6 +42,9 @@ export const TodoItem: FC<TodoItemProps> = ({
          >
             {title}
          </div>
+         <button className={styles.edit} onClick={handleClick}>
+            <BiEditAlt />
+         </button>
          <button
             onClick={() => dispatch(deleteTodo(String(id)))}
             className={styles.delete}

@@ -23,8 +23,13 @@ export const fetchPosts = createAsyncThunk<
    any,
    { rejectValue: string }
 >('post/fetchPosts', async (url, { rejectWithValue }) => {
-   const limit = url.itemsPerPage;
-   const page = url.pageNumber;
+   let limit = '';
+   let page = '';
+
+   if (url.itemsPerPage) {
+      limit = url.itemsPerPage;
+      page = url.pageNumber;
+   }
 
    const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`,

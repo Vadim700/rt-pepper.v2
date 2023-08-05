@@ -25,8 +25,13 @@ export const fetchTodos = createAsyncThunk<
    any,
    { rejectValue: string }
 >('todos/fetchTodos', async (url, { rejectWithValue }) => {
-   const limit = url.itemsPerPage;
-   const page = url.pageNumber;
+   let limit = '';
+   let page = '';
+
+   if (url.itemsPerPage) {
+      limit = url.itemsPerPage;
+      page = url.pageNumber;
+   }
 
    const response = await fetch(
       `https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=${limit}`,
@@ -49,8 +54,6 @@ export const addNewTodo = createAsyncThunk<Todo, any, { rejectValue: string }>(
       const text = obj.value;
       const id = obj.maxId;
 
-      console.log(obj, '>>> input');
-
       const todo = {
          title: text,
          userId: 1,
@@ -72,8 +75,6 @@ export const addNewTodo = createAsyncThunk<Todo, any, { rejectValue: string }>(
       if (!response.ok) {
          return rejectWithValue("Can't add task");
       }
-
-      // console.log(await response.json(), '>>> output');
 
       return (await response.json()) as Todo;
    },

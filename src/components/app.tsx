@@ -11,6 +11,7 @@ import { Todos } from '../pages/todos/component';
 import { Albums } from '../pages/albums/components';
 import { Posts } from '../pages/posts/component';
 import { fetchPosts } from '../redux/slices/postsSlice';
+import { CreateTodo, createTodoAction } from '../pages/createPost/component';
 
 export const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
@@ -28,6 +29,11 @@ export const App = (): JSX.Element => {
             <Route index element={<Posts />} />
             <Route path="/albums" element={<Albums />} />
             <Route path="/todos" element={<Todos />} />
+            <Route
+               path="/todos/new"
+               element={<CreateTodo />}
+               action={createTodoAction}
+            />
             <Route path="*" element={<NotfoundPage />} />
          </Route>
       </Routes>
