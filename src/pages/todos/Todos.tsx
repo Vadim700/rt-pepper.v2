@@ -9,7 +9,6 @@ export const Todos: React.FC = (): JSX.Element => {
       <div className={styles.root}>
          <div className={styles.top}>
             <button>sort</button>
-            <Link to="/todo/new">create a new todo</Link>
             <BasicModal />
          </div>
          <TodoList />

@@ -8,18 +8,22 @@ import { AiOutlineFileAdd } from 'react-icons/ai';
 import styles from './style.module.scss';
 
 type FullWidthTextFieldProps = {
-   label: string;
+   label: any;
    id: string;
    postValue: any;
+   value: any;
+   defaultValue: any;
 };
 
 export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
    label,
    id,
    postValue,
+   // defaultValue,
 }) => {
    const [value, setValue] = React.useState<string>('');
    const dispatch = useAppDispatch();
+   const state = useAppSelector((state) => state.topic.topic);
    const current = useAppSelector((item) => item.todo.list).map(
       (todo) => todo.id,
    );
@@ -35,7 +39,6 @@ export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
       if (value.trim().length) {
          dispatch(addNewTodo({ value, maxId }));
          setValue('');
-         postValue();
       }
    };
 
@@ -43,7 +46,6 @@ export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
       <>
          <Box
             sx={{
-               width: 500,
                maxWidth: '100%',
                margin: '0 auto 20px',
                display: 'flex',
