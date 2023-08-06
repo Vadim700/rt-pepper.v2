@@ -128,6 +128,41 @@ export const toggleStatus = createAsyncThunk<
    return rejectWithValue('no such todo id');
 });
 
+//editTodo
+export const editTodo = createAsyncThunk<
+   Todo,
+   any,
+   { rejectValue: string; state: { todo: TodoState } }
+>('todos/toggleStatus', async function (obj, { rejectWithValue, getState }) {
+   console.log(obj);
+   const text = obj.value;
+   const id = obj.id;
+   console.log(text, '>>> text');
+   console.log(id, '>>> id');
+
+   const todo = getState().todo.list.find((item) => item.id === id);
+
+   if (todo) {
+      const response = await fetch(
+         `https://jsonplaceholder.typicode.com/todos/${id}`,
+         {
+            method: 'PATCH',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+               // title: todo.text,
+            }),
+         },
+      );
+      if (!response.ok) {
+         return rejectWithValue('Server error!');
+      }
+      return (await response.json()) as Todo;
+   }
+   return rejectWithValue('no such todo id');
+});
+
 const initialState: TodoState = {
    list: [],
    loading: false,

@@ -68,16 +68,22 @@ export default function BasicModal() {
                            label={'TITLE'}
                            id={'title'}
                            postValue={postValue}
+                           defaultValue={''}
+                           value={''}
                         />
                         <FullWidthTextField
                            label={'NAME'}
                            id={'name'}
                            postValue={postValue}
+                           defaultValue={''}
+                           value={''}
                         />
                         <FullWidthTextField
                            label={'POST'}
                            id={'post'}
                            postValue={postValue}
+                           defaultValue={''}
+                           value={''}
                         />
                      </>
                   )}
@@ -86,6 +92,8 @@ export default function BasicModal() {
                         label={'NEW TASK'}
                         id={'task'}
                         postValue={postValue}
+                        defaultValue={''}
+                        value={''}
                      />
                   )}
                </form>

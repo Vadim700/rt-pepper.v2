@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styles from './style.module.scss';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Link } from 'react-router-dom';
 
 import { deleteTodo, toggleStatus } from '../../redux/slices/todoSlice';
 import { RxCross2 } from 'react-icons/rx';
@@ -42,9 +43,9 @@ export const TodoItem: FC<TodoItemProps> = ({
          >
             {title}
          </div>
-         <button className={styles.edit} onClick={handleClick}>
+         <Link to={`/todos/${id}`} className={styles.edit}>
             <BiEditAlt />
-         </button>
+         </Link>
          <button
             onClick={() => dispatch(deleteTodo(String(id)))}
             className={styles.delete}

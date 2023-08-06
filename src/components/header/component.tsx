@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { SiGhostery } from 'react-icons/si';
-import { Buttons } from '../customizedButtons/component';
+import { Buttons } from '../buttons/component';
 import { BasicSelect } from '../basicSelect/component';
 
 import styles from './style.module.scss';
