@@ -7,6 +7,7 @@ import {
 import { useAppSelector } from '../../hooks';
 
 type Todo = {
+   text: any;
    id: number;
    userId: number;
    title: string;
@@ -133,14 +134,11 @@ export const editTodo = createAsyncThunk<
    Todo,
    any,
    { rejectValue: string; state: { todo: TodoState } }
->('todos/toggleStatus', async function (obj, { rejectWithValue, getState }) {
-   console.log(obj);
+>('todos/editTodo', async function (obj, { rejectWithValue, getState }) {
    const text = obj.value;
    const id = obj.id;
-   console.log(text, '>>> text');
-   console.log(id, '>>> id');
 
-   const todo = getState().todo.list.find((item) => item.id === id);
+   const todo = getState().todo.list.find((item) => item.id === Number(id));
 
    if (todo) {
       const response = await fetch(
@@ -151,10 +149,11 @@ export const editTodo = createAsyncThunk<
                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-               // title: todo.text,
+               title: text,
             }),
          },
       );
+
       if (!response.ok) {
          return rejectWithValue('Server error!');
       }
@@ -200,6 +199,14 @@ const todoSlice = createSlice({
             );
             if (toggledTodo) {
                toggledTodo.completed = !toggledTodo.completed;
+            }
+         })
+         .addCase(editTodo.fulfilled, (state, action) => {
+            const editedTodo = state.list.find(
+               (item) => item.id === action.payload.id,
+            );
+            if (editedTodo) {
+               editedTodo.title = action.payload.title;
             }
          })
          .addMatcher(isError, (state, action: PayloadAction<string>) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import styles from './style.module.scss';
 import { editTodo } from '../../redux/slices/todoSlice';
@@ -9,7 +9,7 @@ type CreateTodoProps = {};
 export const EditTodo: React.FC<CreateTodoProps> = (): JSX.Element => {
    const { id } = useParams();
    const dispantch = useAppDispatch();
-   const [value, setValue] = React.useState('');
+   const navigate = useNavigate();
 
    const todoItem = useAppSelector((item) => item.todo.list).find(
       (i) => String(i.id) === id,
@@ -17,9 +17,9 @@ export const EditTodo: React.FC<CreateTodoProps> = (): JSX.Element => {
 
    const submitHandler = (e: any) => {
       e.preventDefault();
-      setValue((prev) => (prev = e.target.elements[0].value));
-      // console.log(value, '>>> value from state');
+      const value = e.target.elements[0].value;
       dispantch(editTodo({ id, value }));
+      navigate(-1);
    };
 
    return (

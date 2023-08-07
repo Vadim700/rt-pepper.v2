@@ -26,7 +26,7 @@ type PostItemProps = {
    id?: number;
    userId?: number;
    body?: string;
-   onlyName: string[];
+   users: any;
 };
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -36,14 +36,16 @@ export const PostItem: FC<PostItemProps> = ({
    id,
    userId,
    body,
-   onlyName,
+   users,
 }): JSX.Element => {
    const [checked, setChecked] = React.useState<boolean>(true);
    const [openComment, setOpenComment] = React.useState<boolean>(false);
    const dispatch = useAppDispatch();
    const comments = useAppSelector((comment) => comment.comment.list);
 
-   const userName = onlyName.filter((_, key) => key === userId);
+   const name = users.filter(
+      (_: any, key: number | undefined) => key === userId,
+   );
 
    const onchange = () => {
       setChecked((checked) => !checked);
@@ -71,7 +73,7 @@ export const PostItem: FC<PostItemProps> = ({
             <h3 className={styles.title}>{title}</h3>
             <div className={styles.text}>{body}</div>
             <div className={styles.bottom}>
-               <div className={styles.name}>{userName}</div>
+               <div className={styles.name}>{name}</div>
                <button
                   onClick={showComments}
                   className={styles.comment}

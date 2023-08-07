@@ -15,12 +15,14 @@ import topicSlice from './slices/topicSlice';
 import todoSlice from './slices/todoSlice';
 import postSlice from './slices/postsSlice';
 import commentSlice from './slices/commentSlice';
+import userSlice from './slices/userSlice';
 
 const rootReducer = combineReducers({
    topic: topicSlice,
    todo: todoSlice,
    post: postSlice,
    comment: commentSlice,
+   user: userSlice,
 });
 
 const persistConfig = {

@@ -14,25 +14,12 @@ type Post = {
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
    const data = useAppSelector((list) => list.post.list);
-   const [users, setUsers] = React.useState([]);
-
-   React.useEffect(() => {
-      const getName = async () => {
-         const responseName = await fetch(
-            'https://jsonplaceholder.typicode.com/users',
-         )
-            .then((res) => res.json())
-            .then((user) => user.map((i: any) => i.name));
-
-         setUsers(responseName);
-      };
-      getName();
-   }, []);
+   const users = useAppSelector((user) => user.user.list);
 
    return (
       <div className={styles.root}>
          {data.map((item: Post) => (
-            <PostItem key={item.id} {...item} onlyName={users} />
+            <PostItem key={item.id} {...item} users={users} />
          ))}
       </div>
    );

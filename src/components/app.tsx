@@ -17,6 +17,7 @@ import { Albums } from '../pages/albums/Albums';
 import { Posts } from '../pages/posts/Posts';
 import { fetchPosts } from '../redux/slices/postsSlice';
 import { EditTodo } from '../pages/editTodo/EditTodo';
+import { fetchUsers } from '../redux/slices/userSlice';
 
 const router = createBrowserRouter(
    createRoutesFromElements(
@@ -38,6 +39,7 @@ export const App = (): JSX.Element => {
    useEffect(() => {
       dispatch(fetchTodos({ itemsPerPage, pageNumber }));
       dispatch(fetchPosts({ itemsPerPage, pageNumber }));
+      dispatch(fetchUsers());
    }, [dispatch, itemsPerPage, pageNumber]);
 
    return <RouterProvider router={router} />;
