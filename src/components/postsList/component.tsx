@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { PostItem } from '../postItem/component';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 
 type PostsListProps = {};
 

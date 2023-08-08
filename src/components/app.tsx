@@ -18,11 +18,13 @@ import { Posts } from '../pages/posts/Posts';
 import { fetchPosts } from '../redux/slices/postsSlice';
 import { EditTodo } from '../pages/editTodo/EditTodo';
 import { fetchUsers } from '../redux/slices/userSlice';
+import { EditPost } from '../pages/editPost/EditPost';
 
 const router = createBrowserRouter(
    createRoutesFromElements(
       <Route path="/" element={<Layout />}>
          <Route index element={<Posts />} />
+         <Route path="/:id" element={<EditPost />} />
          <Route path="albums" element={<Albums />} />
          <Route path="todos/*" element={<Todos />} />
          <Route path="todos/:id" element={<EditTodo />} />

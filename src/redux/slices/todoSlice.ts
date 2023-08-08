@@ -52,18 +52,17 @@ export const fetchTodos = createAsyncThunk<
 export const addNewTodo = createAsyncThunk<Todo, any, { rejectValue: string }>(
    'todos/addNewTodo',
    async (obj, { rejectWithValue }) => {
-      const text = obj.value;
-      const id = obj.maxId;
+      const { value, maxId } = obj;
 
       const todo = {
-         title: text,
+         title: value,
          userId: 1,
          completed: false,
-         id: id,
+         id: maxId,
       };
 
       const response = await fetch(
-         `https://jsonplaceholder.typicode.com/todos/${id}`,
+         `https://jsonplaceholder.typicode.com/todos/${maxId}`,
          {
             method: 'PUT',
             headers: {

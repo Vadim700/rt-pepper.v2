@@ -27,6 +27,7 @@ export const BasicSelect = () => {
                   backgroundColor: 'white',
                   fontFamily: 'Creepster, cursive',
                   letterSpacing: '2px',
+                  borderColor: 'blue',
                }}
             >
                Items per page

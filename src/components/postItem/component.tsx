@@ -12,6 +12,7 @@ import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchComments } from '../../redux/slices/commentSlice';
 import { deletePost } from '../../redux/slices/postsSlice';
+import { Link } from 'react-router-dom';
 
 type Comment = {
    postId: number;
@@ -88,7 +89,11 @@ export const PostItem: FC<PostItemProps> = ({
             </span>
             <div className={styles.action}>
                <span style={{ marginRight: '10px' }}>id: {id}</span>
-               <BiEditAlt className={styles.edit} />
+
+               <Link to={`/${id}`}>
+                  <BiEditAlt className={styles.edit} />
+               </Link>
+
                <Checkbox
                   {...label}
                   icon={<FavoriteBorder />}
