@@ -18,6 +18,7 @@ type PostState = {
    error: string | null;
 };
 
+// fetch posts
 export const fetchPosts = createAsyncThunk<
    Post[],
    any,
@@ -46,6 +47,7 @@ export const fetchPosts = createAsyncThunk<
    return data;
 });
 
+// delete post
 export const deletePost = createAsyncThunk<
    string,
    string,
@@ -63,6 +65,38 @@ export const deletePost = createAsyncThunk<
 
    return id;
 });
+
+// add new post
+export const addNewPost = createAsyncThunk<Post, any, { rejectValue: string }>(
+   'post/addNewPost',
+   async (obj, { rejectWithValue }) => {
+      const { title, body, id } = obj;
+
+      const post = {
+         title: title,
+         userId: 1,
+         body: body,
+         id: id,
+      };
+
+      const response = await fetch(
+         `https://jsonplaceholder.typicode.com/posts/${id}`,
+         {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(post),
+         },
+      );
+
+      if (!response.ok) {
+         return rejectWithValue("Can't add task");
+      }
+
+      return (await response.json()) as Post;
+   },
+);
 
 const initialState: PostState = {
    list: [],
@@ -88,6 +122,12 @@ const postSlice = createSlice({
             state.list = state.list.filter(
                (post) => String(post.id) !== action.payload,
             );
+         })
+         .addCase(addNewPost.pending, (state) => {
+            state.error = null;
+         })
+         .addCase(addNewPost.fulfilled, (state, action) => {
+            state.list.push(action.payload);
          })
          .addMatcher(isError, (state, action: PayloadAction<string>) => {
             state.error = action.payload;

@@ -3,11 +3,22 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+
 import { FullWidthTextField } from '../fullWidthTextField/component';
-import styles from './style.module.scss';
 import { GrAddCircle } from 'react-icons/gr';
-import { AiOutlineClose } from 'react-icons/ai';
-import { useAppSelector } from '../../hooks';
+import { RiCloseCircleLine } from 'react-icons/ri';
+import { FaAngellist } from 'react-icons/fa';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import styles from './style.module.scss';
+import {
+   FormControl,
+   InputLabel,
+   MenuItem,
+   Select,
+   SelectChangeEvent,
+} from '@mui/material';
+import { addNewPost } from '../../redux/slices/postsSlice';
 
 const style = {
    position: 'absolute' as 'absolute',
@@ -24,7 +35,7 @@ const style = {
 
 const styleOpenButton = {
    border: '3px solid',
-   fontSize: '50px',
+   fontSize: '38px',
    padding: '10px',
 };
 
@@ -32,11 +43,31 @@ export default function BasicModal() {
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
+   const dispatch = useAppDispatch();
+
    const state = useAppSelector((state) => state.topic.topic);
+   const users = useAppSelector((name) => name.user.list);
+   const maxId = useAppSelector((post) => post.post.list).map(
+      (item) => item.id,
+   );
+
+   const id = Math.max(...maxId) + 1;
+
+   const [title, setTitle] = React.useState('');
+   const [body, setBody] = React.useState('');
+   const [name, setName] = React.useState('');
 
    const handleSubmit = (e: any) => {
       e.preventDefault();
       handleClose();
+
+      dispatch(addNewPost({ title, body, id }));
+      setTitle('');
+      setBody('');
+   };
+
+   const handleChange = (event: SelectChangeEvent) => {
+      setName(event.target.value as string);
    };
 
    const postValue = (e: any) => {};
@@ -58,34 +89,62 @@ export default function BasicModal() {
                      id="modal-modal-title"
                      variant="h6"
                      component="h2"
-                     sx={{ marginBottom: '10px' }}
+                     sx={{
+                        marginBottom: '10px',
+                        textTransform: 'uppercase',
+                        textAlign: 'center',
+                     }}
                   >
                      Add new {state.slice(0, -1)} item
                   </Typography>
                   {state === 'posts' && (
-                     <>
-                        <FullWidthTextField
-                           label={'TITLE'}
-                           id={'title'}
-                           postValue={postValue}
-                           defaultValue={''}
-                           value={''}
+                     <div className={styles.postForm}>
+                        <input
+                           className={styles.input}
+                           placeholder="title"
+                           id="title"
+                           autoComplete="off"
+                           value={title}
+                           onChange={(e: any) => setTitle(e.target.value)}
                         />
-                        <FullWidthTextField
-                           label={'NAME'}
-                           id={'name'}
-                           postValue={postValue}
-                           defaultValue={''}
-                           value={''}
+                        <input
+                           className={styles.input}
+                           placeholder="body"
+                           id="body"
+                           autoComplete="off"
+                           value={body}
+                           onChange={(e: any) => setBody(e.target.value)}
                         />
-                        <FullWidthTextField
-                           label={'POST'}
-                           id={'post'}
-                           postValue={postValue}
-                           defaultValue={''}
-                           value={''}
-                        />
-                     </>
+                        <FormControl fullWidth>
+                           <InputLabel
+                              id="demo-simple-select-label"
+                              sx={{
+                                 textTransform: 'uppercase',
+                                 backgroundColor: 'white',
+                                 padding: '0 6px',
+                              }}
+                           >
+                              Name
+                           </InputLabel>
+                           <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              value={name}
+                              label="Age"
+                              onChange={handleChange}
+                           >
+                              {users.map((name: any, key) => (
+                                 <MenuItem value={name} key={key}>
+                                    {name}
+                                 </MenuItem>
+                              ))}
+                           </Select>
+                        </FormControl>
+
+                        <button className={styles.submit} type="submit">
+                           <FaAngellist />
+                        </button>
+                     </div>
                   )}
                   {state === 'todos' && (
                      <FullWidthTextField
@@ -98,7 +157,7 @@ export default function BasicModal() {
                   )}
                </form>
                <span className={styles.close} onClick={handleClose}>
-                  <AiOutlineClose />
+                  <RiCloseCircleLine />
                </span>
             </Box>
          </Modal>
