@@ -98,6 +98,38 @@ export const addNewPost = createAsyncThunk<Post, any, { rejectValue: string }>(
    },
 );
 
+//edit post
+export const editPost = createAsyncThunk<
+   Post,
+   any,
+   { rejectValue: string; state: { post: PostState } }
+>('post/editPost', async (obj, { rejectWithValue, getState }) => {
+   const { title, body, id } = obj;
+
+   const post = getState().post.list.find((item) => item.id === Number(id));
+
+   if (post) {
+      const response = await fetch(
+         `https://jsonplaceholder.typicode.com/posts/${id}`,
+         {
+            method: 'PATCH',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+               title,
+               body,
+            }),
+         },
+      );
+      if (!response.ok) {
+         return rejectWithValue("Can't add task");
+      }
+      return (await response.json()) as Post;
+   }
+   return rejectWithValue('no such todo id');
+});
+
 const initialState: PostState = {
    list: [],
    loading: false,
@@ -128,6 +160,15 @@ const postSlice = createSlice({
          })
          .addCase(addNewPost.fulfilled, (state, action) => {
             state.list.push(action.payload);
+         })
+         .addCase(editPost.fulfilled, (state, action) => {
+            const editedPost = state.list.find(
+               (item) => item.id === action.payload.id,
+            );
+            if (editedPost) {
+               editedPost.title = action.payload.title;
+               editedPost.body = action.payload.body;
+            }
          })
          .addMatcher(isError, (state, action: PayloadAction<string>) => {
             state.error = action.payload;

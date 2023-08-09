@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './style.module.scss';
 import {
    FormControl,
@@ -11,12 +11,15 @@ import {
    SelectChangeEvent,
 } from '@mui/material';
 import { FaAngellist } from 'react-icons/fa6';
+import { editPost } from '../../redux/slices/postsSlice';
 
 type EditPostProps = {};
 
 export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
    const { id } = useParams();
    const navigate = useNavigate();
+   const dispatch = useAppDispatch();
+   const [value, setValue] = React.useState('');
 
    const users = useAppSelector((name) => name.user.list);
    const post = useAppSelector((item) => item.post.list).find(
@@ -31,6 +34,10 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
 
    const submitHandler = (e: any) => {
       e.preventDefault();
+      const title = e.target[0].value;
+      const body = e.target[1].value;
+
+      dispatch(editPost({ title, body, id }));
 
       navigate(-1);
    };
@@ -38,7 +45,6 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
    return (
       <div className={styles.root}>
          <h1 className={styles.title}>Edit Post № {id}</h1>
-
          <form action="#" onSubmit={submitHandler}>
             <div className={styles.postForm}>
                <input

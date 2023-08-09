@@ -13,7 +13,6 @@ type Todo = {
 
 export const TodoList: React.FC = (): JSX.Element => {
    const data = useAppSelector((state) => state.todo.list);
-   // const data = JSON.parse(localStorage.todo);
 
    return (
       <ul className={styles.root}>

@@ -43,7 +43,6 @@ export const fetchTodos = createAsyncThunk<
    }
 
    const data = await response.json();
-   // localStorage.todo = JSON.stringify(data);
 
    return data;
 });
