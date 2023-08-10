@@ -5,12 +5,14 @@ type CounterState = {
    topic: string;
    limit: number;
    pageNumber: number;
+   sortType: string;
 };
 
 const initialState: CounterState = {
    topic: 'posts',
    limit: 10,
    pageNumber: 1,
+   sortType: 'idAsc',
 };
 
 const topicSlice = createSlice({
@@ -26,9 +28,13 @@ const topicSlice = createSlice({
       setPageNumber: (state, action: PayloadAction<number>) => {
          state.pageNumber = action.payload;
       },
+      setSortTodos: (state, action: PayloadAction<string>) => {
+         state.sortType = action.payload;
+      },
    },
 });
 
-export const { setState, setStateLimit, setPageNumber } = topicSlice.actions;
+export const { setState, setStateLimit, setPageNumber, setSortTodos } =
+   topicSlice.actions;
 
 export default topicSlice.reducer;

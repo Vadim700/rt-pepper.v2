@@ -13,8 +13,8 @@ type Post = {
 };
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
-   const data = useAppSelector((list) => list.post.list);
    const users = useAppSelector((user) => user.user.list);
+   const data = useAppSelector((list) => list.post.list);
 
    return (
       <div className={styles.root}>

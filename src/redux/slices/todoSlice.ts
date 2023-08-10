@@ -4,7 +4,6 @@ import {
    createAsyncThunk,
    AnyAction,
 } from '@reduxjs/toolkit';
-import { useAppSelector } from '../../hooks';
 
 type Todo = {
    text: any;

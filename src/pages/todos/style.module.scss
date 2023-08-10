@@ -12,16 +12,15 @@
 	margin-bottom: 20px;
 
 	button {
-		padding: 0;
+		padding: 7px;
+
 		background-color: transparent;
 		border: 1px solid var(--blue);
 		margin: 0;
 		cursor: pointer;
-		font-family: "Creepster", cursive;
 		border-radius: 4px;
 
 		&:not(:last-child) {
-			padding: 10px 20px;
 			font-size: 20px;
 		}
 	}
