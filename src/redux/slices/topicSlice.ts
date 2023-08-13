@@ -28,13 +28,13 @@ const topicSlice = createSlice({
       setPageNumber: (state, action: PayloadAction<number>) => {
          state.pageNumber = action.payload;
       },
-      setSortTodos: (state, action: PayloadAction<string>) => {
+      setSortType: (state, action: PayloadAction<string>) => {
          state.sortType = action.payload;
       },
    },
 });
 
-export const { setState, setStateLimit, setPageNumber, setSortTodos } =
+export const { setState, setStateLimit, setPageNumber, setSortType } =
    topicSlice.actions;
 
 export default topicSlice.reducer;

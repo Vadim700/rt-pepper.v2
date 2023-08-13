@@ -39,7 +39,7 @@ export const PostItem: FC<PostItemProps> = ({
    body,
    users,
 }): JSX.Element => {
-   const [checked, setChecked] = React.useState<boolean>(true);
+   const [checked, setChecked] = React.useState<boolean>(false);
    const [openComment, setOpenComment] = React.useState<boolean>(false);
    const dispatch = useAppDispatch();
    const comments = useAppSelector((comment) => comment.comment.list);
@@ -48,7 +48,7 @@ export const PostItem: FC<PostItemProps> = ({
       (_: any, key: number | undefined) => key === userId,
    );
 
-   const onchange = () => {
+   const chengeCheckbox = () => {
       setChecked((checked) => !checked);
    };
 
@@ -85,7 +85,8 @@ export const PostItem: FC<PostItemProps> = ({
                </button>
             </div>
             <span className={styles.checkbox}>
-               <ControlledCheckbox onchange={onchange} />
+               {/* <ControlledCheckbox onchange={chengeCheckbox} /> */}
+               <input type="checkbox" name="" onChange={chengeCheckbox} />
             </span>
             <div className={styles.action}>
                <span style={{ marginRight: '10px' }}>id: {id}</span>
