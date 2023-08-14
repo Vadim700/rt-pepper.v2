@@ -28,32 +28,34 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
    const idAsc = (a: Post, b: Post) => a.id - b.id;
    const idDesc = (a: Post, b: Post) => b.id - a.id;
 
-   return (
-      <div className={styles.root}>
-         {sortType === 'idAsc' &&
-            [...data]
+   const mySort = React.useMemo(() => {
+      switch (sortType) {
+         case 'idAsc':
+            return [...data]
                .sort(idAsc)
                .map((item: Post) => (
                   <PostItem key={item.id} {...item} users={users} />
-               ))}
-         {sortType === 'idDesc' &&
-            [...data]
+               ));
+         case 'idDesc':
+            return [...data]
                .sort(idDesc)
                .map((item: Post) => (
                   <PostItem key={item.id} {...item} users={users} />
-               ))}
-         {sortType === 'titleAsc' &&
-            [...data]
+               ));
+         case 'titleAsc':
+            return [...data]
                .sort(titleAsc)
                .map((item: Post) => (
                   <PostItem key={item.id} {...item} users={users} />
-               ))}
-         {sortType === 'titleDesc' &&
-            [...data]
+               ));
+         case 'titleDesc':
+            return [...data]
                .sort(titleDesc)
                .map((item: Post) => (
                   <PostItem key={item.id} {...item} users={users} />
-               ))}
-      </div>
-   );
+               ));
+      }
+   }, [sortType, data, users]);
+
+   return <ul className={styles.root}>{mySort}</ul>;
 };

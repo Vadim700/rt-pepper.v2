@@ -25,7 +25,7 @@ export const Posts = (): JSX.Element => {
    }, [dispatch, sort]);
 
    return (
-      <div>
+      <>
          <div className={styles.top}>
             <button>fillter</button>
             <FormControl sx={{ width: '200px' }}>
@@ -54,6 +54,6 @@ export const Posts = (): JSX.Element => {
             <BasicModal />
          </div>
          <PostsList />
-      </div>
+      </>
    );
 };

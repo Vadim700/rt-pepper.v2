@@ -19,6 +19,7 @@ import { fetchPosts } from '../redux/slices/postsSlice';
 import { EditTodo } from '../pages/editTodo/EditTodo';
 import { fetchUsers } from '../redux/slices/userSlice';
 import { EditPost } from '../pages/editPost/EditPost';
+import topicSlice, { setSortType } from '../redux/slices/topicSlice';
 
 const router = createBrowserRouter(
    createRoutesFromElements(

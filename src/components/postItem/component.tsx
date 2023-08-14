@@ -85,7 +85,6 @@ export const PostItem: FC<PostItemProps> = ({
                </button>
             </div>
             <span className={styles.checkbox}>
-               {/* <ControlledCheckbox onchange={chengeCheckbox} /> */}
                <input type="checkbox" name="" onChange={chengeCheckbox} />
             </span>
             <div className={styles.action}>
