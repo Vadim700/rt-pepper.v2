@@ -1,11 +1,11 @@
 .top {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	column-gap: 20px;
 	margin-bottom: 20px;
 
 	button {
-		padding: 0;
+		// padding: 0;
 		background-color: transparent;
 		border: 1px solid var(--blue);
 		margin: 0;
@@ -17,5 +17,23 @@
 			padding: 10px 20px;
 			font-size: 20px;
 		}
+		@media (hover: hover) {
+			&:hover {
+				color: var(--blue);
+			}
+		}
+	}
+}
+
+.clearFavorite {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 28px;
+	padding: 10px;
+	transition: all 0.2s ease 0s;
+
+	span {
+		margin-left: 15px;
 	}
 }

@@ -9,12 +9,15 @@ import {
    Select,
    SelectChangeEvent,
 } from '@mui/material';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortType } from '../../redux/slices/topicSlice';
+import { LuHeartOff } from 'react-icons/lu';
+import { clearFavorites } from '../../redux/slices/favoriteSlice';
 
 export const Posts = (): JSX.Element => {
    const [sort, setSort] = React.useState('idAsc');
    const dispatch = useAppDispatch();
+   const favoritesLangth = useAppSelector((item) => item.favorites.list.length);
 
    const handleChange = (event: SelectChangeEvent) => {
       setSort(event.target.value);
@@ -31,7 +34,10 @@ export const Posts = (): JSX.Element => {
             <FormControl sx={{ width: '200px' }}>
                <InputLabel
                   id="demo-simple-select-label"
-                  sx={{ backgroundColor: 'white', padding: '0 6px' }}
+                  sx={{
+                     backgroundColor: 'white',
+                     padding: '0 6px',
+                  }}
                >
                   Sort to...
                </InputLabel>
@@ -51,7 +57,17 @@ export const Posts = (): JSX.Element => {
                </Select>
             </FormControl>
 
-            <BasicModal />
+            <div title="Add new post">
+               <BasicModal />
+            </div>
+            <button
+               className={styles.clearFavorite}
+               onClick={() => dispatch(clearFavorites())}
+               title="Clear favorites"
+            >
+               <LuHeartOff />
+               {favoritesLangth > 0 && <span>{favoritesLangth}</span>}
+            </button>
          </div>
          <PostsList />
       </>

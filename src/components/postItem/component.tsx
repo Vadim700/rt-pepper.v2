@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import { BiEditAlt } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 
-import { ControlledCheckbox } from '../checkbox/component';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -13,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchComments } from '../../redux/slices/commentSlice';
 import { deletePost } from '../../redux/slices/postsSlice';
 import { Link } from 'react-router-dom';
+import { addFavorites, removeFavorite } from '../../redux/slices/favoriteSlice';
 
 type Comment = {
    postId: number;
@@ -23,10 +23,10 @@ type Comment = {
 };
 
 type PostItemProps = {
-   title?: string;
-   id?: number;
-   userId?: number;
-   body?: string;
+   title: string;
+   id: number;
+   userId: number;
+   body: string;
    users: any;
 };
 
@@ -39,17 +39,21 @@ export const PostItem: FC<PostItemProps> = ({
    body,
    users,
 }): JSX.Element => {
-   const [checked, setChecked] = React.useState<boolean>(false);
-   const [openComment, setOpenComment] = React.useState<boolean>(false);
    const dispatch = useAppDispatch();
    const comments = useAppSelector((comment) => comment.comment.list);
+   const [checked, setChecked] = React.useState<boolean>(false);
+   const [openComment, setOpenComment] = React.useState<boolean>(false);
+   const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
    const name = users.filter(
       (_: any, key: number | undefined) => key === userId,
    );
 
-   const chengeCheckbox = () => {
-      setChecked((checked) => !checked);
+   const onFavoreteChange = () => {
+      setIsFavorite((isFavorite) => !isFavorite);
+      !isFavorite
+         ? dispatch(addFavorites({ title, id, userId, body, name: name[0] }))
+         : dispatch(removeFavorite({ id }));
    };
 
    const showComments = () => {
@@ -85,7 +89,10 @@ export const PostItem: FC<PostItemProps> = ({
                </button>
             </div>
             <span className={styles.checkbox}>
-               <input type="checkbox" name="" onChange={chengeCheckbox} />
+               <input
+                  type="checkbox"
+                  onChange={() => setChecked((checked) => !checked)}
+               />
             </span>
             <div className={styles.action}>
                <span style={{ marginRight: '10px' }}>id: {id}</span>
@@ -99,7 +106,10 @@ export const PostItem: FC<PostItemProps> = ({
                   icon={<FavoriteBorder />}
                   checkedIcon={<Favorite />}
                   className={styles.favorite}
+                  onChange={onFavoreteChange}
+                  checked={isFavorite}
                />
+
                <RxCross2
                   className={styles.delete}
                   onClick={() => dispatch(deletePost(String(id)))}

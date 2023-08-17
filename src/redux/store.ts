@@ -16,6 +16,7 @@ import todoSlice from './slices/todoSlice';
 import postSlice from './slices/postsSlice';
 import commentSlice from './slices/commentSlice';
 import userSlice from './slices/userSlice';
+import favoriteSlice from './slices/favoriteSlice';
 
 const rootReducer = combineReducers({
    topic: topicSlice,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
    post: postSlice,
    comment: commentSlice,
    user: userSlice,
+   favorites: favoriteSlice,
 });
 
 const persistConfig = {

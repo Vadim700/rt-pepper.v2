@@ -38,7 +38,6 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
       const body = e.target[1].value;
 
       dispatch(editPost({ title, body, id }));
-
       navigate(-1);
    };
 
@@ -54,8 +53,8 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
                   autoComplete="off"
                   defaultValue={post?.title}
                />
-               <input
-                  className={styles.input}
+               <textarea
+                  className={styles.textarea}
                   placeholder="body"
                   id="body"
                   autoComplete="off"
