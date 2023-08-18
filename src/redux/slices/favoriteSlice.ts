@@ -4,7 +4,7 @@ type Favorite = {
    title?: string;
    name?: string;
    body?: string;
-   id?: number;
+   id: number;
    userId?: number;
 };
 

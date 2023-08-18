@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 
 import { BiEditAlt } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
@@ -28,6 +28,7 @@ type PostItemProps = {
    userId: number;
    body: string;
    users: any;
+   favorite: number[];
 };
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -38,6 +39,7 @@ export const PostItem: FC<PostItemProps> = ({
    userId,
    body,
    users,
+   favorite,
 }): JSX.Element => {
    const dispatch = useAppDispatch();
    const comments = useAppSelector((comment) => comment.comment.list);
@@ -45,21 +47,20 @@ export const PostItem: FC<PostItemProps> = ({
    const [openComment, setOpenComment] = React.useState<boolean>(false);
    const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
-   const name = users.filter(
-      (_: any, key: number | undefined) => key === userId,
-   );
+   const name = users.filter((_: any, key: number | undefined) => key === id);
 
-   const onFavoreteChange = () => {
-      setIsFavorite((isFavorite) => !isFavorite);
+   const onFavoreteChange = useCallback(() => {
+      setIsFavorite(!favorite.includes(id)); // ???
+
       !isFavorite
          ? dispatch(addFavorites({ title, id, userId, body, name: name[0] }))
          : dispatch(removeFavorite({ id }));
-   };
+   }, [body, dispatch, favorite, id, isFavorite, name, title, userId]);
 
-   const showComments = () => {
+   const showComments = React.useCallback(() => {
       setOpenComment((close) => !close);
       dispatch(fetchComments(id));
-   };
+   }, [dispatch, id]);
 
    const style = {
       comment: {
