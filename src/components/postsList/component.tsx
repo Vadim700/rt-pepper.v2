@@ -26,7 +26,7 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
    const nameAsc = (a: any, b: any) => a.name.localeCompare(b.name);
    const nameDesc = (a: any, b: any) => b.name.localeCompare(a.name);
 
-   // const isFavorite = (a: Post, b: Post) => {};
+   // const isFavorite = (a: number, b: number) => a - b;
 
    const idAsc = (a: Post, b: Post) => a.id - b.id;
    const idDesc = (a: Post, b: Post) => b.id - a.id;

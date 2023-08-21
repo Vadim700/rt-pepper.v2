@@ -47,7 +47,10 @@ export const PostItem: FC<PostItemProps> = ({
    const [openComment, setOpenComment] = React.useState<boolean>(false);
    const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
-   const name = users.filter((_: any, key: number | undefined) => key === id);
+   const name = users.filter(
+      (_: any, key: any) =>
+         String(key).split('').pop() === String(id).split('').pop(),
+   );
 
    const hasInFavorite = React.useCallback(
       (): any => favorite.includes(id),
@@ -58,9 +61,9 @@ export const PostItem: FC<PostItemProps> = ({
       setIsFavorite((isFavorite) => !isFavorite);
 
       !isFavorite
-         ? dispatch(addFavorites({ title, id, userId, body, name: name[0] }))
+         ? dispatch(addFavorites({ title, id, userId, body }))
          : dispatch(removeFavorite({ id }));
-   }, [body, dispatch, id, isFavorite, name, title, userId]);
+   }, [body, dispatch, id, isFavorite, title, userId]);
 
    const showComments = React.useCallback(() => {
       setOpenComment((close) => !close);
