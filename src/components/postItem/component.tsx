@@ -49,13 +49,18 @@ export const PostItem: FC<PostItemProps> = ({
 
    const name = users.filter((_: any, key: number | undefined) => key === id);
 
+   const hasInFavorite = React.useCallback(
+      (): any => favorite.includes(id),
+      [favorite, id],
+   );
+
    const onFavoreteChange = useCallback(() => {
-      setIsFavorite(!favorite.includes(id)); // ???
+      setIsFavorite((isFavorite) => !isFavorite);
 
       !isFavorite
          ? dispatch(addFavorites({ title, id, userId, body, name: name[0] }))
          : dispatch(removeFavorite({ id }));
-   }, [body, dispatch, favorite, id, isFavorite, name, title, userId]);
+   }, [body, dispatch, id, isFavorite, name, title, userId]);
 
    const showComments = React.useCallback(() => {
       setOpenComment((close) => !close);
@@ -108,7 +113,7 @@ export const PostItem: FC<PostItemProps> = ({
                   checkedIcon={<Favorite />}
                   className={styles.favorite}
                   onChange={onFavoreteChange}
-                  checked={isFavorite}
+                  checked={hasInFavorite()}
                />
 
                <RxCross2
