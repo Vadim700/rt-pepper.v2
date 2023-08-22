@@ -28,7 +28,6 @@ export const EditTodo: React.FC<CreateTodoProps> = (): JSX.Element => {
 
          <form action="#" onSubmit={submitHandler}>
             <label htmlFor="" className={styles.label}>
-               Edin this todo-item
                <input
                   type="text"
                   defaultValue={todoItem?.title}

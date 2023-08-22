@@ -29,7 +29,7 @@ const favoriteSlice = createSlice({
          );
       },
       clearFavorites: (state) => {
-         state.list = [];
+         state.list.length = 0;
       },
    },
 });

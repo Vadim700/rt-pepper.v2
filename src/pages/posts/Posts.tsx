@@ -31,33 +31,35 @@ export const Posts = (): JSX.Element => {
       <>
          <div className={styles.top}>
             <button>fillter</button>
-            <FormControl sx={{ width: '200px' }}>
-               <InputLabel
-                  id="demo-simple-select-label"
-                  sx={{
-                     backgroundColor: 'white',
-                     padding: '0 6px',
-                  }}
-               >
-                  Sort to...
-               </InputLabel>
-               <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={sort}
-                  label="Age"
-                  onChange={handleChange}
-               >
-                  <MenuItem value={'titleAsc'}>TITLE &#129147;</MenuItem>
-                  <MenuItem value={'titleDesc'}>TITLE &#129145;</MenuItem>
-                  <MenuItem value={'idAsc'}>ID &#129147;</MenuItem>
-                  <MenuItem value={'idDesc'}>ID &#129145;</MenuItem>
-                  <MenuItem value={'nameAsc'}>NAME &#129147;</MenuItem>
-                  <MenuItem value={'nameDesc'}>NAME &#129145;</MenuItem>
-               </Select>
-            </FormControl>
+            <div className={styles.sort}>
+               <FormControl sx={{ width: '200px' }}>
+                  <InputLabel
+                     id="demo-simple-select-label"
+                     sx={{
+                        backgroundColor: 'white',
+                        padding: '0 6px',
+                     }}
+                  >
+                     Sort to...
+                  </InputLabel>
+                  <Select
+                     labelId="demo-simple-select-label"
+                     id="demo-simple-select"
+                     value={sort}
+                     label="Age"
+                     onChange={handleChange}
+                  >
+                     <MenuItem value={'titleAsc'}>TITLE &#129147;</MenuItem>
+                     <MenuItem value={'titleDesc'}>TITLE &#129145;</MenuItem>
+                     <MenuItem value={'idAsc'}>ID &#129147;</MenuItem>
+                     <MenuItem value={'idDesc'}>ID &#129145;</MenuItem>
+                     <MenuItem value={'nameAsc'}>NAME &#129147;</MenuItem>
+                     <MenuItem value={'nameDesc'}>NAME &#129145;</MenuItem>
+                  </Select>
+               </FormControl>
+            </div>
 
-            <div title="Add new post">
+            <div title="Add new post" className={styles.modal}>
                <BasicModal />
             </div>
             <button
