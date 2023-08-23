@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 
 type Post = {
+   name: any;
    id: number;
    userId: number;
    title: string;
@@ -36,13 +37,20 @@ export const fetchPosts = createAsyncThunk<
       `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`,
    );
 
+   const users = await fetch(`https://jsonplaceholder.typicode.com/users`)
+      .then((res) => res.json())
+      .then((data) => data.map((user: any) => user.name));
+
    if (!response.ok) {
       return rejectWithValue('Server Error!');
    }
 
    const data = await response.json();
 
-   // localStorage.posts = JSON.stringify(data);
+   data.map((item: any, key: any) => {
+      key = item.id;
+      return (item.name = users[Number(String(key).split('').pop())]);
+   });
 
    return data;
 });
@@ -70,13 +78,14 @@ export const deletePost = createAsyncThunk<
 export const addNewPost = createAsyncThunk<Post, any, { rejectValue: string }>(
    'post/addNewPost',
    async (obj, { rejectWithValue }) => {
-      const { title, body, id } = obj;
+      const { title, body, id, name } = obj;
 
       const post = {
-         title: title,
+         title,
          userId: 1,
-         body: body,
-         id: id,
+         body,
+         id,
+         name,
       };
 
       const response = await fetch(

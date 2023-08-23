@@ -27,7 +27,7 @@ type PostItemProps = {
    id: number;
    userId: number;
    body: string;
-   users: any;
+   name: string;
    favorite: number[];
 };
 
@@ -38,7 +38,7 @@ export const PostItem: FC<PostItemProps> = ({
    id,
    userId,
    body,
-   users,
+   name,
    favorite,
 }): JSX.Element => {
    const dispatch = useAppDispatch();
@@ -46,11 +46,6 @@ export const PostItem: FC<PostItemProps> = ({
    const [checked, setChecked] = React.useState<boolean>(false);
    const [openComment, setOpenComment] = React.useState<boolean>(false);
    const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
-
-   const name = users.filter(
-      (_: any, key: any) =>
-         String(key).split('').pop() === String(id).split('').pop(),
-   );
 
    const hasInFavorite = React.useCallback(
       (): any => favorite.includes(id),

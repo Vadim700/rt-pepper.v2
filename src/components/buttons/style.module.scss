@@ -30,6 +30,10 @@
 	&:not(:last-child) {
 		margin-right: 30px;
 	}
+
+	@media (max-width: 768px) {
+		font-size: 0;
+	}
 }
 
 .icon {

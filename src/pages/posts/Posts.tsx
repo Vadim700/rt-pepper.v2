@@ -51,8 +51,8 @@ export const Posts = (): JSX.Element => {
                   >
                      <MenuItem value={'titleAsc'}>TITLE &#129147;</MenuItem>
                      <MenuItem value={'titleDesc'}>TITLE &#129145;</MenuItem>
-                     <MenuItem value={'idAsc'}>ID &#129147;</MenuItem>
-                     <MenuItem value={'idDesc'}>ID &#129145;</MenuItem>
+                     <MenuItem value={'idAsc'}>ID &#129145;</MenuItem>
+                     <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
                      <MenuItem value={'nameAsc'}>NAME &#129147;</MenuItem>
                      <MenuItem value={'nameDesc'}>NAME &#129145;</MenuItem>
                   </Select>

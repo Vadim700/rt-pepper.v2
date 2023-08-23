@@ -61,7 +61,7 @@ export default function BasicModal() {
       e.preventDefault();
       handleClose();
 
-      dispatch(addNewPost({ title, body, id }));
+      dispatch(addNewPost({ title, body, id, name }));
       setTitle('');
       setBody('');
    };

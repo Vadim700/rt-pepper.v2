@@ -10,10 +10,10 @@ type Post = {
    userId: number;
    title: string;
    body: string;
+   name: string;
 };
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
-   const users = useAppSelector((user) => user.user.list);
    const data = useAppSelector((list) => list.post.list);
    const sortType = useAppSelector((type) => type.topic.sortType);
    const favorite = useAppSelector((item) => item.favorites.list).map(
@@ -37,48 +37,40 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
             return [...data]
                .sort(idAsc)
                .map((item: Post) => (
-                  <PostItem
-                     key={item.id}
-                     {...item}
-                     users={users}
-                     favorite={favorite}
-                  />
+                  <PostItem key={item.id} {...item} favorite={favorite} />
                ));
          case 'idDesc':
             return [...data]
                .sort(idDesc)
                .map((item: Post) => (
-                  <PostItem
-                     key={item.id}
-                     {...item}
-                     users={users}
-                     favorite={favorite}
-                  />
+                  <PostItem key={item.id} {...item} favorite={favorite} />
                ));
          case 'titleAsc':
             return [...data]
                .sort(titleAsc)
                .map((item: Post) => (
-                  <PostItem
-                     key={item.id}
-                     {...item}
-                     users={users}
-                     favorite={favorite}
-                  />
+                  <PostItem key={item.id} {...item} favorite={favorite} />
                ));
          case 'titleDesc':
             return [...data]
                .sort(titleDesc)
                .map((item: Post) => (
-                  <PostItem
-                     key={item.id}
-                     {...item}
-                     users={users}
-                     favorite={favorite}
-                  />
+                  <PostItem key={item.id} {...item} favorite={favorite} />
+               ));
+         case 'nameAsc':
+            return [...data]
+               .sort(nameAsc)
+               .map((item: Post) => (
+                  <PostItem key={item.id} {...item} favorite={favorite} />
+               ));
+         case 'nameDesc':
+            return [...data]
+               .sort(nameDesc)
+               .map((item: Post) => (
+                  <PostItem key={item.id} {...item} favorite={favorite} />
                ));
       }
-   }, [sortType, data, users, favorite]);
+   }, [sortType, data, favorite]);
 
    return <ul className={styles.root}>{mySort}</ul>;
 };
