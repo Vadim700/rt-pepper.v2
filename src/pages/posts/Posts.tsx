@@ -10,7 +10,7 @@ import {
    SelectChangeEvent,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSortType } from '../../redux/slices/topicSlice';
+import { setSortPostType } from '../../redux/slices/topicSlice';
 import { LuHeartOff } from 'react-icons/lu';
 import { clearFavorites } from '../../redux/slices/favoriteSlice';
 
@@ -24,7 +24,7 @@ export const Posts = (): JSX.Element => {
    };
 
    React.useEffect(() => {
-      dispatch(setSortType(sort));
+      dispatch(setSortPostType(sort));
    }, [dispatch, sort]);
 
    return (
@@ -55,6 +55,12 @@ export const Posts = (): JSX.Element => {
                      <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
                      <MenuItem value={'nameAsc'}>NAME &#129147;</MenuItem>
                      <MenuItem value={'nameDesc'}>NAME &#129145;</MenuItem>
+                     <MenuItem value={'favoritesAsc'}>
+                        FAVORITES &#129147;
+                     </MenuItem>
+                     <MenuItem value={'favoritesDesc'}>
+                        FAVORITES &#129145;
+                     </MenuItem>
                   </Select>
                </FormControl>
             </div>

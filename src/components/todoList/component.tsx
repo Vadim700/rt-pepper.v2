@@ -13,7 +13,7 @@ type Todo = {
 
 export const TodoList: React.FC = (): JSX.Element => {
    const data = useAppSelector((state) => state.todo.list);
-   const sortType = useAppSelector((type) => type.topic.sortType);
+   const sortType = useAppSelector((type) => type.topic.sortTodoType);
 
    const titleAsc = (a: Todo, b: Todo) => a.title.localeCompare(b.title);
    const titleDesc = (a: Todo, b: Todo) => b.title.localeCompare(a.title);
@@ -21,7 +21,7 @@ export const TodoList: React.FC = (): JSX.Element => {
    const idAsc = (a: Todo, b: Todo) => a.id - b.id;
    const idDesc = (a: Todo, b: Todo) => b.id - a.id;
 
-   const completedDesc = (a: any, b: any) => b.completed - a.completed; // firstly completed
+   const completedDesc = (a: any, b: any) => a.completed - b.completed; // firstly completed
 
    const mySort = React.useMemo(() => {
       switch (sortType) {

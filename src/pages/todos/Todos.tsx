@@ -10,18 +10,18 @@ import {
    SelectChangeEvent,
 } from '@mui/material';
 import { useAppDispatch } from '../../hooks';
-import { setSortType } from '../../redux/slices/topicSlice';
+import { setSortTodoType } from '../../redux/slices/topicSlice';
 
 export const Todos: React.FC = (): JSX.Element => {
    const dispatch = useAppDispatch();
-   const [sort, setSort] = React.useState('idAsc');
+   const [sort, setSort] = React.useState('completed');
 
    const handleChange = (event: SelectChangeEvent) => {
       setSort(event.target.value);
    };
 
    React.useEffect(() => {
-      dispatch(setSortType(sort));
+      dispatch(setSortTodoType(sort));
    }, [dispatch, sort]);
 
    return (
@@ -43,8 +43,8 @@ export const Todos: React.FC = (): JSX.Element => {
                >
                   <MenuItem value={'titleAsc'}>TITLE &#129147;</MenuItem>
                   <MenuItem value={'titleDesc'}>TITLE &#129145;</MenuItem>
-                  <MenuItem value={'idAsc'}>ID &#129147;</MenuItem>
-                  <MenuItem value={'idDesc'}>ID &#129145;</MenuItem>
+                  <MenuItem value={'idAsc'}>ID &#129145;</MenuItem>
+                  <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
                   <MenuItem value={'completed'}>COMPLETED &#10003;</MenuItem>
                </Select>
             </FormControl>

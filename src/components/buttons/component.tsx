@@ -7,7 +7,7 @@ import { FaListCheck } from 'react-icons/fa6';
 
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import topicSlice, { setState } from '../../redux/slices/topicSlice';
+import { setState } from '../../redux/slices/topicSlice';
 
 export const Buttons: React.FC = () => {
    const dispatch = useAppDispatch();

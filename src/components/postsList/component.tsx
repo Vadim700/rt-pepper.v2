@@ -15,7 +15,7 @@ type Post = {
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
    const data = useAppSelector((list) => list.post.list);
-   const sortType = useAppSelector((type) => type.topic.sortType);
+   const sortType = useAppSelector((type) => type.topic.sortPostType);
    const favorite = useAppSelector((item) => item.favorites.list).map(
       (item) => item.id,
    );

@@ -19,7 +19,6 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
    const { id } = useParams();
    const navigate = useNavigate();
    const dispatch = useAppDispatch();
-   const [value, setValue] = React.useState('');
 
    const users = useAppSelector((name) => name.user.list);
    const post = useAppSelector((item) => item.post.list).find(
@@ -37,7 +36,7 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
       const title = e.target[0].value;
       const body = e.target[1].value;
 
-      dispatch(editPost({ title, body, id }));
+      dispatch(editPost({ title, body, id, name }));
       navigate(-1);
    };
 
