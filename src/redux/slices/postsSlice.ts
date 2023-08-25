@@ -113,7 +113,7 @@ export const editPost = createAsyncThunk<
    any,
    { rejectValue: string; state: { post: PostState } }
 >('post/editPost', async (obj, { rejectWithValue, getState }) => {
-   const { title, body, id } = obj;
+   const { title, body, id, name } = obj;
 
    const post = getState().post.list.find((item) => item.id === Number(id));
 
@@ -128,6 +128,7 @@ export const editPost = createAsyncThunk<
             body: JSON.stringify({
                title,
                body,
+               name,
             }),
          },
       );
@@ -177,6 +178,7 @@ const postSlice = createSlice({
             if (editedPost) {
                editedPost.title = action.payload.title;
                editedPost.body = action.payload.body;
+               editedPost.name = action.payload.name;
             }
          })
          .addMatcher(isError, (state, action: PayloadAction<string>) => {
