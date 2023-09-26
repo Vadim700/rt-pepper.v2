@@ -47,10 +47,10 @@ export const fetchPosts = createAsyncThunk<
 
    const data = await response.json();
 
-   data.map((item: any, key: any) => {
-      key = item.id;
-      return (item.name = users[Number(String(key).split('').pop())]);
-   });
+   data.map(
+      (item: Post, key: number) =>
+         (item.name = users[Number(String(key).split('').pop())]),
+   );
 
    return data;
 });

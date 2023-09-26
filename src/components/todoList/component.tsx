@@ -11,7 +11,13 @@ type Todo = {
    completed: boolean;
 };
 
-export const TodoList: React.FC = (): JSX.Element => {
+type TodoListProps = {
+   filteredValue: string;
+};
+
+export const TodoList: React.FC<TodoListProps> = ({
+   filteredValue,
+}): JSX.Element => {
    const data = useAppSelector((state) => state.todo.list);
    const sortType = useAppSelector((type) => type.topic.sortTodoType);
 
@@ -21,42 +27,67 @@ export const TodoList: React.FC = (): JSX.Element => {
    const idAsc = (a: Todo, b: Todo) => a.id - b.id;
    const idDesc = (a: Todo, b: Todo) => b.id - a.id;
 
-   const completedDesc = (a: any, b: any) => a.completed - b.completed; // firstly completed
+   const completedDesc = (a: any, b: any) => a.completed - b.completed;
 
    const mySort = React.useMemo(() => {
       switch (sortType) {
          case 'idAsc':
             return [...data]
+               .filter((item: any) =>
+                  item.title
+                     .toLowerCase()
+                     .includes(filteredValue.toLowerCase()),
+               )
                .sort(idAsc)
                .map((item: Todo, key: number) => (
                   <TodoItem key={key} {...item} />
                ));
          case 'idDesc':
             return [...data]
+               .filter((item: any) =>
+                  item.title
+                     .toLowerCase()
+                     .includes(filteredValue.toLowerCase()),
+               )
                .sort(idDesc)
                .map((item: Todo, key: number) => (
                   <TodoItem key={key} {...item} />
                ));
          case 'titleAsc':
             return [...data]
+               .filter((item: any) =>
+                  item.title
+                     .toLowerCase()
+                     .includes(filteredValue.toLowerCase()),
+               )
                .sort(titleAsc)
                .map((item: Todo, key: number) => (
                   <TodoItem key={key} {...item} />
                ));
          case 'titleDesc':
             return [...data]
+               .filter((item: any) =>
+                  item.title
+                     .toLowerCase()
+                     .includes(filteredValue.toLowerCase()),
+               )
                .sort(titleDesc)
                .map((item: Todo, key: number) => (
                   <TodoItem key={key} {...item} />
                ));
          case 'completed':
             return [...data]
+               .filter((item: any) =>
+                  item.title
+                     .toLowerCase()
+                     .includes(filteredValue.toLowerCase()),
+               )
                .sort(completedDesc)
                .map((item: Todo, key: number) => (
                   <TodoItem key={key} {...item} />
                ));
       }
-   }, [data, sortType]);
+   }, [data, filteredValue, sortType]);
 
    return <ul className={styles.root}>{mySort}</ul>;
 };

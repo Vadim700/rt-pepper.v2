@@ -4,6 +4,7 @@ import styles from './style.module.scss';
 import BasicModal from '../../components/modal/component';
 import {
    FormControl,
+   Input,
    InputLabel,
    MenuItem,
    Select,
@@ -15,6 +16,7 @@ import { setSortTodoType } from '../../redux/slices/topicSlice';
 export const Todos: React.FC = (): JSX.Element => {
    const dispatch = useAppDispatch();
    const [sort, setSort] = React.useState('completed');
+   const [value, setValue] = React.useState<string>('');
 
    const handleChange = (event: SelectChangeEvent) => {
       setSort(event.target.value);
@@ -23,6 +25,10 @@ export const Todos: React.FC = (): JSX.Element => {
    React.useEffect(() => {
       dispatch(setSortTodoType(sort));
    }, [dispatch, sort]);
+
+   const onFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e?.target.value);
+   };
 
    return (
       <div className={styles.root}>
@@ -49,8 +55,15 @@ export const Todos: React.FC = (): JSX.Element => {
                </Select>
             </FormControl>
             <BasicModal />
+            <Input
+               color="primary"
+               disabled={false}
+               placeholder="Filter search"
+               value={value}
+               onChange={onFilterChange}
+            />
          </div>
-         <TodoList />
+         <TodoList filteredValue={value} />
       </div>
    );
 };

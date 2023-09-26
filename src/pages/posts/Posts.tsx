@@ -55,12 +55,6 @@ export const Posts = (): JSX.Element => {
                      <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
                      <MenuItem value={'nameAsc'}>NAME &#129147;</MenuItem>
                      <MenuItem value={'nameDesc'}>NAME &#129145;</MenuItem>
-                     <MenuItem value={'favoritesAsc'}>
-                        FAVORITES &#129147;
-                     </MenuItem>
-                     <MenuItem value={'favoritesDesc'}>
-                        FAVORITES &#129145;
-                     </MenuItem>
                   </Select>
                </FormControl>
             </div>
