@@ -1,14 +1,16 @@
 import * as React from 'react';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 import { FullWidthTextField } from '../fullWidthTextField/component';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
 import { GrAddCircle } from 'react-icons/gr';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { FaAngellist } from 'react-icons/fa';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import styles from './style.module.scss';
 import {

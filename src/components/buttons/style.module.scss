@@ -1,3 +1,5 @@
+@import "../../common.scss";
+
 .root {
 	display: flex;
 	align-items: center;
@@ -10,6 +12,7 @@
 	justify-content: center;
 
 	background-color: black;
+
 	color: white;
 	padding: 0 15px;
 	border-radius: 4px;
@@ -22,11 +25,11 @@
 		color: red;
 	}
 
-	@media (hover: hover) {
-		&:hover {
-			color: tomato;
-		}
-	}
+	// @media (hover: hover) {
+	// 	&:hover {
+	// 		color: tomato;
+	// 	}
+	// }
 
 	&:not(:last-child) {
 		margin-right: 30px;

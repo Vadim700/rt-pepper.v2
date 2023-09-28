@@ -8,18 +8,19 @@ import styles from './style.module.scss';
 type HeaderProps = {};
 
 export const Header: FC<HeaderProps> = (): JSX.Element => {
-   return (
-      <header className={styles.root}>
-         <div className={styles.top}>
-            <a href="/" className={styles.logo}>
-               <SiGhostery />
-            </a>
-            <span className={styles.title}>Confident pepper</span>
-         </div>
-         <div className={styles.bottom}>
-            <Buttons />
-            <BasicSelect />
-         </div>
-      </header>
-   );
+  return (
+    <header className={styles.root}>
+      <div className={styles.top}>
+        <a href="/" className={styles.logo}>
+          <SiGhostery />
+        </a>
+        <span className={styles.title}>Confident pepper</span>
+        <div className={styles.pagination} id="pagination"></div>
+      </div>
+      <div className={styles.bottom}>
+        <Buttons />
+        <BasicSelect />
+      </div>
+    </header>
+  );
 };

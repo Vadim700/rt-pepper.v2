@@ -5,19 +5,28 @@ import styles from './style.module.scss';
 
 import { useAppDispatch } from '../../hooks';
 import { setPageNumber } from '../../redux/slices/topicSlice';
+import { createPortal } from 'react-dom';
 
 export default function PaginationControlled() {
-   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-   const [page, setPage] = React.useState(1);
-   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-      setPage(value);
-      dispatch(setPageNumber(value));
-   };
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    dispatch(setPageNumber(value));
+  };
 
-   return (
-      <Stack spacing={2} className={styles.pagination}>
-         <Pagination count={10} page={page} onChange={handleChange} />
-      </Stack>
-   );
+  const pagination = document.getElementById('pagination');
+
+  return (
+    <>
+      {pagination &&
+        createPortal(
+          <Stack spacing={2} className={styles.pagination}>
+            <Pagination count={10} page={page} onChange={handleChange} />
+          </Stack>,
+          pagination,
+        )}
+    </>
+  );
 }
