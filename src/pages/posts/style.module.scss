@@ -8,7 +8,7 @@
 		// padding: 0;
 		background-color: transparent;
 		border: 1px solid var(--blue);
-		margin: 0;
+
 		cursor: pointer;
 		font-family: "Creepster", cursive;
 		border-radius: 4px;
@@ -32,13 +32,15 @@
 	font-size: 28px;
 	padding: 10px;
 	transition: all 0.2s ease 0s;
-
-	span {
-		margin-left: 15px;
-	}
+	line-height: 1;
 }
 
 .modal {
+	// margin-right: auto;
+}
+
+.filter {
+	display: block;
 	margin-right: auto;
 }
 

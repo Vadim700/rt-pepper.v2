@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 
 import { BiEditAlt } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchComments } from '../../redux/slices/commentSlice';
 import { deletePost } from '../../redux/slices/postsSlice';
 import { Link } from 'react-router-dom';
-import { addFavorites, removeFavorite } from '../../redux/slices/favoriteSlice';
+import { toggleSelectedFavorite } from '../../redux/slices/favoriteSlice';
 import { BsBoxArrowDown } from 'react-icons/bs';
 
 type Comment = {
@@ -29,7 +29,7 @@ type PostItemProps = {
   userId: number;
   body: string;
   name: string;
-  favorite: number[];
+  favorite: any;
 };
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -46,20 +46,11 @@ export const PostItem: FC<PostItemProps> = ({
   const comments = useAppSelector((comment) => comment.comment.list);
   const [checked, setChecked] = React.useState<boolean>(false);
   const [openComment, setOpenComment] = React.useState<boolean>(false);
-  const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
   const hasInFavorite = React.useCallback(
     (): any => favorite.includes(id),
     [favorite, id],
   );
-
-  const onFavoreteChange = useCallback(() => {
-    setIsFavorite((isFavorite) => !isFavorite);
-
-    !isFavorite
-      ? dispatch(addFavorites({ title, id, userId, body }))
-      : dispatch(removeFavorite({ id }));
-  }, [body, dispatch, id, isFavorite, title, userId]);
 
   const showComments = React.useCallback(() => {
     setOpenComment((close) => !close);
@@ -118,7 +109,7 @@ export const PostItem: FC<PostItemProps> = ({
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
             className={styles.favorite}
-            onChange={onFavoreteChange}
+            onChange={() => dispatch(toggleSelectedFavorite(id))}
             checked={hasInFavorite()}
           />
           <RxCross2

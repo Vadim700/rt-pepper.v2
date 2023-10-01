@@ -1,5 +1,5 @@
 .root {
-	border: 2px solid;
+	border: 1px solid;
 	border-radius: 4px;
 	display: flex;
 	align-items: center;
@@ -29,7 +29,6 @@
 }
 
 .id {
-	margin-right: 40px;
 	flex-shrink: 0;
 
 	b {
