@@ -4,6 +4,7 @@ import {
   createAsyncThunk,
   AnyAction,
 } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 
 type Post = {
   id: number;
@@ -11,6 +12,7 @@ type Post = {
   userId: number;
   title: string;
   body: string;
+  checked: boolean;
 };
 
 type PostState = {
@@ -49,7 +51,7 @@ export const fetchPosts = createAsyncThunk<
 
   const postsWithSelected = data.map((item: Post) => ({
     ...item,
-    selected: false,
+    checked: false,
     name: users[Number(String(item.id).split('').pop())],
   }));
 
@@ -150,7 +152,15 @@ const initialState: PostState = {
 const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleChecked: (state, { payload }: PayloadAction<number>) => {
+      const checkedItem = state.list.find((item) => item.id === payload);
+
+      if (checkedItem) {
+        checkedItem.checked = !checkedItem.checked;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -190,6 +200,8 @@ const postSlice = createSlice({
       });
   },
 });
+
+export const { toggleChecked } = postSlice.actions;
 
 export default postSlice.reducer;
 

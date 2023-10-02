@@ -11,6 +11,7 @@ type Post = {
   title: string;
   body: string;
   name: string;
+  checked: boolean;
 };
 
 export const PostsList: FC<PostsListProps> = (): JSX.Element => {
@@ -26,6 +27,8 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
 
   const idAsc = (a: Post, b: Post) => a.id - b.id;
   const idDesc = (a: Post, b: Post) => b.id - a.id;
+
+  const isCkecked = data.some((item) => item.checked === true);
 
   const mySort = React.useMemo(() => {
     switch (sortType) {
@@ -68,5 +71,17 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
     }
   }, [sortType, data, favorite]);
 
-  return <ul className={styles.root}>{mySort}</ul>;
+  return (
+    <ul className={styles.root}>
+      <>
+        {mySort}
+        {isCkecked && (
+          <div className={styles.action}>
+            <button className={styles.button}>Remove</button>
+            <button className={styles.button}>Add to favorites</button>
+          </div>
+        )}
+      </>
+    </ul>
+  );
 };

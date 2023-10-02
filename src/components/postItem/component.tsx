@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import styles from './style.module.scss';
 
 import { BiEditAlt } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
@@ -7,10 +8,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 
-import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchComments } from '../../redux/slices/commentSlice';
-import { deletePost } from '../../redux/slices/postsSlice';
+import { deletePost, toggleChecked } from '../../redux/slices/postsSlice';
 import { Link } from 'react-router-dom';
 
 import { BsBoxArrowDown } from 'react-icons/bs';
@@ -31,6 +31,7 @@ type PostItemProps = {
   body: string;
   name: string;
   favorite: number[];
+  checked: boolean;
 };
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -42,10 +43,10 @@ export const PostItem: FC<PostItemProps> = ({
   body,
   name,
   favorite,
+  checked,
 }): JSX.Element => {
   const dispatch = useAppDispatch();
   const comments = useAppSelector((comment) => comment.comment.list);
-  const [checked, setChecked] = React.useState<boolean>(false);
   const [openComment, setOpenComment] = React.useState<boolean>(false);
 
   const hasInFavorite = React.useCallback(
@@ -66,15 +67,14 @@ export const PostItem: FC<PostItemProps> = ({
     },
   };
 
-  const changeSelected = () => {
-    setChecked((checked) => !checked);
-  };
-
   return (
     <article className={styles.root}>
       <div
         className={styles.post}
-        style={{ borderColor: checked ? '#1976d2' : '' }}
+        style={{
+          borderColor: checked ? 'rgba(25, 118, 210, 0.4)' : '',
+          backgroundColor: checked ? 'rgba(25, 118, 210, 0.04)' : '',
+        }}
       >
         <div className={styles.name}>{name}</div>
         <h3 className={styles.title}>{title}</h3>
@@ -98,7 +98,11 @@ export const PostItem: FC<PostItemProps> = ({
           </span>
         </button>
         <span className={styles.checkbox}>
-          <input type="checkbox" checked={checked} onChange={changeSelected} />
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={() => dispatch(toggleChecked(id))}
+          />
         </span>
         <span className={styles.postNumber}>ID: {id}</span>
         <div className={styles.action}>
