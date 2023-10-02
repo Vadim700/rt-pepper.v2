@@ -1,0 +1,13 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  font-size: 22px;
+}
+
+.input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 28px;
+}/*# sourceMappingURL=style.module.css.map */

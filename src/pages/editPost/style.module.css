@@ -1,0 +1,74 @@
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 36px;
+  transition: all 0.15s ease 0s;
+}
+@media (hover: hover) {
+  .close:hover {
+    color: var(--blue);
+  }
+}
+
+.input {
+  padding: 16.5px 20px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  font-size: 18px;
+}
+.input::-moz-placeholder {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.input::placeholder {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.textarea {
+  padding: 16.5px 20px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  font-size: 18px;
+  height: 120px;
+}
+.textarea::-moz-placeholder {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.textarea::placeholder {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.postForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.submit {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  padding: 6px 0;
+  border-radius: 4px;
+  border-color: var(--blue);
+  font-size: 18px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: var(--blue);
+  transition: all 0.2s ease 0s;
+}
+.submit svg {
+  height: 40px;
+  width: 40px;
+}
+@media (hover: hover) {
+  .submit:hover {
+    background-color: rgba(9, 105, 218, 0.06);
+    color: black;
+  }
+}/*# sourceMappingURL=style.module.css.map */

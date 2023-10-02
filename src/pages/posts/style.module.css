@@ -1,0 +1,42 @@
+.top {
+  display: flex;
+  align-items: stretch;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  margin-bottom: 20px;
+}
+.top button {
+  background-color: transparent;
+  border: 1px solid var(--blue);
+  cursor: pointer;
+  font-family: "Creepster", cursive;
+  border-radius: 4px;
+}
+.top button:not(:last-child) {
+  padding: 10px 20px;
+  font-size: 20px;
+}
+@media (hover: hover) {
+  .top button:hover {
+    color: var(--blue);
+  }
+}
+
+.clearFavorite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  padding: 10px;
+  transition: all 0.2s ease 0s;
+  line-height: 1;
+}
+
+.filter {
+  display: block;
+  margin-right: auto;
+}
+
+.sort {
+  align-self: flex-end;
+}/*# sourceMappingURL=style.module.css.map */

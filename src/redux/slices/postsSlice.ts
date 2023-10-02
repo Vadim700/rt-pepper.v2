@@ -6,8 +6,8 @@ import {
 } from '@reduxjs/toolkit';
 
 type Post = {
-  name: any;
   id: number;
+  name: any;
   userId: number;
   title: string;
   body: string;
@@ -47,12 +47,13 @@ export const fetchPosts = createAsyncThunk<
 
   const data = await response.json();
 
-  data.map(
-    (item: Post, key: number) =>
-      (item.name = users[Number(String(key).split('').pop())]),
-  );
+  const postsWithSelected = data.map((item: Post) => ({
+    ...item,
+    selected: false,
+    name: users[Number(String(item.id).split('').pop())],
+  }));
 
-  return data;
+  return postsWithSelected;
 });
 
 // delete post
@@ -156,31 +157,33 @@ const postSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.list = action.payload;
+
+      .addCase(fetchPosts.fulfilled, (state, { payload }) => {
+        state.list = payload;
         state.loading = false;
       })
-      .addCase(deletePost.fulfilled, (state, action) => {
-        state.list = state.list.filter(
-          (post) => String(post.id) !== action.payload,
-        );
+
+      .addCase(deletePost.fulfilled, ({ list }, { payload }) => {
+        list = list.filter((post) => String(post.id) !== payload);
       })
+
       .addCase(addNewPost.pending, (state) => {
         state.error = null;
       })
-      .addCase(addNewPost.fulfilled, (state, action) => {
-        state.list.push(action.payload);
+
+      .addCase(addNewPost.fulfilled, ({ list }, { payload }) => {
+        list.push(payload);
       })
-      .addCase(editPost.fulfilled, (state, action) => {
-        const editedPost = state.list.find(
-          (item) => item.id === action.payload.id,
-        );
+
+      .addCase(editPost.fulfilled, (state, { payload }) => {
+        const editedPost = state.list.find((item) => item.id === payload.id);
         if (editedPost) {
-          editedPost.title = action.payload.title;
-          editedPost.body = action.payload.body;
-          editedPost.name = action.payload.name;
+          editedPost.title = payload.title;
+          editedPost.body = payload.body;
+          editedPost.name = payload.name;
         }
       })
+
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
         state.loading = false;

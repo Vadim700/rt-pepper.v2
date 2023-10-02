@@ -12,8 +12,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchComments } from '../../redux/slices/commentSlice';
 import { deletePost } from '../../redux/slices/postsSlice';
 import { Link } from 'react-router-dom';
-import { toggleSelectedFavorite } from '../../redux/slices/favoriteSlice';
+
 import { BsBoxArrowDown } from 'react-icons/bs';
+import { toggleSelectedFavorite } from '../../redux/slices/favoriteSlice';
 
 type Comment = {
   postId: number;
@@ -29,7 +30,7 @@ type PostItemProps = {
   userId: number;
   body: string;
   name: string;
-  favorite: any;
+  favorite: number[];
 };
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -65,6 +66,10 @@ export const PostItem: FC<PostItemProps> = ({
     },
   };
 
+  const changeSelected = () => {
+    setChecked((checked) => !checked);
+  };
+
   return (
     <article className={styles.root}>
       <div
@@ -93,10 +98,7 @@ export const PostItem: FC<PostItemProps> = ({
           </span>
         </button>
         <span className={styles.checkbox}>
-          <input
-            type="checkbox"
-            onChange={() => setChecked((checked) => !checked)}
-          />
+          <input type="checkbox" checked={checked} onChange={changeSelected} />
         </span>
         <span className={styles.postNumber}>ID: {id}</span>
         <div className={styles.action}>

@@ -1,0 +1,41 @@
+.root {
+  font-family: "Poppins", sans-serif;
+  padding: 15px 0px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 40px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.pagination {
+  margin-left: auto;
+}
+
+.logo {
+  font-size: 50px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.logo svg {
+  color: #000;
+  transition: all 0.2s ease 0s;
+}
+@media (hover: hover) {
+  .logo:hover svg {
+    color: indigo;
+  }
+}/*# sourceMappingURL=style.module.css.map */
