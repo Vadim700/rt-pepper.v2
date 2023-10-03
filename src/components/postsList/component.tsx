@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { PostItem } from '../postItem/component';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { BsHeart } from 'react-icons/bs';
+import { deletePosts } from '../../redux/slices/postsSlice';
 
 type PostsListProps = {};
 
@@ -19,6 +21,8 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
   const sortType = useAppSelector((type) => type.topic.sortPostType);
   const favorite = useAppSelector((item) => item.favorites.list);
 
+  const dispatch = useAppDispatch();
+
   const titleAsc = (a: Post, b: Post) => a.title.localeCompare(b.title);
   const titleDesc = (a: Post, b: Post) => b.title.localeCompare(a.title);
 
@@ -29,6 +33,10 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
   const idDesc = (a: Post, b: Post) => b.id - a.id;
 
   const isCkecked = data.some((item) => item.checked === true);
+
+  const checkedPosts = data
+    .filter((item) => item.checked === true)
+    .map((item) => item.id);
 
   const mySort = React.useMemo(() => {
     switch (sortType) {
@@ -77,8 +85,15 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
         {mySort}
         {isCkecked && (
           <div className={styles.action}>
-            <button className={styles.button}>Remove</button>
-            <button className={styles.button}>Add to favorites</button>
+            <button
+              className={styles.button}
+              onClick={() => dispatch(deletePosts(checkedPosts))}
+            >
+              Remove
+            </button>
+            <button className={styles.button}>
+              Add to <BsHeart />
+            </button>
           </div>
         )}
       </>

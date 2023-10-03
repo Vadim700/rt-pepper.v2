@@ -4,7 +4,6 @@ import {
   createAsyncThunk,
   AnyAction,
 } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 
 type Post = {
   id: number;
@@ -75,6 +74,32 @@ export const deletePost = createAsyncThunk<
   }
 
   return id;
+});
+
+// delete some posts
+export const deletePosts = createAsyncThunk<
+  any,
+  number[],
+  { rejectValue: string }
+>('post/deletePosts', async function (ids, { rejectWithValue }) {
+  const promises = ids.map(async (id) => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      {
+        method: 'DELETE',
+      },
+    );
+
+    if (!response.ok) {
+      return rejectWithValue(`Can't delete post with ID: ${id}`);
+    }
+
+    return id;
+  });
+
+  const results = await Promise.all(promises);
+
+  return results;
 });
 
 // add new post
@@ -173,16 +198,21 @@ const postSlice = createSlice({
         state.loading = false;
       })
 
-      .addCase(deletePost.fulfilled, ({ list }, { payload }) => {
-        list = list.filter((post) => String(post.id) !== payload);
+      .addCase(deletePost.fulfilled, (state, { payload }) => {
+        state.list = state.list.filter((post) => String(post.id) !== payload);
+      })
+
+      .addCase(deletePosts.fulfilled, (state, { payload }) => {
+        console.log(payload, '>>> payload');
+        state.list = state.list.filter((item) => !payload.includes(item.id));
       })
 
       .addCase(addNewPost.pending, (state) => {
         state.error = null;
       })
 
-      .addCase(addNewPost.fulfilled, ({ list }, { payload }) => {
-        list.push(payload);
+      .addCase(addNewPost.fulfilled, (state, { payload }) => {
+        state.list.push(payload);
       })
 
       .addCase(editPost.fulfilled, (state, { payload }) => {
