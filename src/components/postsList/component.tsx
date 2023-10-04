@@ -3,20 +3,13 @@ import styles from './style.module.scss';
 import { PostItem } from '../postItem/component';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { BsHeart } from 'react-icons/bs';
-import { deletePosts } from '../../redux/slices/postsSlice';
+import { clearChecked } from '../../redux/slices/postsSlice';
+import { addToFavorites } from '../../redux/slices/favoriteSlice';
+import { IoMdCheckboxOutline } from 'react-icons/io';
+import { deletePosts } from '../../redux/thunks/postsThunks';
+import { Post } from '../../types';
 
-type PostsListProps = {};
-
-type Post = {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-  name: string;
-  checked: boolean;
-};
-
-export const PostsList: FC<PostsListProps> = (): JSX.Element => {
+export const PostsList: FC = (): JSX.Element => {
   const data = useAppSelector((list) => list.post.list);
   const sortType = useAppSelector((type) => type.topic.sortPostType);
   const favorite = useAppSelector((item) => item.favorites.list);
@@ -37,6 +30,11 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
   const checkedPosts = data
     .filter((item) => item.checked === true)
     .map((item) => item.id);
+
+  const onClickAddToFavorites = () => {
+    dispatch(addToFavorites(checkedPosts));
+    dispatch(clearChecked());
+  };
 
   const mySort = React.useMemo(() => {
     switch (sortType) {
@@ -85,14 +83,15 @@ export const PostsList: FC<PostsListProps> = (): JSX.Element => {
         {mySort}
         {isCkecked && (
           <div className={styles.action}>
+            <button className={styles.button} onClick={onClickAddToFavorites}>
+              Add to <BsHeart />
+            </button>
             <button
               className={styles.button}
               onClick={() => dispatch(deletePosts(checkedPosts))}
             >
               Remove
-            </button>
-            <button className={styles.button}>
-              Add to <BsHeart />
+              <IoMdCheckboxOutline />
             </button>
           </div>
         )}

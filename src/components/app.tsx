@@ -6,17 +6,17 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchTodos } from '../redux/slices/todoSlice';
 
 import { NotfoundPage } from '../pages/notfoundPage/NotfoundPage';
 import { Layout } from './layout/component';
 import { Todos } from '../pages/todos/Todos';
 import { Albums } from '../pages/albums/Albums';
 import { Posts } from '../pages/posts/Posts';
-import { fetchPosts } from '../redux/slices/postsSlice';
 import { EditTodo } from '../pages/editTodo/EditTodo';
-import { fetchUsers } from '../redux/slices/userSlice';
 import { EditPost } from '../pages/editPost/EditPost';
+import { fetchTodos } from '../redux/thunks/todoThunks';
+import { fetchPosts } from '../redux/thunks/postsThunks';
+import { fetchUsers } from '../redux/thunks/userThunks';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

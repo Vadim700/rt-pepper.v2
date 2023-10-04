@@ -5,15 +5,15 @@ import { AlbumItem } from '../albumItem/component';
 type AlbumsListProps = {};
 
 const arr = Array(5)
-   .fill(1)
-   .map((_, i) => i);
+  .fill(1)
+  .map((_, i) => i);
 
 export const AlbumsList: FC<AlbumsListProps> = (): JSX.Element => {
-   return (
-      <div>
-         {arr.map((_, i) => (
-            <AlbumItem data={arr} key={i} />
-         ))}
-      </div>
-   );
+  return (
+    <div className={styles.root}>
+      {arr.map((_, i) => (
+        <AlbumItem data={arr} key={i} />
+      ))}
+    </div>
+  );
 };

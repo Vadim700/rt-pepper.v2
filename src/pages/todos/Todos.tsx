@@ -47,11 +47,11 @@ export const Todos: React.FC = (): JSX.Element => {
             label="Age"
             onChange={handleChange}
           >
-            <MenuItem value={'titleAsc'}>TITLE &#129145;</MenuItem>
-            <MenuItem value={'titleDesc'}>TITLE &#129147;</MenuItem>
+            <MenuItem value={'titleAsc'}>Title &#129145;</MenuItem>
+            <MenuItem value={'titleDesc'}>Title &#129147;</MenuItem>
             <MenuItem value={'idAsc'}>ID &#129145;</MenuItem>
             <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
-            <MenuItem value={'completed'}>COMPLETED &#10003;</MenuItem>
+            <MenuItem value={'completed'}>Completed &#10003;</MenuItem>
           </Select>
         </FormControl>
         <BasicModal />

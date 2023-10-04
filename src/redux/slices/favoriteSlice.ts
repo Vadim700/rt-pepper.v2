@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type FavoriteState = {
-  list: number[];
-};
+import { FavoriteState } from '../../types';
 
 const initialState: FavoriteState = {
   list: [],
@@ -13,7 +10,7 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     addToFavorites: (state, { payload }: PayloadAction<number[]>) => {
-      payload.forEach((item) => state.list.push(item));
+      state.list = [...state.list, ...payload];
     },
 
     toggleSelectedFavorite: (state, { payload }: PayloadAction<number>) => {

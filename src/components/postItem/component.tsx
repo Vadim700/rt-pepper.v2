@@ -9,12 +9,14 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchComments } from '../../redux/slices/commentSlice';
-import { deletePost, toggleChecked } from '../../redux/slices/postsSlice';
+
+import { toggleChecked } from '../../redux/slices/postsSlice';
 import { Link } from 'react-router-dom';
 
 import { BsBoxArrowDown } from 'react-icons/bs';
 import { toggleSelectedFavorite } from '../../redux/slices/favoriteSlice';
+import { fetchComments } from '../../redux/thunks/commentsThunks';
+import { deletePost } from '../../redux/thunks/postsThunks';
 
 type Comment = {
   postId: number;
@@ -125,7 +127,7 @@ export const PostItem: FC<PostItemProps> = ({
         </div>
       </div>
       {openComment &&
-        comments.map((item: Comment) => (
+        comments.map((item: any) => (
           <div className={styles.comments} key={item.id}>
             <div className={styles.comments__name}>{item.name}</div>
             <div className={styles.comments__email}>{item.email}</div>

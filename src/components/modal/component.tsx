@@ -20,7 +20,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { addNewPost } from '../../redux/slices/postsSlice';
+import { addNewPost } from '../../redux/thunks/postsThunks';
 
 const style = {
   position: 'absolute' as 'absolute',

@@ -2,6 +2,7 @@ import React from 'react';
 import { PostsList } from '../../components/postsList/component';
 import BasicModal from '../../components/modal/component';
 import styles from './style.module.scss';
+import { IoMdHeartDislike } from 'react-icons/io';
 import {
   FormControl,
   InputLabel,
@@ -17,7 +18,7 @@ export const Posts = (): JSX.Element => {
   const [sort, setSort] = React.useState('idAsc');
   const dispatch = useAppDispatch();
 
-  const favoritesLength = useAppSelector((item) => item.favorites.list.length);
+  const favoritesLength = useAppSelector((item) => item.favorites.list).length;
 
   const handleChange = (event: SelectChangeEvent) => {
     setSort(event.target.value);
@@ -48,12 +49,12 @@ export const Posts = (): JSX.Element => {
               label="Age"
               onChange={handleChange}
             >
-              <MenuItem value={'titleAsc'}>TITLE &#129147;</MenuItem>
-              <MenuItem value={'titleDesc'}>TITLE &#129145;</MenuItem>
+              <MenuItem value={'titleAsc'}>Title &#129147;</MenuItem>
+              <MenuItem value={'titleDesc'}>Title &#129145;</MenuItem>
               <MenuItem value={'idAsc'}>ID &#129145;</MenuItem>
               <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
-              <MenuItem value={'nameAsc'}>NAME &#129147;</MenuItem>
-              <MenuItem value={'nameDesc'}>NAME &#129145;</MenuItem>
+              <MenuItem value={'nameAsc'}>Name &#129147;</MenuItem>
+              <MenuItem value={'nameDesc'}>Name &#129145;</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -62,13 +63,15 @@ export const Posts = (): JSX.Element => {
           <BasicModal />
         </div>
         <button className={styles.filter}>fillter</button>
-        <button
-          className={styles.clearFavorite}
-          onClick={() => dispatch(clearFavorites())}
-          title="Clear favorites"
-        >
-          {favoritesLength}
-        </button>
+        {favoritesLength > 0 && (
+          <button
+            className={styles.clearFavorite}
+            onClick={() => dispatch(clearFavorites())}
+            title="Clear favorites"
+          >
+            <IoMdHeartDislike />
+          </button>
+        )}
       </div>
       <PostsList />
     </>
