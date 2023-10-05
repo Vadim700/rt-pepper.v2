@@ -9,7 +9,15 @@ import { IoMdCheckboxOutline } from 'react-icons/io';
 import { deletePosts } from '../../redux/thunks/postsThunks';
 import { Post } from '../../types';
 
-export const PostsList: FC = (): JSX.Element => {
+type PostsListProps = {
+  valueInput: any;
+  valueSelect: any;
+};
+
+export const PostsList: FC<PostsListProps> = ({
+  valueInput,
+  valueSelect,
+}): JSX.Element => {
   const data = useAppSelector((list) => list.post.list);
   const sortType = useAppSelector((type) => type.topic.sortPostType);
   const favorite = useAppSelector((item) => item.favorites.list);
@@ -37,45 +45,72 @@ export const PostsList: FC = (): JSX.Element => {
   };
 
   const mySort = React.useMemo(() => {
+    const toLower = (prop: string) =>
+      prop.toLowerCase().includes(valueInput.toLowerCase());
+
+    const filterBy = (item: Post) => {
+      switch (valueSelect) {
+        case 'title':
+          return toLower(item.title);
+
+        case 'body':
+          return toLower(item.body);
+
+        default:
+          return toLower(item.name);
+      }
+    };
+
     switch (sortType) {
       case 'idAsc':
         return [...data]
+          .filter(filterBy)
           .sort(idAsc)
           .map((item: Post) => (
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
+
       case 'idDesc':
         return [...data]
+          .filter(filterBy)
           .sort(idDesc)
           .map((item: Post) => (
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
+
       case 'titleAsc':
         return [...data]
+          .filter(filterBy)
           .sort(titleAsc)
           .map((item: Post) => (
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
+
       case 'titleDesc':
         return [...data]
+          .filter(filterBy)
           .sort(titleDesc)
           .map((item: Post) => (
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
+
       case 'nameAsc':
         return [...data]
+          .filter(filterBy)
           .sort(nameAsc)
           .map((item: Post) => (
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
+
       case 'nameDesc':
         return [...data]
+          .filter(filterBy)
           .sort(nameDesc)
           .map((item: Post) => (
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
     }
-  }, [sortType, data, favorite]);
+  }, [sortType, valueSelect, valueInput, data, favorite]);
 
   return (
     <ul className={styles.root}>

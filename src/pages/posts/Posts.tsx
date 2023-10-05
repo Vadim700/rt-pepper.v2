@@ -14,14 +14,21 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortPostType } from '../../redux/slices/topicSlice';
 import { clearFavorites } from '../../redux/slices/favoriteSlice';
 
+import { Filter } from '../../components/filter/component';
+
 export const Posts = (): JSX.Element => {
-  const [sort, setSort] = React.useState('idAsc');
+  const [sort, setSort] = React.useState<string>('idAsc');
+  const [valueInput, setValueInput] = React.useState<string>('');
+  const [valueSelect, setValueSelect] = React.useState<string>('');
   const dispatch = useAppDispatch();
 
   const favoritesLength = useAppSelector((item) => item.favorites.list).length;
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setSort(event.target.value);
+  const handlerChangeInput = (e: any) => {
+    setValueInput(e.target.value);
+  };
+  const handlerChangeSelect = (e: any) => {
+    setValueSelect(e);
   };
 
   React.useEffect(() => {
@@ -47,7 +54,7 @@ export const Posts = (): JSX.Element => {
               id="demo-simple-select"
               value={sort}
               label="Age"
-              onChange={handleChange}
+              onChange={(e: SelectChangeEvent) => setSort(e.target.value)}
             >
               <MenuItem value={'titleAsc'}>Title &#129147;</MenuItem>
               <MenuItem value={'titleDesc'}>Title &#129145;</MenuItem>
@@ -58,11 +65,15 @@ export const Posts = (): JSX.Element => {
             </Select>
           </FormControl>
         </div>
-
         <div title="Add new post" className={styles.modal}>
           <BasicModal />
         </div>
-        <button className={styles.filter}>fillter</button>
+        <div className={styles.filter}>
+          <Filter
+            handlerChangeInput={handlerChangeInput}
+            handlerChangeSelect={handlerChangeSelect}
+          />
+        </div>
         {favoritesLength > 0 && (
           <button
             className={styles.clearFavorite}
@@ -73,7 +84,7 @@ export const Posts = (): JSX.Element => {
           </button>
         )}
       </div>
-      <PostsList />
+      <PostsList valueInput={valueInput} valueSelect={valueSelect} />
     </>
   );
 };

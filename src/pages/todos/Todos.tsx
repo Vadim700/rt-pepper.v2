@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '../../hooks';
 import { setSortTodoType } from '../../redux/slices/topicSlice';
+import styled from '@emotion/styled';
 
 export const Todos: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -54,14 +55,18 @@ export const Todos: React.FC = (): JSX.Element => {
             <MenuItem value={'completed'}>Completed &#10003;</MenuItem>
           </Select>
         </FormControl>
-        <BasicModal />
-        <Input
-          color="primary"
-          disabled={false}
-          placeholder="Filter search"
-          value={value}
-          onChange={onFilterChange}
-        />
+        <div className={styles.modal}>
+          <BasicModal />
+        </div>
+        <div className={styles.filter}>
+          <Input
+            color="primary"
+            disabled={false}
+            placeholder="Filter search"
+            value={value}
+            onChange={onFilterChange}
+          />
+        </div>
       </div>
       <TodoList filteredValue={value} />
     </div>

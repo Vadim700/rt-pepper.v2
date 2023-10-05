@@ -6,6 +6,11 @@
 	display: inline-block;
 }
 
+.filter,
+.modal {
+	align-self: end;
+}
+
 .top {
 	display: flex;
 	align-items: center;

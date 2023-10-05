@@ -1,6 +1,6 @@
 export type Post = {
   id: number;
-  name: any;
+  name: string;
   userId: number;
   title: string;
   body: string;

@@ -1,0 +1,70 @@
+.root {
+	position: relative;
+	display: flex;
+	column-gap: 5px;
+	border-bottom: 1px solid;
+
+	& button {
+		margin: 0;
+		padding: 0 !important;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		border: none;
+		outline: none;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 2px;
+		bottom: -2px;
+		left: 50%;
+		background-color: var(--blue);
+		transition: all 0.3s ease 0s;
+	}
+
+	@media (hover: hover) {
+		&:hover {
+			&::after {
+				width: 100%;
+				left: 0;
+			}
+
+			& .select {
+				color: var(--blue);
+			}
+		}
+	}
+}
+
+.select {
+	width: 70px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 18px;
+	transition: all 0.3s ease 0s;
+}
+
+.option {
+}
+
+.input {
+	max-width: 130px;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	padding-right: 27px;
+}
+
+.button {
+	position: absolute;
+
+	top: -1px;
+	right: -46px;
+
+	font-size: 26px;
+}
