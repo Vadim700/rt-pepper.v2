@@ -17,11 +17,13 @@ import postSlice from './slices/postsSlice';
 import commentSlice from './slices/commentSlice';
 import userSlice from './slices/userSlice';
 import favoriteSlice from './slices/favoriteSlice';
+import albumsSlice from './slices/albumsSlice';
 
 const rootReducer = combineReducers({
   topic: topicSlice,
   todo: todoSlice,
   post: postSlice,
+  album: albumsSlice,
   comment: commentSlice,
   user: userSlice,
   favorites: favoriteSlice,

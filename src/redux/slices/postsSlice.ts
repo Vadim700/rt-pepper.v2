@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  PayloadAction,
-  createAsyncThunk,
-  AnyAction,
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, AnyAction } from '@reduxjs/toolkit';
 
 import { PostState } from '../../types';
 
@@ -25,7 +20,7 @@ const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    toggleChecked: (state, { payload }: PayloadAction<number>) => {
+    togglePostItemChecked: (state, { payload }: PayloadAction<number>) => {
       const checkedItem = state.list.find((item) => item.id === payload);
       if (checkedItem) {
         checkedItem.checked = !checkedItem.checked;
@@ -81,7 +76,7 @@ const postSlice = createSlice({
   },
 });
 
-export const { toggleChecked, clearChecked } = postSlice.actions;
+export const { togglePostItemChecked, clearChecked } = postSlice.actions;
 export default postSlice.reducer;
 
 const isError = (action: AnyAction) => {

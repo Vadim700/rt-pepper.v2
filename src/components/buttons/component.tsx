@@ -10,48 +10,48 @@ import { useAppDispatch } from '../../hooks';
 import { setState } from '../../redux/slices/topicSlice';
 
 export const Buttons: React.FC = () => {
-   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-   const setActive = ({ isActive }: any): any => {
-      return { backgroundColor: isActive ? '#1976d2' : 'black' };
-   };
+  const setActive = ({ isActive }: any): any => {
+    return { backgroundColor: isActive ? '#1976d2' : 'black' };
+  };
 
-   const handleClick = (event: any): void => {
-      dispatch(setState(event.target.id));
-   };
+  const handleClick = (event: any): void => {
+    dispatch(setState(event.target.id));
+  };
 
-   return (
-      <div className={styles.root}>
-         <NavLink
-            className={styles.button}
-            to="/"
-            style={setActive}
-            id="posts"
-            onClick={handleClick}
-         >
-            <BsPostcardHeart className={styles.icon} />
-            Posts
-         </NavLink>
-         <NavLink
-            className={styles.button}
-            to="/albums"
-            style={setActive}
-            onClick={handleClick}
-            id="albums"
-         >
-            <MdOutlinePhotoAlbum className={styles.icon} />
-            Albums
-         </NavLink>
-         <NavLink
-            className={styles.button}
-            to="/todos"
-            style={setActive}
-            onClick={handleClick}
-            id="todos"
-         >
-            <FaListCheck className={styles.icon} />
-            Todos
-         </NavLink>
-      </div>
-   );
+  return (
+    <div className={styles.root}>
+      <NavLink
+        className={styles.button}
+        to="/"
+        style={setActive}
+        id="posts"
+        onClick={handleClick}
+      >
+        <BsPostcardHeart className={styles.icon} />
+        Posts
+      </NavLink>
+      <NavLink
+        className={styles.button}
+        to="/albums"
+        style={setActive}
+        onClick={handleClick}
+        id="albums"
+      >
+        <MdOutlinePhotoAlbum className={styles.icon} />
+        Albums
+      </NavLink>
+      <NavLink
+        className={styles.button}
+        to="/todos"
+        style={setActive}
+        onClick={handleClick}
+        id="todos"
+      >
+        <FaListCheck className={styles.icon} />
+        Todos
+      </NavLink>
+    </div>
+  );
 };

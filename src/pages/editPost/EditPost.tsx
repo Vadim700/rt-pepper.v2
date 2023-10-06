@@ -64,7 +64,7 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
               id="demo-simple-select-label"
               sx={{
                 textTransform: 'uppercase',
-                backgroundColor: 'white',
+                backgroundColor: 'transparent',
                 padding: '0 6px',
               }}
             >

@@ -1,0 +1,113 @@
+@import "../../common.scss";
+
+.root {
+	position: relative;
+	display: grid;
+	grid-template-columns: 40px 100px 1fr 30px 40px;
+	align-items: center;
+
+	padding: 10px;
+
+	border-radius: 4px;
+	border: 1px solid var(--blue);
+	background: linear-gradient(218deg, rgba(22, 176, 217, 0.42) 0%, rgba(255, 196, 0, 0.2) 54%);
+
+	a {
+		text-decoration: none;
+		padding: 0;
+
+		@media (hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.title {
+	padding: 5px 0;
+	font-family: $mainFontFamily;
+	color: #000;
+	font-size: 18px;
+	font-weight: 600;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
+.delete {
+	cursor: pointer;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	font-size: 28px;
+	padding: 0;
+	margin: 0;
+
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
+}
+
+.edit {
+	font-size: 24px;
+	margin-right: 15px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: black;
+
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
+}
+
+.checkbox {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+
+	input {
+		cursor: pointer;
+		width: 20px;
+		height: 20px;
+
+		opacity: 0;
+		visibility: hidden;
+
+		&:checked {
+			+ label::after {
+				content: "";
+			}
+		}
+	}
+
+	label {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		top: 0;
+		left: 0;
+		border-radius: 4px;
+		user-select: none;
+
+		background-color: transparent;
+		border: 1px solid #000;
+		cursor: pointer;
+
+		&::after {
+			display: inline-block;
+			width: 24px;
+			height: 15px;
+			border-left: 2px solid red;
+			border-bottom: 2px solid red;
+			transform: rotate(-42deg) translate(7px, -10px) skew(-8deg, -8deg);
+		}
+	}
+}

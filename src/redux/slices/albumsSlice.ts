@@ -1,30 +1,55 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { deleteAlbumItem, fetchAlbums } from '../thunks/albumsThunks';
+import { AlbumsState } from '../../types';
 
-export interface CounterState {
-  value: number;
-}
-
-const initialState: CounterState = {
-  value: 0,
+const initialState: AlbumsState = {
+  list: [],
+  loading: false,
+  error: null,
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const albumsSlice = createSlice({
+  name: 'album',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    toggleAlbumItemChecked: (state, { payload }: PayloadAction<number>) => {
+      const editedAlbum = state.list.find((item) => item.id === payload);
+      if (editedAlbum) {
+        editedAlbum.checked = !editedAlbum.checked;
+      }
     },
-    decrement: (state) => {
-      state.value -= 1;
+
+    clearChecked: (state) => {
+      state.list.map((item) => (item.checked = false));
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAlbums.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(fetchAlbums.fulfilled, (state, { payload }) => {
+        state.list = payload;
+      })
+
+      .addCase(deleteAlbumItem.fulfilled, (state, { payload }) => {
+        state.list = state.list.filter((item) => String(item.id) !== payload);
+      })
+
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+        state.error = action.payload;
+        state.loading = false;
+      });
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { toggleAlbumItemChecked, clearChecked } = albumsSlice.actions;
 
-export default counterSlice.reducer;
+export default albumsSlice.reducer;
+
+const isError = (action: AnyAction) => {
+  return action.type.endsWith('rejected');
+};

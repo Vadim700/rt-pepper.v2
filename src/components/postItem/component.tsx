@@ -10,21 +10,13 @@ import Favorite from '@mui/icons-material/Favorite';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { toggleChecked } from '../../redux/slices/postsSlice';
+import { togglePostItemChecked } from '../../redux/slices/postsSlice';
 import { Link } from 'react-router-dom';
 
 import { BsBoxArrowDown } from 'react-icons/bs';
 import { toggleSelectedFavorite } from '../../redux/slices/favoriteSlice';
 import { fetchComments } from '../../redux/thunks/commentsThunks';
 import { deletePost } from '../../redux/thunks/postsThunks';
-
-type Comment = {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-};
 
 type PostItemProps = {
   title: string;
@@ -74,8 +66,8 @@ export const PostItem: FC<PostItemProps> = ({
       <div
         className={styles.post}
         style={{
-          borderColor: checked ? 'rgba(25, 118, 210, 0.4)' : '',
-          backgroundColor: checked ? 'rgba(25, 118, 210, 0.04)' : '',
+          borderColor: checked ? 'tomato' : '',
+          backgroundColor: checked ? 'rgba(25, 118, 210, 0.25)' : '',
         }}
       >
         <div className={styles.name}>{name}</div>
@@ -103,8 +95,10 @@ export const PostItem: FC<PostItemProps> = ({
           <input
             type="checkbox"
             checked={checked}
-            onChange={() => dispatch(toggleChecked(id))}
+            onChange={() => dispatch(togglePostItemChecked(id))}
+            id={String(id)}
           />
+          <label htmlFor={String(id)}></label>
         </span>
         <span className={styles.postNumber}>ID: {id}</span>
         <div className={styles.action}>
@@ -130,8 +124,8 @@ export const PostItem: FC<PostItemProps> = ({
         comments.map((item: any) => (
           <div className={styles.comments} key={item.id}>
             <div className={styles.comments__name}>{item.name}</div>
-            <div className={styles.comments__email}>{item.email}</div>
             <div className={styles.comments__body}>{item.body}</div>
+            <div className={styles.comments__email}>{item.email}</div>
             <span className={styles.comments__id}>
               <strong>ID: {item.id}</strong>
               <strong>postID: {item.postId}</strong>

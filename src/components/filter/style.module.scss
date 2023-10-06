@@ -1,8 +1,11 @@
+@import "../../common.scss";
+
 .root {
 	position: relative;
 	display: flex;
 	column-gap: 5px;
 	border-bottom: 1px solid;
+	padding-bottom: 6px;
 
 	& button {
 		margin: 0;
@@ -47,9 +50,12 @@
 	cursor: pointer;
 	font-size: 18px;
 	transition: all 0.3s ease 0s;
-}
+	background-color: transparent;
 
-.option {
+	option {
+		background-color: rgba(255, 206, 43);
+		color: #000;
+	}
 }
 
 .input {
@@ -58,13 +64,19 @@
 	outline: none;
 	font-size: 18px;
 	padding-right: 27px;
+
+	font-family: $altFontFamily;
+
+	&::placeholder {
+		font-family: $mainFontFamily;
+	}
 }
 
 .button {
 	position: absolute;
 
-	top: -1px;
-	right: -46px;
+	top: 5px;
+	right: -40px;
 
 	font-size: 26px;
 }

@@ -17,15 +17,23 @@ import { EditPost } from '../pages/editPost/EditPost';
 import { fetchTodos } from '../redux/thunks/todoThunks';
 import { fetchPosts } from '../redux/thunks/postsThunks';
 import { fetchUsers } from '../redux/thunks/userThunks';
+import { fetchAlbums } from '../redux/thunks/albumsThunks';
+import { AlbumPhotos } from '../pages/albumPhotos/AlbumPhotos';
+import { EditAlbumTitle } from '../pages/editAlbumTitle/EditAlbumTitle';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Posts />} />
       <Route path="/:id" element={<EditPost />} />
-      <Route path="albums" element={<Albums />} />
+
+      <Route path="albums/*" element={<Albums />} />
+      <Route path="albums/:id" element={<EditAlbumTitle />} />
+      <Route path="albums/photos/:id" element={<AlbumPhotos />} />
+
       <Route path="todos/*" element={<Todos />} />
       <Route path="todos/:id" element={<EditTodo />} />
+
       <Route path="*" element={<NotfoundPage />} />
     </Route>,
   ),
@@ -33,11 +41,12 @@ const router = createBrowserRouter(
 
 export const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const itemsPerPage = useAppSelector((limit) => limit.topic.limit);
-  const pageNumber = useAppSelector((page) => page.topic.pageNumber);
+  const itemsPerPage = useAppSelector((limit) => limit.topic.limit.toString());
+  const pageNumber = useAppSelector((page) => page.topic.pageNumber.toString());
 
   React.useEffect(() => {
     dispatch(fetchTodos({ itemsPerPage, pageNumber }));
+    dispatch(fetchAlbums({ itemsPerPage, pageNumber }));
     dispatch(fetchPosts({ itemsPerPage, pageNumber }));
     dispatch(fetchUsers());
   }, [dispatch, itemsPerPage, pageNumber]);

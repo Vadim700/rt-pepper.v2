@@ -1,18 +1,17 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { AlbumItem } from '../albumItem/component';
+import { useAppSelector } from '../../hooks';
 
 type AlbumsListProps = {};
 
-const arr = Array(5)
-  .fill(1)
-  .map((_, i) => i);
-
 export const AlbumsList: FC<AlbumsListProps> = (): JSX.Element => {
+  const data = useAppSelector((item) => item.album.list);
+
   return (
     <div className={styles.root}>
-      {arr.map((_, i) => (
-        <AlbumItem data={arr} key={i} />
+      {data.map((item) => (
+        <AlbumItem {...item} key={item.id} />
       ))}
     </div>
   );

@@ -13,6 +13,16 @@ body {
   font-family: $mainFontFamily;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: rgb(22, 176, 217);
+  background: linear-gradient(
+    27deg,
+    rgba(22, 176, 217, 0.8155637254901961) 0%,
+    rgba(255, 196, 0, 0.8295693277310925) 54%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 code {
@@ -38,4 +48,8 @@ body,
   max-width: 1080px;
   margin: 0px auto;
   padding: 0 15px;
+}
+
+* input {
+  background-color: transparent;
 }

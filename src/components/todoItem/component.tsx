@@ -22,8 +22,6 @@ export const TodoItem: FC<TodoItemProps> = ({
 }): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const handleClick = (e: any) => {};
-
   return (
     <li
       className={styles.root}

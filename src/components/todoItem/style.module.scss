@@ -1,15 +1,26 @@
+@import "../../common.scss";
+
 .root {
 	border: 1px solid;
 	border-radius: 4px;
-	display: flex;
+	display: grid;
+	grid-template-columns: 100px 65px 1fr 30px 40px;
 	align-items: center;
-	justify-content: space-between;
+
 	padding: 10px;
 	border-color: red;
+
+	background: linear-gradient(218deg, rgba(22, 176, 217, 0.42) 0%, rgba(255, 196, 0, 0.2) 54%);
 }
 
 .title {
 	margin-right: auto;
+
+	font-family: $altFontFamily;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
 }
 
 .delete {

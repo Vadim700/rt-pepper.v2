@@ -80,3 +80,29 @@ export type CommentState = {
 export type FavoriteState = {
   list: number[];
 };
+
+export type Album = {
+  userId: number;
+  id: number;
+  title: string;
+  checked: boolean;
+};
+
+export type Photo = {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+};
+
+export type AlbumsState = {
+  list: Album[];
+  loading: boolean;
+  error: string | null;
+};
+
+export interface FetchAlbumsParams {
+  itemsPerPage: string;
+  pageNumber: string;
+}
