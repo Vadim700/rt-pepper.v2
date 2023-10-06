@@ -24,7 +24,7 @@ export const BasicSelect = () => {
           id="demo-simple-select-label"
           sx={{
             padding: '0 10px',
-            backgroundColor: '#ffce2b',
+            backgroundColor: '#edffeb',
             fontFamily: 'Creepster, cursive',
             letterSpacing: '2px',
             borderColor: 'blue',

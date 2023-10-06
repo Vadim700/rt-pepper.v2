@@ -37,7 +37,7 @@ export const Todos: React.FC = (): JSX.Element => {
         <FormControl sx={{ width: '200px' }}>
           <InputLabel
             id="demo-simple-select-label"
-            sx={{ backgroundColor: '#ffce2b', padding: '0 6px' }}
+            sx={{ backgroundColor: '#edffeb', padding: '0 6px' }}
           >
             Sort to...
           </InputLabel>

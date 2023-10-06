@@ -27,7 +27,6 @@ export const AlbumItem: FC<AlbumItemProps> = ({
       className={styles.root}
       style={{
         borderColor: checked ? 'tomato' : '',
-        backgroundColor: checked ? 'rgba(25, 118, 210, 0.25)' : '',
       }}
     >
       <span className={styles.checkbox}>

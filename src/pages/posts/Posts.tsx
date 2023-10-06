@@ -43,7 +43,7 @@ export const Posts = (): JSX.Element => {
             <InputLabel
               id="demo-simple-select-label"
               sx={{
-                backgroundColor: '#ffce2b',
+                backgroundColor: '#edffeb',
                 padding: '0 6px',
               }}
             >
