@@ -98,6 +98,7 @@ export type Photo = {
 
 export type AlbumsState = {
   list: Album[];
+  favoriteList: number[];
   loading: boolean;
   error: string | null;
 };
@@ -106,3 +107,7 @@ export interface FetchAlbumsParams {
   itemsPerPage: string;
   pageNumber: string;
 }
+
+export type FavoriteAlbumState = {
+  list: number[];
+};

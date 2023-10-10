@@ -25,7 +25,7 @@ export const TodoItem: FC<TodoItemProps> = ({
   return (
     <li
       className={styles.root}
-      style={{ borderColor: completed ? 'green' : '' }}
+      style={{ borderColor: completed ? 'var(--blue)' : '' }}
     >
       <span className={styles.id}>
         ID: <b>{id}</b>

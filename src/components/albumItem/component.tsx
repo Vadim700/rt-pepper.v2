@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { BiEditAlt } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { toggleAlbumItemChecked } from '../../redux/slices/albumsSlice';
 import { deleteAlbumItem } from '../../redux/thunks/albumsThunks';
+import { Checkbox } from '@mui/material';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
+import { toggleSelectedAlbumFavorite } from '../../redux/slices/favoriteAlbumSlice';
 
 type AlbumItemProps = {
   userId: number;
@@ -15,12 +18,20 @@ type AlbumItemProps = {
   checked: boolean;
 };
 
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 export const AlbumItem: FC<AlbumItemProps> = ({
   id,
   title,
   checked,
 }): JSX.Element => {
   const dispatch = useAppDispatch();
+  const favorite = useAppSelector((item) => item.albumFavorites.list);
+
+  const hasInFavorite = React.useCallback(
+    (): any => favorite.includes(id),
+    [favorite, id],
+  );
 
   return (
     <article
@@ -44,15 +55,27 @@ export const AlbumItem: FC<AlbumItemProps> = ({
       <Link to={`/albums/photos/${id}`} className={styles.title}>
         {title}
       </Link>
-      <Link to={`/albums/${id}`} className={styles.edit}>
-        <BiEditAlt />
-      </Link>
-      <button
-        className={styles.delete}
-        onClick={() => dispatch(deleteAlbumItem(String(id)))}
-      >
-        <RxCross2 />
-      </button>
+      <div className={styles.action}>
+        <Link to={`/albums/${id}`} className={styles.edit}>
+          <BiEditAlt />
+        </Link>
+        <span className={styles.favorite}>
+          <Checkbox
+            {...label}
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            className={styles.favorite}
+            onChange={() => dispatch(toggleSelectedAlbumFavorite(id))}
+            checked={hasInFavorite()}
+          />
+        </span>
+        <button
+          className={styles.delete}
+          onClick={() => dispatch(deleteAlbumItem(String(id)))}
+        >
+          <RxCross2 />
+        </button>
+      </div>
     </article>
   );
 };

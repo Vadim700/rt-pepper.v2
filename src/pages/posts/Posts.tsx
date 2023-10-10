@@ -3,6 +3,8 @@ import { PostsList } from '../../components/postsList/component';
 import BasicModal from '../../components/modal/component';
 import styles from './style.module.scss';
 import { IoMdHeartDislike } from 'react-icons/io';
+import { FiSearch } from 'react-icons/fi';
+
 import {
   FormControl,
   InputLabel,
@@ -12,9 +14,9 @@ import {
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortPostType } from '../../redux/slices/topicSlice';
-import { clearFavorites } from '../../redux/slices/favoriteSlice';
 
 import { Filter } from '../../components/filter/component';
+import { clearFavorites } from '../../redux/slices/favoriteSlice';
 
 export const Posts = (): JSX.Element => {
   const [sort, setSort] = React.useState<string>('idAsc');
@@ -65,14 +67,18 @@ export const Posts = (): JSX.Element => {
             </Select>
           </FormControl>
         </div>
-        <div title="Add new post" className={styles.modal}>
-          <BasicModal />
-        </div>
+
         <div className={styles.filter}>
+          <div className={styles.filterIcon}>
+            <FiSearch />
+          </div>
           <Filter
             handlerChangeInput={handlerChangeInput}
             handlerChangeSelect={handlerChangeSelect}
           />
+        </div>
+        <div title="Add new post" className={styles.modal}>
+          <BasicModal />
         </div>
         {favoritesLength > 0 && (
           <button

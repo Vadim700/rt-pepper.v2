@@ -67,7 +67,6 @@ export const PostItem: FC<PostItemProps> = ({
         className={styles.post}
         style={{
           borderColor: checked ? 'tomato' : '',
-          // backgroundColor: checked ? 'rgba(25, 118, 210, 0.25)' : '',
         }}
       >
         <div className={styles.name}>{name}</div>

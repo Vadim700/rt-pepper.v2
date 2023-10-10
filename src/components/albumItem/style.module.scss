@@ -3,7 +3,7 @@
 .root {
 	position: relative;
 	display: grid;
-	grid-template-columns: 40px 100px 1fr 30px 40px;
+	grid-template-columns: 40px 100px 1fr auto;
 	align-items: center;
 
 	padding: 10px;
@@ -43,21 +43,6 @@
 	font-size: 28px;
 	padding: 0;
 	margin: 0;
-
-	@media (hover: hover) {
-		&:hover {
-			color: #1976d2;
-		}
-	}
-}
-
-.edit {
-	font-size: 24px;
-	margin-right: 15px;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	color: black;
 
 	@media (hover: hover) {
 		&:hover {
@@ -108,5 +93,31 @@
 			border-bottom: 2px solid red;
 			transform: rotate(-42deg) translate(7px, -10px) skew(-8deg, -8deg);
 		}
+	}
+}
+
+.edit {
+	font-size: 24px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: black;
+
+	@media (hover: hover) {
+		&:hover {
+			color: #1976d2;
+		}
+	}
+}
+
+.action {
+	display: flex;
+	align-items: center;
+	column-gap: 5px;
+
+	* {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }

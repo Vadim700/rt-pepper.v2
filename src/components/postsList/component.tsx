@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styles from './style.module.scss';
 import { PostItem } from '../postItem/component';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { BsHeart } from 'react-icons/bs';
 import { clearChecked } from '../../redux/slices/postsSlice';
-import { addToFavorites } from '../../redux/slices/favoriteSlice';
+
 import { IoMdCheckboxOutline } from 'react-icons/io';
 import { deletePosts } from '../../redux/thunks/postsThunks';
 import { Post } from '../../types';
+import { addToFavorites } from '../../redux/slices/favoriteSlice';
 
 type PostsListProps = {
   valueInput: any;
@@ -24,11 +25,23 @@ export const PostsList: FC<PostsListProps> = ({
 
   const dispatch = useAppDispatch();
 
-  const titleAsc = (a: Post, b: Post) => a.title.localeCompare(b.title);
-  const titleDesc = (a: Post, b: Post) => b.title.localeCompare(a.title);
+  const titleAsc = useCallback(
+    (a: Post, b: Post) => a.title.localeCompare(b.title),
+    [],
+  );
+  const titleDesc = useCallback(
+    (a: Post, b: Post) => b.title.localeCompare(a.title),
+    [],
+  );
 
-  const nameAsc = (a: any, b: any) => a.name.localeCompare(b.name);
-  const nameDesc = (a: any, b: any) => b.name.localeCompare(a.name);
+  const nameAsc = useCallback(
+    (a: any, b: any) => a.name.localeCompare(b.name),
+    [],
+  );
+  const nameDesc = useCallback(
+    (a: any, b: any) => b.name.localeCompare(a.name),
+    [],
+  );
 
   const idAsc = (a: Post, b: Post) => a.id - b.id;
   const idDesc = (a: Post, b: Post) => b.id - a.id;
@@ -110,7 +123,17 @@ export const PostsList: FC<PostsListProps> = ({
             <PostItem key={item.id} {...item} favorite={favorite} />
           ));
     }
-  }, [sortType, valueSelect, valueInput, data, favorite]);
+  }, [
+    sortType,
+    valueInput,
+    valueSelect,
+    data,
+    titleAsc,
+    titleDesc,
+    nameAsc,
+    nameDesc,
+    favorite,
+  ]);
 
   return (
     <ul className={styles.root}>
@@ -125,7 +148,7 @@ export const PostsList: FC<PostsListProps> = ({
               className={styles.button}
               onClick={() => dispatch(deletePosts(checkedPosts))}
             >
-              Remove
+              Remove all
               <IoMdCheckboxOutline />
             </button>
           </div>

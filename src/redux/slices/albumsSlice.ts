@@ -1,9 +1,14 @@
 import { AnyAction, PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { deleteAlbumItem, fetchAlbums } from '../thunks/albumsThunks';
+import {
+  deleteAlbumItem,
+  deleteAlbumItems,
+  fetchAlbums,
+} from '../thunks/albumsThunks';
 import { AlbumsState } from '../../types';
 
 const initialState: AlbumsState = {
   list: [],
+  favoriteList: [],
   loading: false,
   error: null,
 };
@@ -37,6 +42,10 @@ export const albumsSlice = createSlice({
 
       .addCase(deleteAlbumItem.fulfilled, (state, { payload }) => {
         state.list = state.list.filter((item) => String(item.id) !== payload);
+      })
+
+      .addCase(deleteAlbumItems.fulfilled, (state, { payload }) => {
+        state.list = state.list.filter((item) => !payload.includes(item.id));
       })
 
       .addMatcher(isError, (state, action: PayloadAction<string>) => {

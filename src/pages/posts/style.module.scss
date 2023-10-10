@@ -23,6 +23,10 @@
 			}
 		}
 	}
+
+	> div:last-child {
+		margin-right: 50px;
+	}
 }
 
 .clearFavorite {
@@ -38,10 +42,22 @@
 }
 
 .filter {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+
 	margin-right: auto;
 	align-self: end;
+
+	button {
+		border: none;
+	}
 }
 
 .sort {
 	align-self: flex-end;
+}
+
+.filterIcon {
+	padding-bottom: 3px;
 }

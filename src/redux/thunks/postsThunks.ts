@@ -42,21 +42,21 @@ export const fetchPosts = createAsyncThunk<
 export const deletePost = createAsyncThunk<
   string, // Тип, который будет возвращен после завершения запроса
   string, // Тип параметра, ожидаемого функцией (id поста для удаления)
-  { rejectValue: string } // Конфигурация с дополнительной информацией для обработки ошибок
+  { rejectValue: string } // для обработки ошибок
 >('post/deletePost', async function (id, { rejectWithValue }) {
-  // Формируем запрос DELETE к API, используя переданный id
+  // запрос  к API
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${id}`,
     {
-      method: 'DELETE', // Определяем метод HTTP запроса как DELETE
+      method: 'DELETE', //  метод HTTP
     },
   );
   // Проверяем успешность выполнения запроса
   if (!response.ok) {
-    // Если запрос не успешен, вызываем rejectWithValue с сообщением об ошибке
+    // Если запрос не успешен,
     return rejectWithValue("Can't delete this post ;)");
   }
-  // Если запрос успешен, возвращаем id удаленного поста
+  // Если запрос успешен
   return id;
 });
 

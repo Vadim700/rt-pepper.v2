@@ -40,7 +40,7 @@ export const deleteAlbumItem = createAsyncThunk<
   string,
   string,
   { rejectValue: string }
->('', async (id, { rejectWithValue }) => {
+>('albums/deleteAlbumItem', async (id, { rejectWithValue }) => {
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/albums/${id}`,
     {
@@ -53,4 +53,28 @@ export const deleteAlbumItem = createAsyncThunk<
   }
 
   return id;
+});
+
+// delete some Albums
+export const deleteAlbumItems = createAsyncThunk<
+  any,
+  number[],
+  { rejectValue: string }
+>('albums/deleteAlbumItems', async (ids, { rejectWithValue }) => {
+  const promises = ids.map(async (id) => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/albums/${id}`,
+      { method: 'DELETE' },
+    );
+
+    if (!response.ok) {
+      return rejectWithValue(`Can't delete post with ID: ${id}`);
+    }
+
+    return id;
+  });
+
+  const result = await Promise.all(promises);
+
+  return result;
 });
