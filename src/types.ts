@@ -98,7 +98,7 @@ export type Photo = {
 
 export type AlbumsState = {
   list: Album[];
-  favoriteList: number[];
+  photosList: any;
   loading: boolean;
   error: string | null;
 };

@@ -3,12 +3,13 @@ import {
   deleteAlbumItem,
   deleteAlbumItems,
   fetchAlbums,
+  fetchPhotos,
 } from '../thunks/albumsThunks';
 import { AlbumsState } from '../../types';
 
 const initialState: AlbumsState = {
   list: [],
-  favoriteList: [],
+  photosList: [],
   loading: false,
   error: null,
 };
@@ -46,6 +47,10 @@ export const albumsSlice = createSlice({
 
       .addCase(deleteAlbumItems.fulfilled, (state, { payload }) => {
         state.list = state.list.filter((item) => !payload.includes(item.id));
+      })
+
+      .addCase(fetchPhotos.fulfilled, (state, { payload }) => {
+        state.photosList = payload;
       })
 
       .addMatcher(isError, (state, action: PayloadAction<string>) => {

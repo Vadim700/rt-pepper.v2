@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Album, FetchAlbumsParams } from '../../types';
+import { Album, FetchAlbumsParams, Photo } from '../../types';
 
 type FetchAlbumsReturnType = Album[];
 
@@ -33,6 +33,25 @@ export const fetchAlbums = createAsyncThunk<
   }));
 
   return editData;
+});
+
+// fetchPhotos
+export const fetchPhotos = createAsyncThunk<
+  Album[],
+  string,
+  { rejectValue: string }
+>('comment/fetchPhotos', async (id, { rejectWithValue }) => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/photos?albumId=${id}`,
+  );
+
+  if (!response.ok) {
+    return rejectWithValue('Server Error!');
+  }
+
+  const data = await response.json();
+
+  return data;
 });
 
 // delete Album

@@ -1,0 +1,21 @@
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+	gap: 20px;
+}
+
+.photo {
+	padding: 10px;
+
+	border: 1px solid #000;
+}
+
+.image {
+	border-radius: 8px;
+	overflow: hidden;
+	img {
+		width: 100%;
+		max-width: 150px;
+		height: auto;
+	}
+}
