@@ -1,21 +1,50 @@
+@import "../../common.scss";
+
+.root {
+	margin-bottom: 20px;
+	font-family: $altFontFamily;
+
+	background-color: #edffeb;
+}
+
+.titleOfPage {
+	margin: 0;
+	margin-bottom: 30px;
+	font-size: 32px;
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
 .grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	gap: 20px;
 }
 
-.photo {
-	padding: 10px;
+.title {
+	font-size: 13px;
+	padding: 0px 10px 10px 10px;
 
-	border: 1px solid #000;
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
+.photo {
+	position: relative;
+
+	border-radius: 8px 8px 0 0;
+	overflow: hidden;
 }
 
 .image {
-	border-radius: 8px;
-	overflow: hidden;
+	margin-bottom: 5px;
+	width: 245px;
+	height: 245px;
+
 	img {
 		width: 100%;
-		max-width: 150px;
-		height: auto;
+		object-fit: cover;
 	}
 }

@@ -101,6 +101,8 @@ export type AlbumsState = {
   photosList: any;
   loading: boolean;
   error: string | null;
+  loadingPhotos: boolean;
+  errorPhotos: string | null;
 };
 
 export interface FetchAlbumsParams {

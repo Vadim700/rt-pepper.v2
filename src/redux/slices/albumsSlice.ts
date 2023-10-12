@@ -12,6 +12,8 @@ const initialState: AlbumsState = {
   photosList: [],
   loading: false,
   error: null,
+  loadingPhotos: false,
+  errorPhotos: null,
 };
 
 export const albumsSlice = createSlice({
@@ -49,7 +51,12 @@ export const albumsSlice = createSlice({
         state.list = state.list.filter((item) => !payload.includes(item.id));
       })
 
+      .addCase(fetchPhotos.pending, (state) => {
+        state.loadingPhotos = true;
+      })
+
       .addCase(fetchPhotos.fulfilled, (state, { payload }) => {
+        state.loadingPhotos = false;
         state.photosList = payload;
       })
 
