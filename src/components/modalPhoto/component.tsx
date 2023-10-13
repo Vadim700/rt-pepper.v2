@@ -16,6 +16,7 @@ const style = {
   border: '2px solid var(--blue)',
   borderRadius: '12px',
   boxShadow: 24,
+  maxWidth: 770,
   p: 4,
 };
 

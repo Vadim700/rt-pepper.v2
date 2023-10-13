@@ -27,23 +27,27 @@ export const AlbumPhotos: FC = (): JSX.Element => {
     <div className={styles.root}>
       <h2 className={styles.titleOfPage}> {currintAlbum?.title}</h2>
       <div className={styles.grid}>
-        {data.map((item: Photo) => (
-          <React.Fragment key={item.id}>
-            {loadingPhotos === true ? (
-              <MyLoader />
-            ) : (
-              <div className={styles.photo}>
-                <div className={styles.image}>
-                  <img src={item.thumbnailUrl} alt="Превью" />
+        {data ? (
+          data.map((item: Photo) => (
+            <React.Fragment key={item.id}>
+              {loadingPhotos === true ? (
+                <MyLoader />
+              ) : (
+                <div className={styles.photo}>
+                  <div className={styles.image}>
+                    <img src={item.thumbnailUrl} alt="Превью" />
+                  </div>
+                  <div className={styles.modal}>
+                    <ModalPhoto {...item} />
+                  </div>
+                  <div className={styles.title}>{item.title}</div>
                 </div>
-                <div className={styles.modal}>
-                  <ModalPhoto {...item} />
-                </div>
-                <div className={styles.title}>{item.title}</div>
-              </div>
-            )}
-          </React.Fragment>
-        ))}
+              )}
+            </React.Fragment>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </div>
   );
