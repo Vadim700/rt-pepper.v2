@@ -16,7 +16,7 @@ const style = {
   border: '2px solid var(--blue)',
   borderRadius: '12px',
   boxShadow: 24,
-  maxWidth: 770,
+  maxWidth: 600,
   p: 4,
 };
 
@@ -26,18 +26,14 @@ type ModalPhotoProps = {
   thumbnailUrl: string;
 };
 
-export const ModalPhoto: React.FC<ModalPhotoProps> = ({
-  title,
-  url,
-  thumbnailUrl,
-}) => {
+export const ModalPhoto: React.FC<ModalPhotoProps> = ({ title, url }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <div className={styles.root}>
       <Button onClick={handleOpen}></Button>
       <Modal
         open={open}

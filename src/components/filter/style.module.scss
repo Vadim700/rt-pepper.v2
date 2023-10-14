@@ -3,9 +3,9 @@
 .root {
 	position: relative;
 	display: flex;
-	column-gap: 5px;
+	align-items: center;
+	column-gap: 10px;
 	border-bottom: 1px solid;
-	padding-bottom: 6px;
 
 	& button {
 		margin: 0;
@@ -79,4 +79,8 @@
 	right: -40px;
 
 	font-size: 26px;
+}
+
+.fitlerIcon {
+	margin-bottom: -5px;
 }

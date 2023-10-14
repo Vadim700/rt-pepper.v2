@@ -4,7 +4,7 @@
 	border: 1px solid;
 	border-radius: 4px;
 	display: grid;
-	grid-template-columns: 100px 65px 1fr 30px 40px;
+	grid-template-columns: 60px 65px 1fr 30px 40px;
 	align-items: center;
 
 	padding: 10px;
@@ -16,7 +16,8 @@
 .title {
 	margin-right: auto;
 
-	font-family: $altFontFamily;
+	font-family: $mainFontFamily;
+	font-weight: 600;
 
 	&::first-letter {
 		text-transform: uppercase;
@@ -41,6 +42,8 @@
 
 .id {
 	flex-shrink: 0;
+	color: var(--red);
+	text-align: center;
 
 	b {
 		font-size: 20px;

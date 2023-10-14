@@ -11,7 +11,6 @@ import { addNewTodo } from '../../redux/thunks/todoThunks';
 type FullWidthTextFieldProps = {
   label: any;
   id: string;
-  postValue: any;
   value: any;
   defaultValue: any;
 };
@@ -19,12 +18,10 @@ type FullWidthTextFieldProps = {
 export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
   label,
   id,
-  postValue,
-  // defaultValue,
 }) => {
   const [value, setValue] = React.useState<string>('');
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state.topic.topic);
+
   const current = useAppSelector((item) => item.todo.list).map(
     (todo) => todo.id,
   );

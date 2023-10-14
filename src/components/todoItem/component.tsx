@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 
 import { RxCross2 } from 'react-icons/rx';
@@ -28,7 +28,7 @@ export const TodoItem: FC<TodoItemProps> = ({
       style={{ borderColor: completed ? 'var(--blue)' : '' }}
     >
       <span className={styles.id}>
-        ID: <b>{id}</b>
+        <b>{id}</b>
       </span>
       <Switch
         checked={completed}

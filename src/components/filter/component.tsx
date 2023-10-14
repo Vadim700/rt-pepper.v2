@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styles from './style.module.scss';
 import { MdClear } from 'react-icons/md';
+import { FiSearch } from 'react-icons/fi';
 
 type FilterProps = {
   handlerChangeInput: any;
@@ -31,6 +32,9 @@ export const Filter: FC<FilterProps> = ({
 
   return (
     <div className={styles.root}>
+      <div className={styles.fitlerIcon}>
+        <FiSearch />
+      </div>
       <input
         type="text"
         className={styles.input}

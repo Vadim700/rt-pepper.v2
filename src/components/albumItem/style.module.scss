@@ -3,7 +3,7 @@
 .root {
 	position: relative;
 	display: grid;
-	grid-template-columns: 40px 100px 1fr auto;
+	grid-template-columns: 40px 50px 1fr auto;
 	align-items: center;
 
 	padding: 10px;
@@ -120,4 +120,8 @@
 		align-items: center;
 		justify-content: center;
 	}
+}
+
+.id {
+	color: var(--red);
 }

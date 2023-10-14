@@ -36,14 +36,15 @@ const style = {
 };
 
 const styleOpenButton = {
-  border: '3px solid',
-  fontSize: '38px',
-  padding: '10px',
+  fontSize: 42,
 };
 
 export default function BasicModal() {
+  const [title, setTitle] = React.useState<string>('');
+  const [body, setBody] = React.useState<string>('');
+  const [name, setName] = React.useState<string>('');
+
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useAppDispatch();
 
@@ -53,11 +54,7 @@ export default function BasicModal() {
 
   const id = Math.max(...maxId) + 1;
 
-  const [title, setTitle] = React.useState('');
-  const [body, setBody] = React.useState('');
-  const [name, setName] = React.useState('');
-
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleClose();
 
@@ -70,11 +67,15 @@ export default function BasicModal() {
     setName(event.target.value as string);
   };
 
-  const postValue = (e: any) => {};
+  // const postValue = (e: any) => {};
 
   return (
     <div className={styles.root}>
-      <Button onClick={handleOpen} sx={styleOpenButton}>
+      <Button
+        onClick={() => setOpen(true)}
+        sx={styleOpenButton}
+        title="add new post"
+      >
         <GrAddCircle />
       </Button>
       <Modal
@@ -150,7 +151,6 @@ export default function BasicModal() {
               <FullWidthTextField
                 label={'NEW TASK'}
                 id={'task'}
-                postValue={postValue}
                 defaultValue={''}
                 value={''}
               />

@@ -69,9 +69,6 @@ export const Posts = (): JSX.Element => {
         </div>
 
         <div className={styles.filter}>
-          <div className={styles.filterIcon}>
-            <FiSearch />
-          </div>
           <Filter
             handlerChangeInput={handlerChangeInput}
             handlerChangeSelect={handlerChangeSelect}

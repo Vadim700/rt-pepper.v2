@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../hooks';
 import { setStateLimit } from '../../redux/slices/topicSlice';
 
 export const BasicSelect = () => {
-  const [count, setCount] = React.useState('');
+  const [count, setCount] = React.useState('10');
   const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {

@@ -99,7 +99,7 @@ export const PostItem: FC<PostItemProps> = ({
           />
           <label htmlFor={String(id)}></label>
         </span>
-        <span className={styles.postNumber}>ID: {id}</span>
+        <span className={styles.postNumber}>{id}</span>
         <div className={styles.action}>
           <Link to={`/${id}`}>
             <BiEditAlt className={styles.edit} />
@@ -126,8 +126,8 @@ export const PostItem: FC<PostItemProps> = ({
             <div className={styles.comments__body}>{item.body}</div>
             <div className={styles.comments__email}>{item.email}</div>
             <span className={styles.comments__id}>
-              <strong>ID: {item.id}</strong>
-              <strong>postID: {item.postId}</strong>
+              <strong>post№ {item.postId}</strong>
+              <strong>{item.id}</strong>
             </span>
           </div>
         ))}

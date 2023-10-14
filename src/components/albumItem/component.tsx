@@ -50,7 +50,7 @@ export const AlbumItem: FC<AlbumItemProps> = ({
         <label htmlFor={String(id)}></label>
       </span>
       <span className={styles.id}>
-        ID: <b>{id}</b>
+        <b>{id}</b>
       </span>
       <Link to={`/albums/photos/${id}`} className={styles.title}>
         {title}

@@ -3,8 +3,8 @@ import { Post, PostState } from '../../types';
 
 // fetch posts
 export const fetchPosts = createAsyncThunk<
-  Post[],
-  any,
+  Post[], // >>>
+  any, // <<<
   { rejectValue: string }
 >('post/fetchPosts', async (url, { rejectWithValue }) => {
   let limit = '';
@@ -19,15 +19,15 @@ export const fetchPosts = createAsyncThunk<
     `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`,
   );
 
-  const users = await fetch(`https://jsonplaceholder.typicode.com/users`)
-    .then((res) => res.json())
-    .then((data) => data.map((user: any) => user.name));
-
   if (!response.ok) {
     return rejectWithValue('Server Error!');
   }
 
   const data = await response.json();
+
+  const users = await fetch(`https://jsonplaceholder.typicode.com/users`)
+    .then((res) => res.json())
+    .then((data) => data.map((user: any) => user.name));
 
   const postsWithSelected = data.map((item: Post) => ({
     ...item,
@@ -40,23 +40,21 @@ export const fetchPosts = createAsyncThunk<
 
 // delete post
 export const deletePost = createAsyncThunk<
-  string, // Тип, который будет возвращен после завершения запроса
-  string, // Тип параметра, ожидаемого функцией (id поста для удаления)
-  { rejectValue: string } // для обработки ошибок
+  string, // >>>
+  string, // <<<
+  { rejectValue: string }
 >('post/deletePost', async function (id, { rejectWithValue }) {
-  // запрос  к API
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${id}`,
     {
-      method: 'DELETE', //  метод HTTP
+      method: 'DELETE',
     },
   );
-  // Проверяем успешность выполнения запроса
+
   if (!response.ok) {
-    // Если запрос не успешен,
     return rejectWithValue("Can't delete this post ;)");
   }
-  // Если запрос успешен
+
   return id;
 });
 

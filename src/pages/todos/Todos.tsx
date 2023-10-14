@@ -4,7 +4,6 @@ import styles from './style.module.scss';
 import BasicModal from '../../components/modal/component';
 import {
   FormControl,
-  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -12,6 +11,8 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '../../hooks';
 import { setSortTodoType } from '../../redux/slices/topicSlice';
+
+import { FiSearch } from 'react-icons/fi';
 
 export const Todos: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export const Todos: React.FC = (): JSX.Element => {
     dispatch(setSortTodoType(sort));
   }, [dispatch, sort]);
 
-  const onFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlerChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e?.target.value);
   };
 
@@ -40,6 +41,7 @@ export const Todos: React.FC = (): JSX.Element => {
           >
             Sort to...
           </InputLabel>
+
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -54,15 +56,17 @@ export const Todos: React.FC = (): JSX.Element => {
             <MenuItem value={'completed'}>Completed &#10003;</MenuItem>
           </Select>
         </FormControl>
+
         <div className={styles.filter}>
-          <Input
-            color="primary"
-            disabled={false}
-            placeholder="Filter search"
+          <FiSearch />
+          <input
+            className={styles.input}
             value={value}
-            onChange={onFilterChange}
+            onChange={handlerChangeInput}
+            placeholder="Search..."
           />
         </div>
+
         <div className={styles.modal}>
           <BasicModal />
         </div>
