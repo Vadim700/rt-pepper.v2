@@ -9,6 +9,7 @@ export type Post = {
 
 export type PostState = {
   list: Post[];
+  length: number[];
   loading: boolean;
   error: string | null;
 };
@@ -113,3 +114,5 @@ export interface FetchAlbumsParams {
 export type FavoriteAlbumState = {
   list: number[];
 };
+
+export type PathUrls = { [key: string]: string }; // что-бы ни было в свойстве - то будет строка

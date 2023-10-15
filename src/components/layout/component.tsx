@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 import { useAppSelector } from '../../hooks';
 
 import { Outlet } from 'react-router-dom';
-import PaginationControlled from '../pagination/component';
+import { PaginationControlled } from '../pagination/component';
 import { Header } from '../header/component';
 
 type LayoutProps = {};

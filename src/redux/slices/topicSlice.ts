@@ -21,20 +21,20 @@ const topicSlice = createSlice({
   name: 'state',
   initialState,
   reducers: {
-    setState: (state, action: PayloadAction<string>) => {
-      state.topic = action.payload;
+    setState: (state, { payload }: PayloadAction<string>) => {
+      state.topic = payload;
     },
-    setStateLimit: (state, action: PayloadAction<number>) => {
-      state.limit = action.payload;
+    setStateLimit: (state, { payload }: PayloadAction<number>) => {
+      state.limit = payload;
     },
-    setPageNumber: (state, action: PayloadAction<number>) => {
-      state.pageNumber = action.payload;
+    setPageNumber: (state, { payload }: PayloadAction<number>) => {
+      state.pageNumber = payload;
     },
-    setSortPostType: (state, action: PayloadAction<string>) => {
-      state.sortPostType = action.payload;
+    setSortPostType: (state, { payload }: PayloadAction<string>) => {
+      state.sortPostType = payload;
     },
-    setSortTodoType: (state, action: PayloadAction<string>) => {
-      state.sortTodoType = action.payload;
+    setSortTodoType: (state, { payload }: PayloadAction<string>) => {
+      state.sortTodoType = payload;
     },
   },
 });

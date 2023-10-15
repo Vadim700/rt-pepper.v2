@@ -8,10 +8,12 @@ import {
   deletePosts,
   addNewPost,
   editPost,
+  fetchPostsDataLength,
 } from '../thunks/postsThunks';
 
 const initialState: PostState = {
   list: [],
+  length: [],
   loading: false,
   error: null,
 };
@@ -34,6 +36,10 @@ const postSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+      .addCase(fetchPostsDataLength.fulfilled, (state, { payload }) => {
+        state.length = payload;
+      })
+
       .addCase(fetchPosts.pending, (state) => {
         state.loading = true;
         state.error = null;

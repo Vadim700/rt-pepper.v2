@@ -15,7 +15,7 @@ import { Posts } from '../pages/posts/Posts';
 import { EditTodo } from '../pages/editTodo/EditTodo';
 import { EditPost } from '../pages/editPost/EditPost';
 import { fetchTodos } from '../redux/thunks/todoThunks';
-import { fetchPosts } from '../redux/thunks/postsThunks';
+import { fetchPosts, fetchPostsDataLength } from '../redux/thunks/postsThunks';
 import { fetchUsers } from '../redux/thunks/userThunks';
 import { fetchAlbums } from '../redux/thunks/albumsThunks';
 import { AlbumPhotos } from '../pages/albumPhotos/AlbumPhotos';
@@ -45,9 +45,10 @@ export const App = (): JSX.Element => {
   const pageNumber = useAppSelector((page) => page.topic.pageNumber.toString());
 
   React.useEffect(() => {
-    dispatch(fetchTodos({ itemsPerPage, pageNumber }));
-    dispatch(fetchAlbums({ itemsPerPage, pageNumber }));
+    dispatch(fetchPostsDataLength());
     dispatch(fetchPosts({ itemsPerPage, pageNumber }));
+    dispatch(fetchAlbums({ itemsPerPage, pageNumber }));
+    dispatch(fetchTodos({ itemsPerPage, pageNumber }));
     dispatch(fetchUsers());
   }, [dispatch, itemsPerPage, pageNumber]);
 

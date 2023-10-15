@@ -1,5 +1,39 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Post, PostState } from '../../types';
+import { PathUrls, Post, PostState } from '../../types';
+
+const path: PathUrls = {
+  posts: 'https://jsonplaceholder.typicode.com/posts',
+  albums: 'https://jsonplaceholder.typicode.com/albums',
+  todos: 'https://jsonplaceholder.typicode.com/todos',
+};
+
+// fetch posts data length
+export const fetchPostsDataLength = createAsyncThunk<
+  number[],
+  void,
+  { rejectValue: any }
+>('post/fetchPostsDataLength', async (_, { rejectWithValue }) => {
+  try {
+    const responses = await Promise.all([
+      fetch(path.posts),
+      fetch(path.albums),
+      fetch(path.todos),
+    ]);
+
+    if (responses.some((response) => !response.ok)) {
+      throw new Error('One or more requests failed');
+    }
+
+    const data = await Promise.all(
+      responses.map((response) => response.json()),
+    );
+    const lengths = data.map((array) => array.length);
+
+    return lengths;
+  } catch (error) {
+    return rejectWithValue('Server Error!');
+  }
+});
 
 // fetch posts
 export const fetchPosts = createAsyncThunk<
