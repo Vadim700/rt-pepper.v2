@@ -7,7 +7,7 @@
 
 .action {
 	position: fixed;
-	bottom: 50px;
+	bottom: 90px;
 	left: 50%;
 	transform: translateX(-50%);
 
@@ -25,17 +25,19 @@
 	align-items: center;
 	justify-content: center;
 
-	min-width: 300px;
+	min-width: 190px;
 	padding: 10px 15px;
-	background-color: #000;
+
 	font-family: $altFontFamily;
 	font-size: 24px;
 	color: #fff;
+
+	opacity: 0.75;
 	border-radius: 4px;
 	border: 1px solid #000;
-	cursor: pointer;
+	background-color: #000;
 	transition: all 0.3s ease 0s;
-	opacity: 0.75;
+	cursor: pointer;
 
 	svg {
 		margin-left: 12px;

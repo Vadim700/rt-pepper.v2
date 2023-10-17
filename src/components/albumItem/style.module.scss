@@ -3,7 +3,7 @@
 .root {
 	position: relative;
 	display: grid;
-	grid-template-columns: 40px 50px 1fr auto;
+	grid-template-columns: 40px 60px 1fr auto;
 	align-items: center;
 
 	padding: 10px;
@@ -55,6 +55,7 @@
 	position: relative;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 
 	input {
 		cursor: pointer;
@@ -75,8 +76,9 @@
 		position: absolute;
 		width: 15px;
 		height: 15px;
-		top: 0;
-		left: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		border-radius: 4px;
 		user-select: none;
 
@@ -123,4 +125,5 @@
 
 .id {
 	color: var(--red);
+	padding-left: 10px;
 }

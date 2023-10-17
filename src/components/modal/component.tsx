@@ -35,9 +35,12 @@ const style = {
   borderRadius: '8px',
 };
 
-const styleOpenButton = {
-  fontSize: 42,
-};
+// const styleOpenButton = {
+//   display: 'block',
+//   width: 56,
+//   heigth: 56,
+//   fontSize: 28,
+// };
 
 export default function BasicModal() {
   const [title, setTitle] = React.useState<string>('');
@@ -73,7 +76,7 @@ export default function BasicModal() {
     <div className={styles.root}>
       <Button
         onClick={() => setOpen(true)}
-        sx={styleOpenButton}
+        // sx={styleOpenButton}
         title="add new post"
       >
         <GrAddCircle />

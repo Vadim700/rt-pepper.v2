@@ -1,13 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-type CounterState = {
-  topic: string;
-  limit: number;
-  pageNumber: number;
-  sortPostType: string;
-  sortTodoType: string;
-};
+import { CounterState } from '../../types';
 
 const initialState: CounterState = {
   topic: 'posts',

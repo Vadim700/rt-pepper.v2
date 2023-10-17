@@ -4,9 +4,10 @@ import TextField from '@mui/material/TextField';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { FC } from 'react';
-import { AiOutlineFileAdd } from 'react-icons/ai';
+
 import styles from './style.module.scss';
 import { addNewTodo } from '../../redux/thunks/todoThunks';
+import { FaAngellist } from 'react-icons/fa6';
 
 type FullWidthTextFieldProps = {
   label: any;
@@ -59,8 +60,14 @@ export const FullWidthTextField: FC<FullWidthTextFieldProps> = ({
           autoComplete="off"
           type="text"
         />
-        <button type="submit" onClick={handleAction} className={styles.add}>
-          <AiOutlineFileAdd />
+        <button
+          type="submit"
+          onClick={handleAction}
+          className={styles.addNewTodo}
+          title="submit"
+        >
+          <FaAngellist />
+          <span>submit</span>
         </button>
       </Box>
     </>

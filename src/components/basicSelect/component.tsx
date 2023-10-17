@@ -18,7 +18,7 @@ export const BasicSelect = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 200 }}>
+    <Box sx={{ width: 100 }}>
       <FormControl fullWidth>
         <InputLabel
           id="demo-simple-select-label"
@@ -30,7 +30,7 @@ export const BasicSelect = () => {
             borderColor: 'blue',
           }}
         >
-          Items per page
+          Per page
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -48,7 +48,7 @@ export const BasicSelect = () => {
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={50}>50</MenuItem>
           <MenuItem value={100}>100</MenuItem>
-          <MenuItem value={0}>All</MenuItem>
+          {/* <MenuItem value={0}>All</MenuItem> */}
         </Select>
       </FormControl>
     </Box>

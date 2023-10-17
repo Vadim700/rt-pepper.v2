@@ -3,7 +3,6 @@ import { PostsList } from '../../components/postsList/component';
 import BasicModal from '../../components/modal/component';
 import styles from './style.module.scss';
 import { IoMdHeartDislike } from 'react-icons/io';
-import { FiSearch } from 'react-icons/fi';
 
 import {
   FormControl,
@@ -41,7 +40,7 @@ export const Posts = (): JSX.Element => {
     <>
       <div className={styles.top}>
         <div className={styles.sort}>
-          <FormControl sx={{ width: '200px' }}>
+          <FormControl sx={{ minWidth: '115px', width: '100%' }}>
             <InputLabel
               id="demo-simple-select-label"
               sx={{
@@ -74,9 +73,11 @@ export const Posts = (): JSX.Element => {
             handlerChangeSelect={handlerChangeSelect}
           />
         </div>
+
         <div title="Add new post" className={styles.modal}>
           <BasicModal />
         </div>
+
         {favoritesLength > 0 && (
           <button
             className={styles.clearFavorite}
@@ -84,6 +85,9 @@ export const Posts = (): JSX.Element => {
             title="Clear favorites"
           >
             <IoMdHeartDislike />
+            <span className={styles.favoritesLengthCount}>
+              {favoritesLength}
+            </span>
           </button>
         )}
       </div>

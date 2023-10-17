@@ -116,3 +116,11 @@ export type FavoriteAlbumState = {
 };
 
 export type PathUrls = { [key: string]: string }; // что-бы ни было в свойстве - то будет строка
+
+export type CounterState = {
+  topic: string;
+  limit: number;
+  pageNumber: number;
+  sortPostType: string;
+  sortTodoType: string;
+};

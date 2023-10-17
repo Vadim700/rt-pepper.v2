@@ -13,7 +13,7 @@ export const Buttons: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const setActive = ({ isActive }: any): any => {
-    return { backgroundColor: isActive ? '#1976d2' : 'black' };
+    return { backgroundColor: isActive ? 'var(--blue)' : 'black' };
   };
 
   const handleClick = (event: any): void => {

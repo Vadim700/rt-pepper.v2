@@ -7,15 +7,15 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setPageNumber } from '../../redux/slices/topicSlice';
 import { createPortal } from 'react-dom';
 
-export const PaginationControlled = () => {
+export const PaginationControlled: React.FC = () => {
   const [page, setPage] = React.useState(1);
 
+  const dispatch = useAppDispatch();
   const limit = useAppSelector((item) => item.topic.limit);
   const topic = useAppSelector((item) => item.topic.topic);
 
-  const dispatch = useAppDispatch();
-
   const pagination = document.getElementById('pagination');
+
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
     dispatch(setPageNumber(value));
@@ -23,7 +23,7 @@ export const PaginationControlled = () => {
 
   const fetchDataLength = useAppSelector((item) => item.post.length);
 
-  const items = React.useCallback(() => {
+  const updatePaginationCoutn = React.useCallback(() => {
     switch (topic) {
       case 'albums':
         return fetchDataLength[1] / limit;
@@ -43,7 +43,12 @@ export const PaginationControlled = () => {
           // что вставляем
           <Stack spacing={2} className={styles.pagination}>
             {' '}
-            <Pagination count={items()} page={page} onChange={handleChange} />
+            <Pagination
+              count={updatePaginationCoutn()}
+              page={page}
+              onChange={handleChange}
+              color="primary"
+            />
           </Stack>,
           pagination, // куда вставляем
         )}

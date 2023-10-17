@@ -1,7 +1,9 @@
-.add {
+.addNewTodo {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	row-gap: 2px;
 
 	font-size: 30px;
 	background-color: transparent;
@@ -11,6 +13,10 @@
 	margin: 0;
 	padding: 0 10px;
 	transition: all 0.3s ease 0s;
+
+	span {
+		font-size: 12px;
+	}
 
 	@media (hover: hover) {
 		&:hover {
