@@ -43,7 +43,7 @@ export const Filter: FC<FilterProps> = ({
         onChange={onChangeInput}
       />
       {valueInput && (
-        <button className={styles.button} onClick={onClear}>
+        <button className={styles.clearButton} onClick={onClear}>
           <MdClear />
         </button>
       )}

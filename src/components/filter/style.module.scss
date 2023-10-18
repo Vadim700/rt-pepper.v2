@@ -7,7 +7,7 @@
 	column-gap: 10px;
 	border-bottom: 1px solid;
 
-	& button {
+	button {
 		margin: 0;
 		padding: 0 !important;
 		display: flex;
@@ -41,10 +41,14 @@
 			}
 		}
 	}
+
+	@media (max-width: 420px) {
+		justify-content: space-between;
+	}
 }
 
 .select {
-	width: 70px;
+	max-width: 70px;
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -55,6 +59,12 @@
 	option {
 		background-color: #edffeb;
 		color: #000;
+	}
+}
+
+.clearButton {
+	@media (max-width: 420px) {
+		position: static;
 	}
 }
 
@@ -70,14 +80,21 @@
 	&::placeholder {
 		font-family: $mainFontFamily;
 	}
+
+	@media (max-width: 420px) {
+		max-width: 30%;
+		padding-right: 10px;
+		margin-right: auto;
+	}
 }
 
-.button {
+.clearButton {
 	position: absolute;
 
 	top: 5px;
 	right: -40px;
 
+	background-color: transparent;
 	font-size: 26px;
 }
 
