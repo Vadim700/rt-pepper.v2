@@ -19,9 +19,7 @@ export const Layout: FC<LayoutProps> = (): JSX.Element => {
         {loading ? (
           <h2 className={styles.loading}>is Loading...</h2>
         ) : (
-          <>
-            <Outlet />
-          </>
+          <Outlet />
         )}
         {error && <h2 className={styles.error}>Error!</h2>}
       </main>

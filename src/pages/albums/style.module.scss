@@ -12,6 +12,8 @@
 }
 
 .clearFavorite {
+	position: relative;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -75,4 +77,14 @@
 	&::placeholder {
 		font-family: $mainFontFamily;
 	}
+}
+
+.favoritesLengthCount {
+	position: absolute;
+
+	right: 5px;
+	bottom: 5px;
+
+	font-size: 12px;
+	user-select: none;
 }

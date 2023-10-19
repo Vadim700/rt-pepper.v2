@@ -37,3 +37,20 @@
 .main {
 	margin-top: 20px;
 }
+
+.error {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	text-align: center;
+	padding: 30px;
+	border-radius: 8px;
+
+	border: 2px solid red;
+	font-size: 42px;
+	color: var(--red);
+
+	backdrop-filter: blur(10px);
+}

@@ -66,6 +66,7 @@ export const Albums = (): JSX.Element => {
             title="Clear favorites"
           >
             <IoMdHeartDislike />
+            <span className={styles.favoritesLengthCount}>{favorites}</span>
           </button>
         )}
       </div>

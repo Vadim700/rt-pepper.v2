@@ -9,6 +9,7 @@ import { IoMdCheckboxOutline } from 'react-icons/io';
 import { deletePosts } from '../../redux/thunks/postsThunks';
 import { Post } from '../../types';
 import { addToFavorites } from '../../redux/slices/favoriteSlice';
+import { ErrorBoundary } from '../error-boundary/component';
 
 type PostsListProps = {
   valueInput: any;

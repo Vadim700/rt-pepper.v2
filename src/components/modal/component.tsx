@@ -110,6 +110,7 @@ export default function BasicModal() {
                   autoComplete="off"
                   value={title}
                   onChange={(e: any) => setTitle(e.target.value)}
+                  required
                 />
                 <input
                   className={styles.input}
@@ -118,6 +119,7 @@ export default function BasicModal() {
                   autoComplete="off"
                   value={body}
                   onChange={(e: any) => setBody(e.target.value)}
+                  required
                 />
                 <FormControl fullWidth>
                   <InputLabel

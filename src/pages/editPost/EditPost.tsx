@@ -59,7 +59,7 @@ export const EditPost: React.FC<EditPostProps> = (): JSX.Element => {
             autoComplete="off"
             defaultValue={post?.body}
           />
-          <FormControl fullWidth>
+          <FormControl fullWidth className={styles.select}>
             <InputLabel
               id="demo-simple-select-label"
               sx={{

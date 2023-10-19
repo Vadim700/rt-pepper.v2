@@ -20,6 +20,8 @@
 	font-size: 18px;
 	outline: none;
 
+	background-color: #fff;
+
 	&:focus {
 	}
 
@@ -37,6 +39,7 @@
 	height: 120px;
 	background-color: transparent;
 	outline: none;
+	background-color: #fff;
 
 	&::first-letter {
 		text-transform: uppercase;
@@ -82,4 +85,8 @@
 			color: black;
 		}
 	}
+}
+
+.select {
+	background-color: #fff;
 }

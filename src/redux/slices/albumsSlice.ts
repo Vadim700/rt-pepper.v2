@@ -2,6 +2,7 @@ import { AnyAction, PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
   deleteAlbumItem,
   deleteAlbumItems,
+  editAlbum,
   fetchAlbums,
   fetchPhotos,
 } from '../thunks/albumsThunks';
@@ -58,6 +59,12 @@ export const albumsSlice = createSlice({
       .addCase(fetchPhotos.fulfilled, (state, { payload }) => {
         state.loadingPhotos = false;
         state.photosList = payload;
+      })
+
+      .addCase(editAlbum.fulfilled, (state, { payload }) => {
+        const editedAlbum = state.list.find((item) => item.id === payload.id);
+
+        if (editedAlbum) editedAlbum.title = payload.title;
       })
 
       .addMatcher(isError, (state, action: PayloadAction<string>) => {

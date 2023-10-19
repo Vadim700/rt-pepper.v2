@@ -9,7 +9,7 @@ type CreateTodoProps = {};
 
 export const EditTodo: React.FC<CreateTodoProps> = (): JSX.Element => {
   const { id } = useParams();
-  const dispantch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const todoItem = useAppSelector((item) => item.todo.list).find(
@@ -19,7 +19,7 @@ export const EditTodo: React.FC<CreateTodoProps> = (): JSX.Element => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     const value = e.target.elements[0].value;
-    dispantch(editTodo({ id, value }));
+    dispatch(editTodo({ id, value }));
     navigate(-1);
   };
 

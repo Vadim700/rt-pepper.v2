@@ -16,6 +16,7 @@ import { setSortPostType } from '../../redux/slices/topicSlice';
 
 import { Filter } from '../../components/filter/component';
 import { clearFavorites } from '../../redux/slices/favoriteSlice';
+import { ErrorBoundary } from '../../components/error-boundary/component';
 
 export const Posts = (): JSX.Element => {
   const [sort, setSort] = React.useState<string>('idAsc');
@@ -91,6 +92,7 @@ export const Posts = (): JSX.Element => {
           </button>
         )}
       </div>
+
       <PostsList valueInput={valueInput} valueSelect={valueSelect} />
     </>
   );
