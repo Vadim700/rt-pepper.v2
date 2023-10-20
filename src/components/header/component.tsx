@@ -5,12 +5,13 @@ import { BasicSelect } from '../basicSelect/component';
 
 import styles from './style.module.scss';
 import { useAppSelector } from '../../hooks';
+import { useWindowWidth } from '../windowWidth/useWindowWidth';
 
 type HeaderProps = {};
 
 export const Header: FC<HeaderProps> = (): JSX.Element => {
   const topic = useAppSelector((item) => item.topic.topic);
-  const windowWidth = React.useRef(window.innerWidth);
+  const windowWidth = useWindowWidth();
 
   return (
     <header className={styles.root}>
@@ -32,7 +33,10 @@ export const Header: FC<HeaderProps> = (): JSX.Element => {
 
       <div
         className={styles.bottom}
-        style={{ marginRight: topic === 'posts' ? '50px' : '' }}
+        style={{
+          marginRight:
+            topic === 'posts' && windowWidth.current > 420 ? '50px' : '',
+        }}
       >
         <Buttons />
         <BasicSelect />

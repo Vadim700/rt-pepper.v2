@@ -16,7 +16,7 @@ import { setSortPostType } from '../../redux/slices/topicSlice';
 
 import { Filter } from '../../components/filter/component';
 import { clearFavorites } from '../../redux/slices/favoriteSlice';
-import { ErrorBoundary } from '../../components/error-boundary/component';
+import { useWindowWidth } from '../../components/windowWidth/useWindowWidth';
 
 export const Posts = (): JSX.Element => {
   const [sort, setSort] = React.useState<string>('idAsc');
@@ -25,6 +25,7 @@ export const Posts = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const favoritesLength = useAppSelector((item) => item.favorites.list).length;
+  const windowWidth = useWindowWidth();
 
   const handlerChangeInput = (e: any) => {
     setValueInput(e.target.value);
@@ -41,7 +42,7 @@ export const Posts = (): JSX.Element => {
     <>
       <div className={styles.top}>
         <div className={styles.sort}>
-          <FormControl sx={{ minWidth: '115px', width: '100%' }}>
+          <FormControl sx={{ width: windowWidth.current <= 350 ? 110 : 200 }}>
             <InputLabel
               id="demo-simple-select-label"
               sx={{

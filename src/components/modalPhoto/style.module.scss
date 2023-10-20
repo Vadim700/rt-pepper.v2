@@ -1,3 +1,5 @@
+@import "../../common.scss";
+
 .close {
 	position: absolute;
 	top: 10px;
@@ -15,9 +17,16 @@
 
 .title {
 	font-size: 24px;
+	@media (max-width: $mobileSmall) {
+	}
 }
 
 .image {
-	height: 600px;
-	width: 600px;
+	// height: 600px;
+	// width: 600px;
+	img {
+		width: 100%;
+		max-width: 600px;
+		height: auto;
+	}
 }

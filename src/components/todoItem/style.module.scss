@@ -1,26 +1,48 @@
 @import "../../common.scss";
 
 .root {
-	border: 1px solid;
-	border-radius: 4px;
-	display: grid;
-	grid-template-columns: 60px 65px 1fr 30px 40px;
+	display: flex;
 	align-items: center;
+	justify-content: space-between;
 
 	padding: 10px;
-	border-color: red;
 
+	border-radius: 4px;
+	border: 1px solid;
+	border-color: red;
 	background-color: #fff;
+
+	@media (max-width: $mobileSmall) {
+		padding: 5px;
+		padding-right: 10px;
+	}
 }
 
 .title {
 	margin-right: auto;
-
+	font-size: 20px;
 	font-family: $mainFontFamily;
-	font-weight: 600;
 
-	&::first-letter {
-		text-transform: uppercase;
+	@media (max-width: $mobileSmall) {
+		font-size: 16px;
+	}
+}
+
+.toggler {
+	@media (max-width: $mobileSmall) {
+		margin: 0 10px;
+	}
+}
+
+.id {
+	flex-shrink: 0;
+
+	b {
+		font-size: 20px;
+
+		@media (max-width: $mobileSmall) {
+			font-size: 14px;
+		}
 	}
 }
 
@@ -38,15 +60,9 @@
 			color: #1976d2;
 		}
 	}
-}
 
-.id {
-	flex-shrink: 0;
-	color: var(--red);
-	text-align: center;
-
-	b {
-		font-size: 16px;
+	@media (max-width: $mobileSmall) {
+		font-size: 18px;
 	}
 }
 
@@ -62,5 +78,21 @@
 		&:hover {
 			color: #1976d2;
 		}
+	}
+
+	@media (max-width: $mobileSmall) {
+		font-size: 18px;
+		text-align: center;
+		margin-right: 0;
+	}
+}
+
+.action {
+	display: flex;
+	align-items: center;
+
+	@media (max-width: $mobileSmall) {
+		flex-direction: column-reverse;
+		row-gap: 5px;
 	}
 }

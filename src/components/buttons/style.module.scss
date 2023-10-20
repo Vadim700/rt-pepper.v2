@@ -27,11 +27,11 @@
 	text-transform: uppercase;
 
 	@media (max-width: 768px) {
-		font-size: 0;
-		padding: 5px 10px;
-
 		width: 45px;
 		height: 35px;
+		padding: 5px 10px;
+
+		font-size: 0;
 	}
 }
 

@@ -10,6 +10,7 @@ import { deleteAlbumItem } from '../../redux/thunks/albumsThunks';
 import { Checkbox } from '@mui/material';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { toggleSelectedAlbumFavorite } from '../../redux/slices/favoriteAlbumSlice';
+import { useWindowWidth } from '../windowWidth/useWindowWidth';
 
 type AlbumItemProps = {
   userId: number;
@@ -27,6 +28,7 @@ export const AlbumItem: FC<AlbumItemProps> = ({
 }): JSX.Element => {
   const dispatch = useAppDispatch();
   const favorite = useAppSelector((item) => item.albumFavorites.list);
+  const windowWidth = useWindowWidth();
 
   const hasInFavorite = React.useCallback(
     (): any => favorite.includes(id),
@@ -67,6 +69,7 @@ export const AlbumItem: FC<AlbumItemProps> = ({
             className={styles.favorite}
             onChange={() => dispatch(toggleSelectedAlbumFavorite(id))}
             checked={hasInFavorite()}
+            size={windowWidth.current <= 478 ? 'small' : 'medium'}
           />
         </span>
         <button

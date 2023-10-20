@@ -1,3 +1,5 @@
+@import "../../common.scss";
+
 .close {
 	position: absolute;
 	top: 10px;
@@ -13,11 +15,20 @@
 	}
 }
 
+.title {
+	font: 600 32px/1.2 $mainFontFamily;
+
+	@media (max-width: $mobileSmall) {
+		font-size: 18px;
+	}
+}
+
 .input {
 	padding: 16.5px 20px;
 	border: 1px solid var(--blue);
 	border-radius: 4px;
-	font-size: 18px;
+
+	font: 18px $mainFontFamily;
 	outline: none;
 
 	background-color: #fff;
@@ -29,17 +40,23 @@
 		font-size: 14px;
 		text-transform: uppercase;
 	}
+
+	@media (max-width: $mobile) {
+		font-size: 14px;
+	}
 }
 
 .textarea {
 	padding: 16.5px 20px;
-	border: 1px solid var(--blue);
-	border-radius: 4px;
-	font-size: 18px;
 	height: 120px;
+
+	font: 18px $mainFontFamily;
+
 	background-color: transparent;
-	outline: none;
+	border-radius: 4px;
+	border: 1px solid var(--blue);
 	background-color: #fff;
+	outline: none;
 
 	&::first-letter {
 		text-transform: uppercase;
@@ -51,6 +68,10 @@
 	&::placeholder {
 		font-size: 14px;
 		text-transform: uppercase;
+	}
+
+	@media (max-width: $mobile) {
+		font-size: 14px;
 	}
 }
 

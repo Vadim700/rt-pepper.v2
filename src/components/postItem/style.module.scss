@@ -3,6 +3,7 @@
 .root {
   position: relative;
   font-family: $altFontFamily;
+  list-style: none;
 
   &:not(:last-child) {
     margin-bottom: 20px;
@@ -220,9 +221,9 @@
   display: flex;
   flex-direction: column;
 
+  max-width: 55%;
   padding: 10px 15px;
   padding-right: 145px;
-  max-width: 55%;
   margin-left: 20px;
 
   border-radius: 4px;
@@ -244,6 +245,7 @@
     max-width: 100%;
     padding-right: 0;
     margin-right: 10px;
+    margin-left: 0;
   }
 
   &__name {

@@ -25,7 +25,6 @@ export const BasicSelect = () => {
           sx={{
             padding: '0 10px',
             backgroundColor: '#edffeb',
-            fontFamily: 'Creepster, cursive',
             letterSpacing: '2px',
             borderColor: 'blue',
           }}
@@ -48,7 +47,6 @@ export const BasicSelect = () => {
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={50}>50</MenuItem>
           <MenuItem value={100}>100</MenuItem>
-          {/* <MenuItem value={0}>All</MenuItem> */}
         </Select>
       </FormControl>
     </Box>

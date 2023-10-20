@@ -62,7 +62,7 @@ export const PostItem: FC<PostItemProps> = ({
   };
 
   return (
-    <article className={styles.root}>
+    <li className={styles.root}>
       <div
         className={styles.post}
         style={{
@@ -131,6 +131,6 @@ export const PostItem: FC<PostItemProps> = ({
             </span>
           </div>
         ))}
-    </article>
+    </li>
   );
 };
