@@ -39,8 +39,8 @@ export default function BasicModal() {
   const [title, setTitle] = React.useState<string>('');
   const [body, setBody] = React.useState<string>('');
   const [name, setName] = React.useState<string>('');
-
   const [open, setOpen] = React.useState(false);
+
   const handleClose = () => setOpen(false);
   const dispatch = useAppDispatch();
 

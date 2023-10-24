@@ -6,6 +6,8 @@ import Modal from '@mui/material/Modal';
 
 import styles from './style.module.scss';
 import { RiCloseCircleLine } from 'react-icons/ri';
+import { useWindowWidth } from '../windowWidth/useWindowWidth';
+import { BiFontSize } from 'react-icons/bi';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -16,8 +18,13 @@ const style = {
   border: '2px solid var(--blue)',
   borderRadius: '12px',
   boxShadow: 24,
+  p: window.innerWidth < 768 ? 2 : 4,
+};
+
+const styleModalImage = {
+  width: '100%',
   maxWidth: 600,
-  p: 4,
+  height: 'auto',
 };
 
 type ModalPhotoProps = {
@@ -28,6 +35,8 @@ type ModalPhotoProps = {
 
 export const ModalPhoto: React.FC<ModalPhotoProps> = ({ title, url }) => {
   const [open, setOpen] = React.useState(false);
+
+  const windowWidth = useWindowWidth();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -46,7 +55,7 @@ export const ModalPhoto: React.FC<ModalPhotoProps> = ({ title, url }) => {
             <span className={styles.title}>{title}</span>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <img src={url} alt="" className={styles.image} />
+            <img src={url} alt="" style={styleModalImage} />
           </Typography>
           <span className={styles.close} onClick={handleClose}>
             <RiCloseCircleLine />
