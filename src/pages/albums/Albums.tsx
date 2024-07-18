@@ -42,10 +42,10 @@ export const Albums = (): JSX.Element => {
               label="Age"
               onChange={onChangeSelect}
             >
-              <MenuItem value={'titleAsc'}>Title &#129145;</MenuItem>
-              <MenuItem value={'titleDesc'}>Title &#129147;</MenuItem>
-              <MenuItem value={'idAsc'}>ID &#129145;</MenuItem>
-              <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
+              <MenuItem value={'titleAsc'}>Title ↑</MenuItem>
+              <MenuItem value={'titleDesc'}>Title ↓</MenuItem>
+              <MenuItem value={'idAsc'}>ID ↑</MenuItem>
+              <MenuItem value={'idDesc'}>ID ↓</MenuItem>
             </Select>
           </FormControl>
         </div>

@@ -59,12 +59,12 @@ export const Posts = (): JSX.Element => {
               label="Age"
               onChange={(e: SelectChangeEvent) => setSort(e.target.value)}
             >
-              <MenuItem value={'titleAsc'}>Title &#129147;</MenuItem>
-              <MenuItem value={'titleDesc'}>Title &#129145;</MenuItem>
-              <MenuItem value={'idAsc'}>ID &#129145;</MenuItem>
-              <MenuItem value={'idDesc'}>ID &#129147;</MenuItem>
-              <MenuItem value={'nameAsc'}>Name &#129147;</MenuItem>
-              <MenuItem value={'nameDesc'}>Name &#129145;</MenuItem>
+              <MenuItem value={'titleAsc'}>Title ↓</MenuItem>
+              <MenuItem value={'titleDesc'}>Title ↑</MenuItem>
+              <MenuItem value={'idAsc'}>ID ↑</MenuItem>
+              <MenuItem value={'idDesc'}>ID ↓</MenuItem>
+              <MenuItem value={'nameAsc'}>Name ↓</MenuItem>
+              <MenuItem value={'nameDesc'}>Name ↑</MenuItem>
             </Select>
           </FormControl>
         </div>
